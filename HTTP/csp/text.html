@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://cdn.bootcss.com; form-action 'self';connect-src 'self'">
+  <title>Ducoment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <form action="http://www.baidu.com">
+      <button typr="submit">click me</button>
+  </form>
+  <script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', 'http://www.baidu.com');
+    xhr.send();
+  </script>
+  <script src="test.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>

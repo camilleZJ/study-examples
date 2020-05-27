@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>抢购礼包</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta name="description" content="抢购礼包">
+<meta name="keywords" content="抢购礼包">
+<link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
+<style>
+html,body{height: 100%;-webkit-tap-highlight-color: transparent}
+body{background: #f2f2f2;font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif}
+
+/*.container{background: #fff;width: 100%;height:100%;margin-top: 10px;}
+.page{margin: 0 15px;}*/
+.container {overflow: hidden;position: absolute;top: 10px;right: 0;bottom: 0;left: 0}
+.page {background: #fff;padding: 0 15px;position: absolute;top: 0;right: 0;bottom: 0;left: 0;overflow-y: auto;-webkit-overflow-scrolling: touch;z-index: 1;}
+.gift-packs-title{font-size: 15px;line-height: 30px;}
+.gift-packs-title span{color:#2386d3;}
+.gift-packs-list{
+	/*height:300px;*/
+	margin:5px 10px 15px 15px;
+}
+.table{width: 100%;max-width: 100%;height:100%;border-collapse: collapse;line-height: normal;font-size: 12px;}
+.table th{font-weight: normal;font-size: 15px;}
+.cel-left{text-align: left;}
+.cel-center{text-align: center;}
+.cel-right{text-align: right;}
+.table tr td{vertical-align:bottom;padding-top: 4.4%;}
+.table tbody tr:nth-child(1) td{padding-top: 5px;}
+.table tr td:nth-child(1){
+	text-align: left;
+	color: #ff3300;
+	font-size: 15px;
+}
+.table tr td:nth-child(2){
+	text-align: center;
+	color:#2386d3;
+}
+.table tr td:nth-child(3){
+	text-align: right;
+}
+.gift-pack-img{
+	width: 30px;
+	vertical-align:bottom;
+}
+.gift-pack-num{
+	font-size: 15px;
+}
+.purchase-operation{
+	 font-size:15px;
+}
+.purchase-num-picker{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	position:relative;
+	cursor: pointer;
+}
+.choose-num{
+	color:#999;
+	padding-right:15px;
+	position:absolute;
+	right: 2px;
+}
+.choose-num:after{
+  content:" ";
+  display:inline-block;
+  height:6px;
+  width:6px;
+  border-width:2px 2px 0 0;
+  border-color:#C8C8CD;
+  border-style:solid;
+  -webkit-transform:matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform:matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position:absolute;
+  top:50%;
+  right: 2px;
+  margin-top:-4px;
+}
+.need-money-info span{
+	color: #ff3300;
+}
+.pachase-username{
+	text-align: center;	
+	font-size: 12px;
+}
+.pachase-username img{
+	vertical-align: middle;
+	padding-right: 5px;
+}
+.pay-type-choose{
+	margin: 5px auto;
+    width: 50%;
+}
+.pay-type-choose a{
+	background-color: #fcd753;
+	color: #fff;
+	border:0;
+	line-height: 2.2;
+	cursor: pointer;
+}
+.reminder{
+	font-size: 9px;
+	line-height: 2.3;
+}
+.reminder span{
+	color: #ff3300;
+}
+.footer-text{
+	font-size: 10px;
+	margin: 20px -15px 10px -15px;
+}
+.gift-packs-null{
+	text-align:center;
+	font-size: 16px;
+	color: #999;
+}
+.gift-packs-null img{
+	display: block;
+	margin:60px auto 20px auto;
+}
+.recharge{
+	display: block;
+	cursor: pointer;
+	margin-top: 100px;
+	color:#2386d3;
+}
+.footer-fixed-bottom{
+	position: fixed;
+    bottom: .52em;
+    left: 0;
+    right: 0;
+}
+</style>
+</head>
+<body ontouchstart>
+	<div class="container" id="container">
+		<div class="page">
+			<p class="gift-packs-title">星启天在售礼包数：<span>23</span>个</p>
+			<div class="gift-packs-list">
+				<table class="table">
+					 <thead>
+					    <tr>
+					      <th class="cel-left">礼包</th>
+					      <th class="cel-center">寄售时间</th>
+					      <th class="cel-right">寄售人</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  	<tr>
+					  		<td>
+					  			<img class="gift-pack-img" alt="gift-pack" src="images/gift-pack.png">
+					  			<span>&times;</span>1
+					  		</td>
+					  		<td>2017-06-28 18:54</td>
+					  		<td>布拉格狂少</td>
+					  	</tr>
+					  </tbody>
+				</table>
+			</div>
+			<div class="purchase-operation">
+				<div class="purchase-num-picker">
+					<span>购买礼包数:</span>
+					<span class="choose-num">10</span>
+				</div>
+				<div class="need-money-info">需支付： <span>1000</span>元</div>
+				<div class="pachase-username"><img alt="check" src="images/check.png" width="14">匿名购买</div>
+				<div class="pay-type-choose">
+					<a href="javascript:;" id="pay-way-choose" class="weui-btn weui-btn_plain-primary">选择支付方式</a>
+				</div>
+				<p class="reminder">提示：<span>礼包100元1个，10个起售，每打开1个礼包可获得103000个钻石</span></p>
+			</div>
+	
+			 <!-- 在售礼包总数＜10个显示货架不足  
+			 <div class="gift-packs-null">
+			 	<img alt="sad" src="images/sorry.png" width="80">
+			 	<p>对不起，您来晚了！</p>
+			 	<p>礼包已被抢购一空，晚点再来看看吧~</p>
+			 	<a href="#" class="recharge">官方充值&nbsp;&nbsp;>></a>
+			 </div>
+			<div class="weui-footer footer-fixed-bottom">
+			    <p class="footer-text">增值电信业务经营许可证ICP:皖B2-20100065&nbsp;&nbsp;版权所有:星启天网络</p>
+			</div>
+			 -->
+			 <div class="weui-footer">
+			    <p class="footer-text">增值电信业务经营许可证ICP:皖B2-20100065&nbsp;&nbsp;版权所有:星启天网络</p>
+			</div>
+		</div>
+	</div>
+<script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="//res.wx.qq.com/open/libs/weuijs/1.1.2/weui.min.js"></script>
+<script type="text/javascript">
+//document.querySelector('.purchase-num-picker').addEventListener('click', function () {
+$(document).on("click", ".purchase-num-picker",function(){
+	 weui.picker([{label: 10,value: 10,},{label: 15,value: 15},{label: 20,value: 20},{label: 25,value: 25},{label: 30,value: 30},{label: 35,value: 35},{label: 40,value: 40},{label: 45,value: 45},{label: 50,value: 50},{label: 55,value: 55},{label: 60,value: 60},{label: 65,value: 65},{label: 70,value: 70},{label: 75,value: 75},{label: 80,value: 80},{label: 85,value: 85},{label: 90,value: 90},{label: 95,value: 95},{label: 100,value: 100}], {
+	      	   className: 'custom-classname',
+	      	   defaultValue: [10],
+	      	   onChange: function (result) {
+	      	       //console.log(result);
+	      	       $(".choose-num").text(result[0].value);
+	      	       $(".need-money-info span").text(result[0].value*100);
+	      	   },
+	      	   onConfirm: function (result) {
+	      	       //console.log(result);	      	     
+	      	       $(".choose-num").text(result[0].value);
+	      	       $(".need-money-info span").text(result[0].value*100);
+	      	   },
+	      	   id: 'singleLinePicker'
+	      	});   
+}).on("click", "#pay-way-choose",function(){
+	weui.actionSheet([
+	    {
+	        label: '微信支付',
+	        onClick: function () {
+	            //console.log('微信支付');
+	            pay_check();
+
+	        }
+	    }, {
+	        label: '支付宝支付',
+	        onClick: function () {
+	            //console.log('支付宝支付');
+	            pay_check();
+	        }
+	    }
+	], [
+	    {
+	        label: '取消',
+	        onClick: function () {
+	            //console.log('取消');
+	          	weui.alert('您还未选择支付方式！',{title: '友情提示'});
+	        }
+	    }
+	], {
+	    className: 'custom-classname'
+	});
+});
+   
+function pay_check(){
+	var buy_pack_nums = $(".choose-num").text(),
+		total_money = $(".need-money-info span").text(),
+		total_packs = $(".gift-packs-title span").text();
+	if (buy_pack_nums == "" || buy_pack_nums < 10) {
+	   weui.alert('购买礼包数最小为10个！',{title: '错误提示'});
+	   return false;
+	} 
+	if ((buy_pack_nums % 5) != 0) {
+	   weui.alert('购买的礼包应为5的整数倍！',{title: '错误提示'});
+	   return false;
+	}
+	if (buy_pack_nums > total_packs) {
+		weui.alert('在售礼包总数不够，请调整您要购买的礼包数！',{title: '错误提示'});
+		return false;
+	} 
+	if (buy_pack_nums != (total_money / 100)) {
+		weui.alert('支付金额错误！',{title: '错误提示'});
+		return false;
+	} 
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>3D立体压缩特效</title>
+<meta name="description" content="3D立体旋转压缩特效">
+<meta name="keywords" content="3D立体压缩特效">
+<style>
+	body,ul,li,div,p,h4{
+		margin:0;
+		padding:0;
+	}
+	body{
+		background: rgb(194,200,190);
+	}
+	#box{
+		width: 675px;
+		height: 220px;	
+		/*background: pink;*/
+		margin: 32px auto;
+	}
+	#box ul li{
+		float:left;
+		width: 180px;
+		height:180px;
+		margin:22px;
+		/*background: red;*/
+		list-style: none;
+		perspective: sss900px; /*镜深 */
+	}
+	.ch-info{
+		position: relative;
+		width: 100%;
+		height: 100%;		
+		border-radius: 50%; /*圆 */
+		transform-style: preserve-3d; /*3d眼镜 */
+	}
+	.ch-info-front{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: rgba(232, 232, 232, .5);
+		border-radius: 50%;
+		transform-origin: 50% 0;
+		transition: .4s;/*过渡动画*/		
+		box-shadow: 0 0 0 5px rgba(232, 232, 221, .2), 0 0 0 3px #e8e8e8; /*边框阴影：x偏移量 y偏移量 模糊度 阴影大小 颜色   外圆, 内圆 */
+	}	
+	.ch-info-front h4{
+		padding-top: 70px;
+		font-family: "Oswald", sans-serif;
+		font-size: 30px;
+		color: #162a43;
+		text-align: center;
+	}
+	.ch-info-back {
+		position: absolute;
+		top: 0;
+		left:0;
+		width: 100%;
+		height: 100%;
+		transform-origin:50%, 0;/*旋转基点*/
+		transform:translate3d(0px,0px,-180px) rotate3d(1,0,0,90deg); /*位移translate3d(x偏移量，y偏移量，z偏移量)，旋转：translate3d(x偏移量，y偏移量，z偏移量) rotate3d(按x轴，按y轴，按x轴,旋转角度：90deg)  */
+		transition: .6s;
+		background: #14c09f;
+		border-radius: 50%;
+		box-shadow: 0 0 0 5px rgba(232,232,221,0.2), 0 0 0 3px #fff; 
+		opacity:0;
+	}
+	.ch-info-back h4{
+	    padding-top: 50px;
+		font-size: 30px;
+		color: #fff;
+		text-align: center;
+	}
+	.ch-info-back p{
+		font-size: 12px;
+		color: #fff;
+		text-align: center;
+		line-height: 20px;
+	}
+	
+	.ch-info:hover .ch-info-front{
+		transform:translate3d(0,120px,0) rotate3d(1,0,0,-90deg);
+		opacity:0;
+	}
+	.ch-info:hover .ch-info-back{
+		transform:translate3d(0,0,0) rotate3d(1,0,0,0deg);
+		opacity:1;
+	}
+</style>
+</head>
+<body>
+    <!-- 
+    	定位：position
+    		static 无定位 元素正常情况 top、left、right、bottom，z-index无效
+    		fixed：相对于视窗固定不变（如防止客服侧边栏随着页面的滚动条滑动而滚动、头部尾部导航）
+    		relative：正常位置进行定位（相对于元素本身在文档的位置）
+    		absolute：相对于static以外的第一个父元素定位（父级是relative子级是absolute则子级是相对于父级；若父级无定位，子级是absolute，则相对于窗口）
+    		inherit：继承父元素position
+    	
+    	css3 边框:
+    		圆角边框：border-radius（圆形值为50%）
+    		边框阴影box-shadow：（可以添加一个或多个用逗号分隔） h-shadow v-shadow blur spread color inset
+	    		h-shadow	必需。水平阴影的位置。允许负值。	
+				v-shadow	必需。垂直阴影的位置。允许负值。	
+				blur		可选。模糊距离。	
+				spread		可选。阴影的尺寸。	
+				color		可选。阴影的颜色。	
+				inset		可选。将外部阴影 (outset) 改为内部阴影。
+				eg: box-shadow: 0 0 0 5px rgba(232,232,221,0.2), 0 0 0 3px #fff;(多个：由外到内) 
+    		边框图片border-image（ie11以下不支持）：source slice width outset repeat（可分别设置border-image-*）图片路径   边框向内偏移   边框宽度    边框图像区域超出边框的量    图像边框是否应平铺(repeated)、铺满(rounded)或拉伸(stretched)
+	    		eg：
+	    		-moz-border-image:url(border.png) 30 30 round;	    /* Old Firefox */
+				-webkit-border-image:url(border.png) 30 30 round;	/* Safari and Chrome */
+				-o-border-image:url(border.png) 30 30 round;		/* Opera */
+				border-image:url(border.png) 30 30 round;
+
+		css3 3D转换：
+			
+
+    	css3  动态伪类选择器
+    		hover:改变样式的变化
+     -->
+    <div id="box">
+    	<ul>
+    		<li>
+    			<div class="ch-info">
+    				<div class="ch-info-front">
+    					<h4>HTML/CSS</h4>
+    				</div>
+    				<div class="ch-info-back">
+    					<h4>HTML/CSS</h4>
+    					<p>As usual, I am using HTML/CSS for this effect.</p>
+    				</div>
+    			</div>
+    		</li>
+    		<li>
+    			<div class="ch-info">
+    				<div class="ch-info-front">
+    					<h4>HTML/CSS</h4>
+    				</div>
+    				<div class="ch-info-back">
+    					<h4>HTML/CSS</h4>
+    					<p>One of the common trend in webdesign nowadays is 3D</p>
+    				</div>
+    			</div>
+    		</li>
+    		<li>
+    			<div class="ch-info">
+    				<div class="ch-info-front">
+    					<h4>HTML/CSS</h4>
+    				</div>
+    				<div class="ch-info-back">
+    					<h4>HTML/CSS</h4>
+    					<p>Fullstack Developer fb.com、l3ikrantgiri@l3ikrant</p>
+    				</div>
+    			</div>
+    		</li>
+    	</ul>
+    </div>   
+</body>
+</html>

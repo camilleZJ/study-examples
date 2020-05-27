@@ -1,0 +1,598 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>活动插件-创建活动</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content=""/>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+		<link rel="stylesheet" href="../css/foundation-datepicker.css" />
+		<style>
+			#wrap{width: 730px;height: 492px;padding: 15px 15px 0;}
+			input, textarea, select, .gifts-box{vertical-align: middle;user-select: text;height: 34px;padding: 6px 12px;line-height: 1.42857143;color: #555;background-color: #fff;background-image: none;border: 1px solid #ccc;border-radius: 4px;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);box-shadow: inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;}
+			select, .gifts-box{padding: 0;}
+			input:focus, textarea:focus, select:focus{border: 1px solid #66AFE9;box-shadow: 0 0 8px #66AFE9;}
+			input[type=button]{font-size: 12px;color: #fff;background-color: #5CB2FF;font-weight: 400;text-align: center;cursor: pointer;border: 1px solid transparent;white-space: nowrap;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+			.info{}
+			.items{display: -ms-flexbox; display:-webkit-flex;display: flex;-ms-flex-align: center;align-items: center; padding-bottom: 10px;}
+			.items label{display: inline-block;width: 60px;}
+			.title, .anchor-acount{width: 218px;}
+			.start, .end{font-size: 0;}
+			.start-date, .end-date, .gifts-box{width: 106px;}
+			.date-line{padding: 0 9px;}
+			.end-date{width: 102px;}
+			select{width: 52px;margin-left: 4px;}
+			.selected-gift{height: 32px;}
+			.gifts{font-size: 0;}
+			.gifts-box{position:relative;display: inline-block;text-align: center;}
+			.icon{position: absolute;top: 14px;right: 3px;z-index: 999;width: 8px;height: 6px; background: url('../img/ico.png') no-repeat 90% center;}
+			.gift-lists{background: #FFF;position: absolute;z-index: 99;top: 33px;left: 0;width: 218px;height: auto;border: 1px #86BDEE solid;display: none;}
+			.gift-item{text-align: center;vertical-align: middle;width: 36px;height: 36px;border-right: 1px #ccc solid;border-bottom: 1px #ccc solid;float: left;cursor: pointer;}
+			.gift-item:hover{background: #C6DAFB;}
+			.gift-item img{height: 33px;}
+			.score{width: 108px;margin: 0 4px;}
+			.add-gift, .add-anchor{margin-left: 4px;}
+			.selected-box{display: -ms-flexbox; display:-webkit-flex;display: flex;width: 627px;height: 70px;}
+			.page-btn{display: block;width: 16px;height: 60px;cursor: pointer;margin: 5px 0;}
+			.btn-left{background: url('../img/left.png');background-position: 50%;margin-right: 5px;}
+			.btn-right{background: url('../img/right.png');background-position: 50%;}
+			.btn-left:hover, .btn-right:hover{background-position: 100%;}
+			.ul-box{position: relative;width: 590px;height: 100%;overflow: hidden;}
+			.gifts-ul{position: absolute;width: 100%;height: 60px;}
+			.ul-item{width: 39px;height: 100%;border: 1px solid #ccc;margin: 5px 3px 5px 0;float: left;position: relative;}
+			.gift-top, .gift-bot{display: block;width: 100%;text-align: center;}
+			.gift-top{height: 75%;border-bottom: 1px solid #ccc;}
+			.gift-bot{height: 25%;}
+			.selected-anchors{width: 628px;height: 64px;}
+			.footer{text-align: center;}
+			.btn-back, .btn-save{width: 140px;height: 40px;font-size: 14px;}
+			.btn-back{background: #F39900 !important;}
+    		.footer p{color: #ACADAE;padding-top: 10px;}
+    		
+    		
+    		.error label, .error .date-line{color: #a94442 !important;}
+    		.error input[type=text], .error input[type=tel], .error select{border-color: #a94442 !important;}
+    		.error input[type=text]:focus, .error input[type=tel]:focus, .error select:focus{border-color: #a94442 !important;box-shadow: 0 0 6px #a94442 !important;}
+			.btn-del{position: absolute;cursor: pointer;top: -5px;left: 30px;z-index: 9;}
+			.disabled{background-color: #D1D1D1 !important;border-color: #D1D1D1 !important;}
+			.layui-layer-diy .layui-layer-title {background: #5CB2FF;color: #fff;border: none;}
+			.layui-layer-diy .layui-layer-btn .layui-layer-btn0 {background-color: #5CB2FF;}
+			.layui-layer-diy .layui-layer-btn .layui-layer-btn1 {background-color: #F39900;color: #fff;}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<form name="activity-form" action="" method="post" onkeydown="if(event.keyCode == 13) return commit();">
+				<ul class="info">
+					<li class="items">
+						<label>活动标题</label>
+						<input type="text" name="title" class="title" placeholder="输入内容不得超过20个字符"/>
+					</li>
+					<li class="items">
+						<label>活动时间</label>
+						<span class="start">
+							<input type="text" class="start-date" />
+							<select class="start-hour">
+								<option value="00" selected="selected">00时</option>
+								<option value="01">01时</option>
+								<option value="02">02时</option>
+								<option value="03">03时</option>
+								<option value="04">04时</option>
+								<option value="05">05时</option>
+								<option value="06">06时</option>
+								<option value="07">07时</option>
+								<option value="08">08时</option>
+								<option value="09">09时</option>
+								<option value="10">10时</option>
+								<option value="11">11时</option>
+								<option value="12">12时</option>
+								<option value="13">13时</option>
+								<option value="14">14时</option>
+								<option value="15">15时</option>
+								<option value="16">16时</option>
+								<option value="17">17时</option>
+								<option value="18">18时</option>
+								<option value="19">19时</option>
+								<option value="20">20时</option>
+								<option value="21">21时</option>
+								<option value="22">22时</option>
+								<option value="23">23时</option>
+							</select>
+							<select class="start-minutes">
+								<option value="00" selected="selected">00分</option>
+								<option value="05">05分</option>
+								<option value="10">10分</option>
+								<option value="15">15分</option>
+								<option value="20">20分</option>
+								<option value="25">25分</option>
+								<option value="30">30分</option>
+								<option value="35">35分</option>
+								<option value="40">40分</option>
+								<option value="45">45分</option>
+								<option value="50">50分</option>
+								<option value="55">55分</option>
+							</select>
+						</span>
+						<span class="date-line">至</span>
+						<span class="end">
+							<input type="text" class="end-date"/>
+							<select class="end-hour">
+								<option value="00" selected="selected">00时</option>
+								<option value="01">01时</option>
+								<option value="02">02时</option>
+								<option value="03">03时</option>
+								<option value="04">04时</option>
+								<option value="05">05时</option>
+								<option value="06">06时</option>
+								<option value="07">07时</option>
+								<option value="08">08时</option>
+								<option value="09">09时</option>
+								<option value="10">10时</option>
+								<option value="11">11时</option>
+								<option value="12">12时</option>
+								<option value="13">13时</option>
+								<option value="14">14时</option>
+								<option value="15">15时</option>
+								<option value="16">16时</option>
+								<option value="17">17时</option>
+								<option value="18">18时</option>
+								<option value="19">19时</option>
+								<option value="20">20时</option>
+								<option value="21">21时</option>
+								<option value="22">22时</option>
+								<option value="23">23时</option>
+							</select>
+							<select class="end-minutes">
+								<option value="00" selected="selected">00分</option>
+								<option value="05">05分</option>
+								<option value="10">10分</option>
+								<option value="15">15分</option>
+								<option value="20">20分</option>
+								<option value="25">25分</option>
+								<option value="30">30分</option>
+								<option value="35">35分</option>
+								<option value="40">40分</option>
+								<option value="45">45分</option>
+								<option value="50">50分</option>
+								<option value="55">55分</option>
+							</select>
+						</span>
+					</li>
+					<li class="items">
+						<label>活动礼物</label>
+						<span class="gifts">
+							<span class="gifts-box">
+								<img class="selected-gift" data-key='10108' src="../img/gifts/10108s.1.png" />
+								<i class="icon"></i>
+								<ul class="gift-lists"></ul>
+							</span>
+						</span>
+						<input type="tel" class="score" maxlength="5" min="-9999" max="9999" placeholder="-9999~9999" value=""/>
+						<span>积分</span>
+						<input type="button" class="add-gift" value="+ 添加" />
+					</li>
+					<li class="items">
+						<label></label>
+						<input type="hidden" name="gifts" id="gifts" value="" />
+						<div class="selected-box">
+							<i class="page-btn btn-left"></i>
+							<div class="ul-box">
+								<ul class="gifts-ul">
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+									<li class="ul-item">
+										<span class="gift-top"></span>
+										<span class="gift-bot"></span>
+									</li>
+								</ul>
+							</div>
+							<i class="page-btn btn-right"></i>
+						</div>
+					</li>
+					<li class="items">
+						<label for="">统计用户</label>
+						<input type="tel" class="anchor-acount" maxlength="10" placeholder="请输入用户IS号" />
+						<input type="button" class="add-anchor" value="+ 添加"/>
+					</li>
+					<li class="items">
+						<label for=""></label>
+						<textarea name="selected-anchors" class="selected-anchors" rows="3" placeholder='注：用户之间用","隔开,做多添加50个用户' readonly="readonly"></textarea>
+					</li>
+				</ul>
+				<div class="footer">
+					<input type="button" class="btn-back" value="取消" />
+					<input type="button" class="btn-save" value="创建活动" />
+					<p>提示：排行榜数据将在活动结束后保留1小时</p>
+				</div>
+			</form>
+		</div>
+		<script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.3/layer.js"></script>
+		<script src="../js/foundation-datepicker.js"></script>
+		<script src="../js/foundation-datepicker.zh-CN.js"></script>
+		<script>
+			
+			function commit()
+			{
+				return $('.btn-save').trigger('click'),false;
+			}
+			function get_byteLen (val) {
+				var len = 0;
+				for (var i = 0; i < val.length; i++) {
+					var a = val.charAt(i); //根据下标循环获取字符串中的每一项
+					if (a.match(/[^\x00-\xff]/ig) != null) { //判断汉字或全角
+						len += 2;
+					}
+					else {
+						len += 1;
+					}
+				}
+				return len;
+			}
+			
+			function RegForbidWord (input) {
+				var result = "";
+				var _strforbid = ["is", "爱秀", "ishow", "公安", "扫黄", "特警", "警察", "罪犯", "刑警", "法轮", "强奸", "性交", "你妈", "你爹", "共产党", "毛主席", "江泽民", "胡锦涛", "胡主席", "{:", "做爱", "china", "喷人", "黒社會", "黑社会", "语音极限", "語音極限", "杂种", "你妹", "你姐", "草你", "操你", "日你", "妈B", "害虫", "嗐蟲", "害蟲", "嗐虫", "篰隊", "淫荡", "搞死", "篰", "隊", "嗐", "痋", "开始报仇", "害茧", "康师傅", "周永康", "康师父", "悄悄", "广播", "学雷峰", "蓝客", "黑涩會", "嗨虫部队", "整死官方", "黑客", "嗨茧部队", "＆", "习近平", "系统提示", "官方", "温馨提示", "你们的爹", "网络★巡警", "网络巡警", "胡温", "温胡", "假币", "白货", "代理", "五评", "法轮", "发轮", "法輪", "发輪", "发伦", "發倫", "發伦", "法倫", "台独", "西藏", "藏独", "江贼", "言论自由", "胡锦涛", "新闻", "网警", "内幕", "www", "http", "达赖", "中国", "gcd", "社会主义", "中共", "中央", "政府", "天理", "代表", "人权", "革命", "谷丽萍", "戴相龙", "习近毛", "马发祥", "高珏", "吴祚来", "guo伯雄", "jiang世俊", "周用康", "王荣", "贾延安", "高全健", "郭正钢", "江锦恒", "江秘", "孔元之子孔丹", "毛风格", "李小鹏", "曾海生", "贾廷安", "令狐世家", "马健", "江核心", "杨卫泽", "王守业", "江ze民", "江某民", "江hama", "江ZM", "俞氏家族", "胡办", "刘志刚", "江mian恒", "余强生", "陈世炬", "黄建国", "吉炳轩", "胡舒立", "齐桥桥", "鄧家貴", "邓家贵", "劉芸刪", "流云删", "令完成", "李晓琳", "江z民", "刘云删", "孟建柱", "鄒睿寧", "邹睿宁", "趙子驍", "赵子骁", "張成亦", "张成亦", "習害羞", "习庆丰", "周某康", "周恩狗", "周恩电", "周恩夹", "周恩去", "曾大佬", "邓楠老公", "席进苹", "席進蘋", "習進蘋", "习进苹", "習驢", "習近熊", "習近驢", "习跳跳虎", "习驴", "习近熊", "习近驴", "趙克石", "赵克石", "自幹五", "張樹林", "太祖毛", "花千芳", "胡锡进", "自干五", "张树林", "習大大", "毛沢東", "毛沢东", "劉奇葆", "蔡名照", "贾跃亭", "习大老板", "王利豐", "王利丰", "毛澤東", "周小平", "彭麻麻", "江麻麻", "习远平", "应勇", "杨雄", "栗战书", "韩正", "苏荣", "万庆良", "黄海波", "徐才厚", "郭伯雄", "冯正虎", "郑恩宠", "曹思源", "修宪", "梁国雄", "涂谨申", "何俊仁", "李卓人", "支联会", "杨建利", "费良勇", "温云超", "王军涛", "王丹", "夏雪", "刘奇葆", "汪洋", "邓卓棣", "曾庆红", "郭声琨", "李鹏", "温云松", "彭丽媛", "李长春", "吴邦国", "近平", "张学兵", "全能神", "赵宗明", "胡常根", "占全喜", "占海特", "邓小平", "熙来", "李源潮", "刘延东", "刘乐飞", "祸国强", "李克弓虽", "贾庆林", "瘟家宝", "误邦国", "江绵恒", "胡瘟", "党魁", "胡一刀", "胡JT", "董文华", "米福士", "杜阳明", "龚浩明", "李天天", "江贼", "泽东", "周恩来", "胡主席", "锦涛", "錦涛", "泽民", "毛主席", "马英九", "贺龙", "谢深山", "余秋里", "向忠发", "吴德", "谭震林", "田纪云", "谭绍文", "习仲勋", "任弼时", "叶菊兰", "杨勇", "邱太三", "杨白冰", "曾培炎", "张闻天", "张立昌", "李克强", "周子玉", "郑宝清", "王震", "王克", "王兆国", "王刚", "苏贞昌", "宋庆龄", "钱其琛", "彭真", "彭冲", "马国瑞", "刘文雄", "刘淇", "刘华清", "刘少奇", "林益世", "林佳龙", "廖承志", "傅作义", "李至伦", "李雪峰", "李登柱", "瞿秋白", "黄永生", "胡耀邦", "洪兴", "郝建秀", "谷牧", "董必武", "姜春云", "成克杰", "陈锡联", "陈慕华", "陈建铭", "陈博志", "曹庆泽", "蔡启芳", "谢非", "于永波", "吴仪", "吴桂贤", "谭政", "许世友", "徐向前", "田弘茂", "卓伯源", "翁金珠", "叶剑英", "姚文元", "杨尚昆", "邱会作", "曾志郎", "赵洪祝", "章孝勇", "张万年", "张德江", "贺国强", "朱立伦", "韦国清", "王金平", "王洪文", "王鹤寿", "王从吾", "苏兆征", "乔石", "祁培文", "彭佩云", "聂荣臻", "罗荣桓", "刘云山", "刘丽英", "刘伯承", "林信义", "林彪", "廖锡龙", "傅全有", "李铁映", "李立三", "李继耐", "李德生", "凯丰", "纪登奎", "黄克诚", "胡启立", "何勇", "郝伯村", "韩杼滨", "杜正胜", "邓颖超", "邓发", "陈永贵", "陈唐山", "陈良宇", "陈独秀", "陈伯达", "蔡英文", "蔡和森", "梁光烈", "俞正声", "希拉克", "扎卡维", "川岛芳子", "阿拉法特", "李宏志", "李红志", "袁纯清", "谢长廷", "颜庆章", "伍世文", "许财利", "耿飚", "赵紫阳", "汪东兴", "夏赞忠", "任建新", "叶群", "姚依林", "杨得志", "张博雅", "章孝严", "张震", "张廷发", "周永康", "邹家华", "朱德", "秦基伟", "陈毅", "王乐泉", "王稼祥", "王汉斌", "苏振华", "宋任穷", "乔冠华", "普京", "彭德怀", "倪志福", "陆定一", "刘澜涛", "林伯渠", "连惠心", "林祖涵", "卢福坦", "傅杰", "李作鹏", "李先念", "李维汉", "李俊毅", "李贵鲜", "黄仲生", "回良玉", "华国锋", "胡乔木", "韩天石", "韩光", "顾顺章", "邓力群", "江青", "陈希", "陈丕显", "陈菊", "陈定南", "薄一波", "蔡庆林", "阿沛阿旺晋美", "丁关根", "曹刚川", "新华社", "台湾党", "中宣部", "尉健行", "谷春立", "汪志远", "令狐剑", "包子党", "周本胜", "周本顺", "李鸿忠", "李鵬", "陈维健", "楚易铭", "竺延风", "黄奇帆", "程维高", "刘汉", "赵乐际", "宋普", "冉沙洲", "周晓辉", "丁子霖", "孙文广", "陆委会", "廖家安", "毛时代", "冷荣泉", "張德江", "李長春", "習李准", "夏小强", "罗志军", "左小青", "习明泽", "吕秀莲", "徐刚", "何岸泉", "蒋洁敏", "谢长发", "孙子马云", "池秋娜", "成龙余英时", "陳可卿曾幾", "陈卓林", "陈永洲", "陈破空", "陈吉宁", "曾庆淮", "曾哥", "曾宝宝", "博裕江", "白所成", "白恩培", "楊尚昆", "曹鉴燎", "張孟業", "夏小強", "罗慕栾", "张孟业", "胥志义", "华春莹", "姜维平", "许家印", "陈子明", "施芝鸿", "鲍彤", "弗朗西斯•福山", "陆昊", "江綿恆", "刘国庆", "毛志斌", "孟钢", "習明澤", "陈伟", "陈云", "陈学军", "周曉輝", "翁山蘇姬", "昂山素姬", "肖建華", "劉曉波", "陈至立", "王晓玲", "郭文贵", "朱鎔基", "克里斯·史密斯", "陈卫", "魏京生", "蔡奇", "何立峰", "刘鹤", "蒋梅", "戴永革", "颜世元", "温如春", "杨军", "解植春", "隋振江", "陈小鲁", "吴小晖", "张锦", "徐辉", "孙平华", "邓朴方", "邓质方", "胡占凡", "杨秀珠", "马兴瑞", "符玲文", "高玨", "刘金国", "王宗南", "王崭新", "贺文", "刘亚洲", "李乐斌", "徐纯合", "赵晋", "赵少麟", "太子辉", "梁耀辉", "余远辉", "谢正义", "陈文清", "斯鑫良", "何刚", "朱小超", "戴海波", "侯凯", "姜中华", "习王俞", "秦玉海", "刘宝来", "王小洪", "江泽琳", "邹德用", "宋德福", "统战部", "河南帮", "程慕阳", "温戴家族", "洪旭东", "耿惠昌", "泛民派", "梁国聚", "徐勤先", "禁飞", "贾晓烨", "贾晓霞", "孙茂业", "李蒨", "丁鑫发", "陈安众", "王林", "周涵", "朱明国", "朱国峰", "周正毅案", "周明贵", "周带鱼", "周滨", "钟绍军", "志成江", "赵志浩", "招玉芳", "张又侠", "张新明", "张树田", "张仕波", "张宏良", "张高丽", "张定发", "张春贤", "臧献甫", "云松温", "媛宵", "俞孽", "俞毒", "鱼振深", "鱼增生", "鱼老狗", "鱼花子", "叶迎春", "叶万勇", "杨澜令家", "杨晶", "杨金山", "杨继绳", "许宗衡", "许永跃", "许其亮", "习胡温", "文嘉堡", "溫雲松", "温相", "温家宝", "吴官正", "汤永林", "汤灿", "谭成义", "郑晓玲", "孙政才", "孙蒸菜", "孙春兰", "苏逸清", "苏达仁", "宋林一", "舒晓琴", "沈冰", "申维辰", "张澜澜", "王敏", "邱进", "秦光荣", "浦志强", "彭大妈", "潘晴", "倪发科", "孟群", "毛专政", "马明哲", "罗干", "罗保铭", "劉源張又俠", "刘志军", "刘源", "刘晓波", "刘满仓", "刘东", "刘赐贵", "令政策", "蔡明照", "令狐野", "令狐绪", "林存德", "梁滨", "傅政华", "令计划", "李雪勤", "李熊猫", "李小勇", "李瑞英", "李瑞环", "李岚清", "李海进", "李东生", "雷春美", "乐飞刘", "陈政高", "焦利", "蒋尊玉", "江志城", "江志成", "江世俊", "江世进", "江石溪", "江撤民", "贾qinglin", "夾文革", "夹文革", "佳兆业", "季建业", "霍克", "黄兴国", "黄丽满", "黄坤明", "黄菊", "胡德华", "賀錦濤", "宋林", "贺国強", "贺guoqiang", "蛤挺傅", "蛤诞节", "马建", "郭英成", "郭声昆妻子", "郭声昆夫人", "郭邓楠丈夫", "宋祖英", "习近平", "毛泽东", "谷彦旭", "谷俊山", "古月帝", "高瑜", "高严", "李小琳", "邓楠", "高建进", "高虎城", "李友", "范长秘", "朱镕基", "東方葵", "东方葵", "丁薛祥", "戴建勇", "装逼", "草泥马", "特么的", "撕逼", "玛拉戈壁", "爆菊", "JB", "呆逼", "本屌", "齐B短裙", "法克鱿", "丢你老母", "达菲鸡", "装13", "逼格", "蛋疼", "傻逼", "绿茶婊", "你妈的", "表砸", "屌爆了", "买了个婊", "已撸", "吉跋猫", "妈蛋", "逗比", "我靠", "碧莲", " 碧池", "然并卵", "日了狗", "屁民", "吃翔", "XX狗", "淫家", "你妹", "浮尸国", "滚粗", "穆罕穆德", "台湾独立", "穆斯林", "屏蔽", "牺牲", "击毙", "被击毙", "一带一路"];
+				$.each(_strforbid, function(k, v) {
+					if(input.toLowerCase().indexOf(v.toLowerCase()) !== -1) {
+						result = v;
+					}
+				});
+				
+				return result;
+			}
+			
+			function check_time(){
+				var b_date = $('.start-date').val(),
+					b_hour = $('.start-hour').val(),
+					b_minutes = $('.start-minutes').val(),
+					e_date = $('.end-date').val(),
+					e_hour = $('.end-hour').val(),
+					e_minutes = $('.end-minutes').val();
+				
+				if(b_date == "") {
+					return $(this).parent().parent().addClass('error'), layer.msg('请选择开始时间'),false;
+				}
+				if(e_date == "") {
+					return $(this).parent().parent().addClass('error'), layer.msg('请选择结束时间'),false;
+				}				
+				
+				var b_timestamp = Date.parse(new Date(b_date.replace(/-/g,"/") + ' ' + b_hour + ':' + b_minutes)),
+				    e_timestamp = Date.parse(new Date(e_date.replace(/-/g,"/") + ' ' + e_hour + ':' + e_minutes));
+				    timestamp = Date.parse(new Date());
+				    
+				if(b_timestamp < timestamp) {
+					return $(this).parent().parent().addClass('error'), layer.msg('开始时间不能小于当前时间'),false;
+				}
+				if(e_timestamp < timestamp) {
+					return $(this).parent().parent().addClass('error'), layer.msg('结束时间不能小于当前时间'),false;
+				}
+				if(e_timestamp - b_timestamp < 0) {
+					return $(this).parent().parent().addClass('error'), layer.msg('结束时间不得小于开始时间'),false;
+				}
+				
+				//jq时间戳13位精确到毫秒，/1000-10位（精确到秒）
+				b_timestamp = b_timestamp / 1000;
+				e_timestamp = e_timestamp / 1000;
+				if (e_timestamp - b_timestamp < 3600) {
+					return $(this).parent().parent().addClass('error'), layer.msg('活动时间不得少于一小时'),false;
+				}
+				if (e_timestamp - b_timestamp > 86400) {
+					return $(this).parent().parent().addClass('error'), layer.msg('活动时间不得超过24小时'),false;
+				}
+
+				$(this).parent().parent().removeClass('error');
+				return true;
+			}
+			
+			var GIFT_NUM = 0,
+				gifts_info=[{id:10108,img:"10108s.1.png"},{id:10110,img:"10110s.1.png"},{id:10116,img:"10116s.1.png"},{id:10117,img:"10117s.1.png"},{id:10121,img:"10121s.1.png"},{id:10127,img:"10127s.1.png"},{id:10164,img:"10164s@2x.2.png"},{id:10192,img:"10192s.1.png"},{id:10201,img:"10201s@2x.2.png"},{id:10220,img:"10220s@2x.2.png"},{id:10226,img:"10226s.1.png"},{id:10244,img:"10244s.1.png"},{id:10252,img:"10252s@2x.1.png"},{id:10255,img:"10255s.1.png"},{id:10260,img:"10260s@2x.7.png"},{id:10261,img:"10261s@2x.3.png"},{id:10262,img:"10262s@2x.3.png"},{id:10266,img:"10266s@2x.3.png"},{id:10292,img:"10292s.1.png"},{id:10309,img:"10309s@2x.1.png"},{id:10315,img:"10315s@2x.1.png"},{id:10386,img:"10386s.226.png"},{id:10400,img:"10400s@2x.1.png"},{id:10410,img:"10410s@2x.1.png"},{id:10410,img:"10410s@2x.1.png"},{id:65005,img:"65005s.1.png"},{id:65006,img:"65006s.1.png"},{id:65007,img:"65007s.1.png"},{id:65008,img:"65008s.1.png"},{id:65009,img:"65009s.1.png"},{id:65010,img:"65010s.1.png"},{id:65023,img:"65023s@2x.4.png"}]; 
+			$(function(){
+				$('.start-date').fdatepicker({
+					format: 'yyyy-mm-dd'
+				});
+				$('.end-date').fdatepicker({
+					format: 'yyyy-mm-dd'
+				});
+				
+				var html='';
+				$.each(gifts_info, function(k, v) {
+					html += '<li class="gift-item"><img data-key="'+ v.id +'" src="../img/gifts/'+ v.img +'" /></li>';
+				});
+				$('.gift-lists').html(html);
+				
+				var myDate = new Date();
+				var year = myDate.getFullYear(),
+				    month = myDate.getMonth() + 1,
+					day = myDate.getDate(); 
+				var now = year +'-'+ (month>9? month : '0'+month) +"-"+ (day>9? day : '0'+day);
+				$('.start-date').val(now);
+				$('.end-date').val(now);
+			}).on('blur', '.title', function(){
+				var con = $.trim($(this).val()),
+					len = get_byteLen(con);
+				
+				if(con == "") {
+					return $(this).parent().addClass('error'), layer.msg('标题不能为空'), false;
+				} 
+				if(len > 20) {
+					return $(this).parent().addClass('error'), layer.msg('最大不能超过20个字符'), false;
+				}
+				$(this).parent().removeClass('error');
+			}).on('change', '.start-date, .end-date, .start-hour, .start-minutes, .end-hour, .end-minutes', check_time
+			).on('click', 'body', function () {
+				if($(".gift-lists").is(":hidden") == false) $(".gift-lists").hide();
+			}).on('click', '.gifts-box', function(e){
+				var is_hide = $(".gift-lists").is(":hidden");
+				if(is_hide) {
+					e.stopPropagation(); //阻止body或document事件的传播
+					$(".gift-lists").show();
+				} else {
+					$(".gift-lists").hide();
+				}
+			}).on('click', '.gift-item', function(){
+				var selected = $(this).find('img');
+
+				$('.selected-gift').attr('src', selected.attr('src'));
+				$('.selected-gift').data('key', selected.data('key'));
+			}).on('input', '.score', function(){
+				var num = $(this).val().replace(/\D/g, "");
+				$(this).val(num);
+			}).on('blur', '.score', function(){
+				var num = $(this).val().replace(/\D/g, "");
+				if(num == 0 || num == '' || isNaN(num) || num > 9999 || num < -9999) {
+					return $(this).parent().addClass('error'), layer.msg('请输入正确积分'), false;
+				}
+				$(this).parent().removeClass('error');
+			})
+			.on('click', '.add-gift',function(){
+				var num = +$('.score').val().replace(/\D/g, "");
+				if(num == 0 || num == '' || isNaN(num) || num > 9999 || num < -9999) {
+					return $(this).parent().addClass('error'), layer.msg('请输入正确积分'), false;
+				}
+				
+				var src = $('.selected-gift').attr('src'),
+					key = $('.selected-gift').data('key'),
+				    gift = $(".gift-top");
+				if($('.ul-item').find('[data-key="' +key+ '"]').length == 0){
+					$.each(gift, function(k, v) {
+						if($(v).html() == '') {
+							$(this).parent().removeClass('error');
+							$(v).parent().css({'border-color': '#86BDEE'});
+							$(v).css({'border-bottom-color': '#86BDEE'});
+							$(v).before('<img class="btn-del" width="12" src="../img/del.png">');
+							$(v).html('<img width="37" src="' + src + '" data-key="'+ key +'">');
+							$(v).next().text(num);
+							$('.gift-lists').find('[data-key="'+key+'"]').parent().remove();
+							$('.score').val('');
+							
+							if (GIFT_NUM != 0 && GIFT_NUM % 14 == 0) {
+								var h = $(v).parent().parent().css('margin-top'),
+									height = Number(h.substr(0, h.length - 2)) - 70;
+								$(v).parent().parent().css('margin-top', height + 'px');
+							}
+							GIFT_NUM++;
+							return false;
+						}
+					});
+				} else {
+					return $(this).parent().addClass('error'), layer.msg('礼物不可重复添加'), false;
+				}
+				
+				if($('.gift-top img').length >= 30) {
+					$('.add-gift').attr('disabled', true).addClass('disabled');
+				}
+			}).on('click', '.btn-del', function(){
+				var selected = $(this).next().find('img');
+				$('.add-gift').attr('disabled', false).removeClass('disabled');
+				$(this).parent().remove();
+				$('.gift-lists').append('<li class="gift-item"><img data-key="'+ selected.data('key') +'" src="'+ selected.attr('src') +'" /></li>');
+				$('gifts-ul').append('<li class="ul-item"><span class="gift-top"></span><span class="gift-bot"></span></li>');
+				
+				var old_page = Math.ceil(GIFT_NUM / 14);
+				GIFT_NUM--;
+				if (GIFT_NUM != 0 && Math.ceil(GIFT_NUM / 14) < old_page) {
+					var me = $('ul.gifts-ul'),
+						h = me.css('margin-top');
+					if (Number(h.substr(0, h.length - 2)) < 0) {
+						height = Number(h.substr(0, h.length - 2)) + 70;
+						me.css('margin-top', height + 'px');
+					}
+				}
+			}).on('click', '.btn-right, .btn-left', function () {
+				var me = $('ul.gifts-ul'),
+					h = me.css('margin-top'),
+					num = Number(h.substr(0, h.length - 2)),
+					page = Math.ceil(GIFT_NUM / 14),
+					height = 0;
+				if (GIFT_NUM < 1) return false;
+		
+				if($(this).hasClass('btn-left')) {
+					if (num < 0) {
+						height = num + 70;
+					} else {
+						return false;
+					}
+				} else if ($(this).hasClass('btn-right')) {
+					if (page > 1 && Math.abs(num) < (page-1) *70) {
+						height = num - 70;
+					} else {
+						return false;
+					}
+				}
+				me.css('margin-top', height + 'px');
+			}).on('input', '.anchor-acount', function(){
+				var account = $(this).val().replace(/\D/g, "");
+				$(this).val(account);
+			}).on('click', '.add-anchor', function(){
+				var account = +$('.anchor-acount').val().replace(/\D/g, "");
+				if(account <= 0 || account == '' || isNaN(account) || account.length > 10) {
+					return $(this).parent().addClass('error'), layer.msg('请输入正确的IS号'), false;
+				}
+				$(this).parent().removeClass('error');
+				
+				var account_str = $('.selected-anchors').val();
+				if(account_str == "") {
+					account_str += account + ',';
+				} else {
+					var temp_arr = [],
+					str = (account_str.substr(account_str.length-1, account_str.length) == ',') ? account_str.substr(0, account_str.length-1) : account_str;
+					arr = str.split(',');
+					if($.inArray(''+account, arr) !== -1) {
+						return $(this).parent().addClass('error'), layer.msg('重复的IS号'), false;
+					}
+					$(this).parent().removeClass('error');
+					
+					if (arr.length > 49) {
+						return $(this).addClass('disabled'), false;
+					}
+					if (arr.length == 49) {
+						$(this).addClass('disabled');
+					}
+					account_str = str + ',' + account + ',';
+				}
+				$('.anchor-acount').val('');
+				$('.selected-anchors').val(account_str);
+			}).on('click', '.btn-back', function(){
+				layer.confirm('是否取消本次活动创建', {
+					title: '提示',
+					skin: 'layui-layer-diy',
+					closeBtn: 0,
+					btn: ['是', '否'] 
+				}, function (e) {
+					history.go(-1);
+				}), function (e) {
+					return false;
+				};
+			}).on('click', '.btn-save', function(){
+				var title = $.trim($('.title').val()),
+					accounts = $('.selected-anchors').val();
+				
+//				var title_byte = get_byteLen(title);
+//				if (title == "" || title_byte == 0) {
+//					return $('.title').parent().addClass('error'),$('.title').focus() ,layer.msg('标题不能为空'), false;
+//				}
+//				if (title_byte > 20) {
+//					return $('.title').parent().addClass('error'),$('.title').focus() ,layer.msg('最大不能超过20个字符'), false;
+//				}
+//				if (RegForbidWord(title) !== "") {
+//					return $('.title').parent().addClass('error'),$('.title').focus() ,layer.msg('标题含有非法字符'), false;
+//				}
+//				$('.title').parent().removeClass('error');
+//				
+//				if(check_time === false) return false;
+//
+//				if(accounts == "") {
+//					return $('.selected-anchors').parent().addClass('error'), layer.msg('至少添加一名用户'), false;
+//				} else {
+//					var temp_str = isNaN(accounts.substr(0, 1)) ? accounts.substr(accounts.length-1) : accounts;
+//					temp_str =  isNaN(temp_str.substr(temp_str.length -1)) ? temp_str.substr(temp_str.length, temp_str.length-1) : temp_str;
+//					var temp_arr = temp_str.split(',');
+//					if (temp_arr.length > 50) {
+//						return $('.selected-anchors').parent().addClass('error'), layer.msg('最多可统计50名用户'), false;
+//					}
+//					
+//					var flag = true;
+//					$.each(temp_arr, function(k, v) {
+//						if(v == '' || isNaN(v) || parseInt(v) <= 0 || v.length > 10) {
+//							return flag = false, $('.selected-anchors').parent().addClass('error'), layer.msg('统计用户中存在不合法的IS号'), $('.selected-anchors').focus(), false;
+//						}
+//					});
+//					
+//					if (flag === false) return false;
+//				}
+//				$('.selected-anchors').parent().removeClass('error');
+				
+				var gifts = $('.gift-top>img')
+					data = '{';
+				if (gifts.length == 0) {
+					return $('.add-gift').parent().addClass('error'), layer.msg('请选择礼物'), false;
+				}
+				$('.add-gift').parent().removeClass('error');
+				$.each(gifts, function(k, v) {
+					data += '"' + $(v).data('key') + '":"' + $(v).parent().next().text() + '",';
+				});
+				data = data.substr(0, data.length-1) + '}';
+				$('#gifts').val(data);
+
+				var html = '<div style="text-align: center;">收否创建活动《' + title + '》<br />' + ' ' + $('.start-date').val() + '时' + $('.start-hour').val() + '分' + $('.start-minutes').val() +'分~' + $('.end-date').val() + ' ' + $('.end-hour').val() + '时' + $('.end-minutes').val() + '分</div>';
+				layer.confirm(html, {
+					title: '提示',
+					skin: 'layui-layer-diy',
+					closeBtn: 0,
+					btn: ['是', '否'] 
+				}, function (e) {
+					$('form').submit();
+				});
+			})				
+		</script>
+	</body>
+</html>

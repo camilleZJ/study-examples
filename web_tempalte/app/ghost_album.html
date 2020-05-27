@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>阴阳师幽灵边框</title>
+<meta name="keywords" content="阴阳师幽灵边框">
+<meta name="description" content="阴阳师幽灵边框案例">
+<style>
+	body,div,ul,li{
+		margin:0;
+		padding:0;
+	}
+	img{
+		border:0;
+		display:block; /*去掉向下4px*/
+		/*vertical-align: middle;*/
+	}
+	body{
+		background:url("images/bg.jpg") no-repeat center 0;
+	}
+	#wrap{
+		width: 1280px;
+		height: 417px;
+		margin:150px auto;
+	}
+	ul{
+		list-style-type: none;
+		
+		/*水平垂直居中： 容器有宽高  之后容器内每个小容器统一  使其水平、垂直方向均分间隙，即水平、垂直居中，且水平方向间隙一致，垂直方向间隙一致 */
+		display:flex;  /*弹性盒模型 强制在一行*/
+		flex-wrap:wrap;  /*强制换行 */
+		justify-content:space-around; /*主轴方向（默认横向）对齐方式环绕 若就一行直接用center就可*/
+		align-items: center; /*辅轴方向（默认纵向）对齐方式 居中*/
+		
+		width:100%;
+		height:100%;
+	}
+	
+	ul li{
+		position: relative;
+		width: 418px;
+		height: 213px;
+		transition: .5s;
+		cursor:pointer;
+	}
+	ul li:nth-child(1){
+		background: url("images/p1.png");
+	}
+	ul li:nth-child(2){
+		background: url("images/p2.png");
+	}
+	ul li:nth-child(3){
+		background: url("images/p3.png");
+	}
+	ul li:nth-child(4){
+		background: url("images/p4.png");
+	}
+	ul li:nth-child(5){
+		background: url("images/p5.png");
+	}
+	ul li:nth-child(6){
+		background: url("images/p6.png");
+	}
+	ul li:nth-child(1n){
+		background-repeat: no-repeat;
+		background-position-y: 17px;
+	}
+	/*幽灵边框线效果： 
+		上边框线：从左往右出现
+		右边框线：紧接上边框线从上往下出现
+		下边框线：紧接右边框线从右往左出现
+		左边框线：紧接下边框线从下往上出现
+	*/
+	ul li i{
+		position: absolute;
+		width: 0;
+		height:3px;
+		background: #a57c47;
+	/*	transition:.5s; 四边一起执行*/
+	}
+	ul li i:nth-child(even){
+		width: 2px;
+		height:0px;
+	}
+	ul li i:nth-child(1){
+		top: 9px;
+		left:9px; /*定位有关，width变化：left从左往右*/
+	} 
+	ul li i:nth-child(2){
+		top: 9px; /*height变化： top从上往下*/
+		right:9px;
+	}
+	ul li i:nth-child(3){
+		bottom: 24px;
+		right:9px; /*width变化：right从右往左  left从左往右*/
+	}
+	ul li i:nth-child(4){
+		bottom:24px; /*height变化：bottom从下往上，改为top从上往下*/
+		left:9px;
+	}
+	
+	ul li:hover{
+		/*transform:translateY(-17px);*/
+		background-position-y:0;
+	}
+	ul li:hover i:nth-child(1){  /*Odd基数 even偶数*/
+		/*width: 400px;*/
+		animation:ghostRow .2s 0s linear 3 forwards;  /*动画时间 延迟时间 运动方式 执行次数 定个到最后一次*/
+	}
+	ul li:hover i:nth-child(2){  
+		/*height: 180px;*/
+		animation:ghostCol .09s .2s linear 3 forwards;
+	}
+	ul li:hover i:nth-child(3){  
+		animation:ghostRow .2s .29s linear 3 forwards;  /*动画时间 延迟时间 运动方式 执行次数 定个到最后一次*/
+	}
+	ul li:hover i:nth-child(4){  /**/
+		animation:ghostCol .09s .49s linear 3 forwards;
+	}
+	
+	@keyframes ghostRow{
+		0%{width:0;}
+		100%{width:400px;}
+	}
+	@keyframes ghostCol{
+		0%{height:0;}
+		100%{height:180px;}
+	}
+</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul>
+			<li>
+				<i></i>
+				<i></i>
+				<i></i>
+				<i></i>
+			</li>
+			<li>
+				<i></i><i></i><i></i><i></i>
+			</li>
+			<li>
+				<i></i><i></i><i></i><i></i>
+			</li>
+			<li>
+				<i></i><i></i><i></i><i></i>
+			</li>
+			<li>
+				<i></i><i></i><i></i><i></i>
+			</li>
+			<li>
+				<i></i><i></i><i></i><i></i>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

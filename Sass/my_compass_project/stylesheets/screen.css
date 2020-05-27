@@ -1,0 +1,483 @@
+@charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/*以下重置样式=@import "compass/reset";*/
+/* line 80, honors/*.png */
+.honors-sprite, .honors-huang, .honors-lang, .honors-tiao, .main-logo {
+  background-image: url('../images/honors-sc2c40faaca.png');
+  background-repeat: no-repeat;
+}
+
+/* line 84, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.honors-huang {
+  background-position: 0 0;
+  height: 310px;
+  width: 480px;
+}
+
+/* line 84, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.honors-lang {
+  background-position: -480px 0;
+  height: 310px;
+  width: 480px;
+}
+
+/* line 84, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.honors-tiao {
+  background-position: -1920px 0;
+  height: 310px;
+  width: 480px;
+}
+
+/* line 15, ../sass/_icons.scss */
+.main-logo {
+  background-position: -480px 0;
+  height: 310px;
+  width: 480px;
+}
+
+/* line 25, ../sass/_icons.scss */
+.ico-file {
+  height: 15px;
+  width: 13px;
+  background-image: url('../images/retina-version/sprites-s19357bd28b.png');
+  background-position: 0 -30px;
+  background-repeat: no-repeat;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  /* line 44, ../sass/_retina-sprites.scss */
+  .ico-file {
+    background-image: url('../images/retina-version/sprites-retina-s7275e4cf61.png');
+    background-position: 0 -30px;
+    -moz-background-size: 15px auto;
+    -o-background-size: 15px auto;
+    -webkit-background-size: 15px auto;
+    background-size: 15px auto;
+  }
+}
+
+/* line 29, ../sass/_icons.scss */
+.ico-calendar {
+  height: 15px;
+  width: 15px;
+  background-image: url('../images/retina-version/sprites-s19357bd28b.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+/* line 28, ../sass/_retina-sprites.scss */
+.ico-calendar:hover {
+  background-position: 0 -15px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  /* line 44, ../sass/_retina-sprites.scss */
+  .ico-calendar {
+    background-image: url('../images/retina-version/sprites-retina-s7275e4cf61.png');
+    background-position: 0 0;
+    -moz-background-size: 15px auto;
+    -o-background-size: 15px auto;
+    -webkit-background-size: 15px auto;
+    background-size: 15px auto;
+  }
+  /* line 52, ../sass/_retina-sprites.scss */
+  .ico-calendar:hover {
+    background-position: 0 -15px;
+  }
+}
+
+/*layout*/
+/* line 23, ../sass/screen.scss */
+.stretch-full {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  right: 30px;
+}
+
+/* line 27, ../sass/screen.scss */
+.stretch-x {
+  position: absolute;
+  left: 30px;
+  right: 0;
+}
+
+/* line 31, ../sass/screen.scss */
+.stretch-y {
+  position: absolute;
+  top: 30px;
+  bottom: 1px;
+}
+
+/* line 10, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/layout/_sticky-footer.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 12, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/layout/_sticky-footer.scss */
+#root {
+  clear: both;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -30px;
+}
+/* line 18, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/layout/_sticky-footer.scss */
+#root #root_footer {
+  height: 30px;
+}
+
+/* line 20, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/layout/_sticky-footer.scss */
+#footer {
+  clear: both;
+  position: relative;
+  height: 30px;
+}
+
+/* line 38, ../sass/screen.scss */
+#bg {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjEuMCIgeDI9IjAuNSIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjUiLz48c3RvcCBvZmZzZXQ9IjUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA=='), url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjMuMTI1JSIgc3RvcC1jb2xvcj0iIzRmNGZkZCIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSIzLjEyNSUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI0LjE2NjY3JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjQuMTY2NjclIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjcuMjkxNjclIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjcuMjkxNjclIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iOC4zMzMzMyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI4LjMzMzMzJSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSIxMS40NTgzMyUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iMTEuNDU4MzMlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iMTIuNSUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSIxMi41JSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSIxNS42MjUlIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjE1LjYyNSUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSIxNi42NjY2NyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSIxNi42NjY2NyUiIHN0b3AtY29sb3I9IiM3OTc5ZTUiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iMTkuNzkxNjclIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjE5Ljc5MTY3JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjIwLjgzMzMzJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjIwLjgzMzMzJSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSIyMy45NTgzMyUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iMjMuOTU4MzMlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iMjUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iMjUlIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjI4LjEyNSUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iMjguMTI1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjI5LjE2NjY3JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjI5LjE2NjY3JSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSIzMi4yOTE2NyUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iMzIuMjkxNjclIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iMzMuMzMzMzMlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iMzMuMzMzMzMlIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjM2LjQ1ODMzJSIgc3RvcC1jb2xvcj0iIzRmNGZkZCIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSIzNi40NTgzMyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSIzNy41JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjM3LjUlIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjQwLjYyNSUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iNDAuNjI1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjQxLjY2NjY3JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjQxLjY2NjY3JSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI0NC43OTE2NyUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iNDQuNzkxNjclIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iNDUuODMzMzMlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iNDUuODMzMzMlIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjQ4Ljk1ODMzJSIgc3RvcC1jb2xvcj0iIzRmNGZkZCIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI0OC45NTgzMyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM3OTc5ZTUiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iNTMuMTI1JSIgc3RvcC1jb2xvcj0iIzRmNGZkZCIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI1My4xMjUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iNTQuMTY2NjclIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iNTQuMTY2NjclIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjU3LjI5MTY3JSIgc3RvcC1jb2xvcj0iIzRmNGZkZCIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI1Ny4yOTE2NyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI1OC4zMzMzMyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI1OC4zMzMzMyUiIHN0b3AtY29sb3I9IiM3OTc5ZTUiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iNjEuNDU4MzMlIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjYxLjQ1ODMzJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjYyLjUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iNjIuNSUiIHN0b3AtY29sb3I9IiM3OTc5ZTUiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iNjUuNjI1JSIgc3RvcC1jb2xvcj0iIzRmNGZkZCIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI2NS42MjUlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iNjYuNjY2NjclIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iNjYuNjY2NjclIiBzdG9wLWNvbG9yPSIjNzk3OWU1IiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjY5Ljc5MTY3JSIgc3RvcC1jb2xvcj0iIzRmNGZkZCIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI2OS43OTE2NyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI3MC44MzMzMyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI3MC44MzMzMyUiIHN0b3AtY29sb3I9IiM3OTc5ZTUiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iNzMuOTU4MzMlIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjczLjk1ODMzJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9Ijc1JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9Ijc1JSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI3OC4xMjUlIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9Ijc4LjEyNSUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI3OS4xNjY2NyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI3OS4xNjY2NyUiIHN0b3AtY29sb3I9IiM3OTc5ZTUiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iODIuMjkxNjclIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjgyLjI5MTY3JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjgzLjMzMzMzJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjgzLjMzMzMzJSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI4Ni40NTgzMyUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iODYuNDU4MzMlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iODcuNSUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI4Ny41JSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI5MC42MjUlIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9IjkwLjYyNSUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI5MS42NjY2NyUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PHN0b3Agb2Zmc2V0PSI5MS42NjY2NyUiIHN0b3AtY29sb3I9IiM3OTc5ZTUiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iOTQuNzkxNjclIiBzdG9wLWNvbG9yPSIjNGY0ZmRkIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz48c3RvcCBvZmZzZXQ9Ijk0Ljc5MTY3JSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9Ijk1LjgzMzMzJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9Ijk1LjgzMzMzJSIgc3RvcC1jb2xvcj0iIzc5NzllNSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI5OC45NTgzMyUiIHN0b3AtY29sb3I9IiM0ZjRmZGQiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iOTguOTU4MzMlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(5%, rgba(0, 0, 0, 0.5)), color-stop(5%, rgba(0, 0, 0, 0))), -webkit-gradient(linear, 0% 50%, 960 50%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(0%, rgba(121, 121, 229, 0.25)), color-stop(3.125%, rgba(79, 79, 221, 0.25)), color-stop(3.125%, rgba(0, 0, 0, 0)), color-stop(4.16667%, rgba(0, 0, 0, 0)), color-stop(4.16667%, rgba(121, 121, 229, 0.25)), color-stop(7.29167%, rgba(79, 79, 221, 0.25)), color-stop(7.29167%, rgba(0, 0, 0, 0)), color-stop(8.33333%, rgba(0, 0, 0, 0)), color-stop(8.33333%, rgba(121, 121, 229, 0.25)), color-stop(11.45833%, rgba(79, 79, 221, 0.25)), color-stop(11.45833%, rgba(0, 0, 0, 0)), color-stop(12.5%, rgba(0, 0, 0, 0)), color-stop(12.5%, rgba(121, 121, 229, 0.25)), color-stop(15.625%, rgba(79, 79, 221, 0.25)), color-stop(15.625%, rgba(0, 0, 0, 0)), color-stop(16.66667%, rgba(0, 0, 0, 0)), color-stop(16.66667%, rgba(121, 121, 229, 0.25)), color-stop(19.79167%, rgba(79, 79, 221, 0.25)), color-stop(19.79167%, rgba(0, 0, 0, 0)), color-stop(20.83333%, rgba(0, 0, 0, 0)), color-stop(20.83333%, rgba(121, 121, 229, 0.25)), color-stop(23.95833%, rgba(79, 79, 221, 0.25)), color-stop(23.95833%, rgba(0, 0, 0, 0)), color-stop(25%, rgba(0, 0, 0, 0)), color-stop(25%, rgba(121, 121, 229, 0.25)), color-stop(28.125%, rgba(79, 79, 221, 0.25)), color-stop(28.125%, rgba(0, 0, 0, 0)), color-stop(29.16667%, rgba(0, 0, 0, 0)), color-stop(29.16667%, rgba(121, 121, 229, 0.25)), color-stop(32.29167%, rgba(79, 79, 221, 0.25)), color-stop(32.29167%, rgba(0, 0, 0, 0)), color-stop(33.33333%, rgba(0, 0, 0, 0)), color-stop(33.33333%, rgba(121, 121, 229, 0.25)), color-stop(36.45833%, rgba(79, 79, 221, 0.25)), color-stop(36.45833%, rgba(0, 0, 0, 0)), color-stop(37.5%, rgba(0, 0, 0, 0)), color-stop(37.5%, rgba(121, 121, 229, 0.25)), color-stop(40.625%, rgba(79, 79, 221, 0.25)), color-stop(40.625%, rgba(0, 0, 0, 0)), color-stop(41.66667%, rgba(0, 0, 0, 0)), color-stop(41.66667%, rgba(121, 121, 229, 0.25)), color-stop(44.79167%, rgba(79, 79, 221, 0.25)), color-stop(44.79167%, rgba(0, 0, 0, 0)), color-stop(45.83333%, rgba(0, 0, 0, 0)), color-stop(45.83333%, rgba(121, 121, 229, 0.25)), color-stop(48.95833%, rgba(79, 79, 221, 0.25)), color-stop(48.95833%, rgba(0, 0, 0, 0)), color-stop(50%, rgba(0, 0, 0, 0)), color-stop(50%, rgba(121, 121, 229, 0.25)), color-stop(53.125%, rgba(79, 79, 221, 0.25)), color-stop(53.125%, rgba(0, 0, 0, 0)), color-stop(54.16667%, rgba(0, 0, 0, 0)), color-stop(54.16667%, rgba(121, 121, 229, 0.25)), color-stop(57.29167%, rgba(79, 79, 221, 0.25)), color-stop(57.29167%, rgba(0, 0, 0, 0)), color-stop(58.33333%, rgba(0, 0, 0, 0)), color-stop(58.33333%, rgba(121, 121, 229, 0.25)), color-stop(61.45833%, rgba(79, 79, 221, 0.25)), color-stop(61.45833%, rgba(0, 0, 0, 0)), color-stop(62.5%, rgba(0, 0, 0, 0)), color-stop(62.5%, rgba(121, 121, 229, 0.25)), color-stop(65.625%, rgba(79, 79, 221, 0.25)), color-stop(65.625%, rgba(0, 0, 0, 0)), color-stop(66.66667%, rgba(0, 0, 0, 0)), color-stop(66.66667%, rgba(121, 121, 229, 0.25)), color-stop(69.79167%, rgba(79, 79, 221, 0.25)), color-stop(69.79167%, rgba(0, 0, 0, 0)), color-stop(70.83333%, rgba(0, 0, 0, 0)), color-stop(70.83333%, rgba(121, 121, 229, 0.25)), color-stop(73.95833%, rgba(79, 79, 221, 0.25)), color-stop(73.95833%, rgba(0, 0, 0, 0)), color-stop(75%, rgba(0, 0, 0, 0)), color-stop(75%, rgba(121, 121, 229, 0.25)), color-stop(78.125%, rgba(79, 79, 221, 0.25)), color-stop(78.125%, rgba(0, 0, 0, 0)), color-stop(79.16667%, rgba(0, 0, 0, 0)), color-stop(79.16667%, rgba(121, 121, 229, 0.25)), color-stop(82.29167%, rgba(79, 79, 221, 0.25)), color-stop(82.29167%, rgba(0, 0, 0, 0)), color-stop(83.33333%, rgba(0, 0, 0, 0)), color-stop(83.33333%, rgba(121, 121, 229, 0.25)), color-stop(86.45833%, rgba(79, 79, 221, 0.25)), color-stop(86.45833%, rgba(0, 0, 0, 0)), color-stop(87.5%, rgba(0, 0, 0, 0)), color-stop(87.5%, rgba(121, 121, 229, 0.25)), color-stop(90.625%, rgba(79, 79, 221, 0.25)), color-stop(90.625%, rgba(0, 0, 0, 0)), color-stop(91.66667%, rgba(0, 0, 0, 0)), color-stop(91.66667%, rgba(121, 121, 229, 0.25)), color-stop(94.79167%, rgba(79, 79, 221, 0.25)), color-stop(94.79167%, rgba(0, 0, 0, 0)), color-stop(95.83333%, rgba(0, 0, 0, 0)), color-stop(95.83333%, rgba(121, 121, 229, 0.25)), color-stop(98.95833%, rgba(79, 79, 221, 0.25)), color-stop(98.95833%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%), -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0px, rgba(121, 121, 229, 0.25) 0px, rgba(79, 79, 221, 0.25) 30px, rgba(0, 0, 0, 0) 30px, rgba(0, 0, 0, 0) 40px, rgba(121, 121, 229, 0.25) 40px, rgba(79, 79, 221, 0.25) 70px, rgba(0, 0, 0, 0) 70px, rgba(0, 0, 0, 0) 80px, rgba(121, 121, 229, 0.25) 80px, rgba(79, 79, 221, 0.25) 110px, rgba(0, 0, 0, 0) 110px, rgba(0, 0, 0, 0) 120px, rgba(121, 121, 229, 0.25) 120px, rgba(79, 79, 221, 0.25) 150px, rgba(0, 0, 0, 0) 150px, rgba(0, 0, 0, 0) 160px, rgba(121, 121, 229, 0.25) 160px, rgba(79, 79, 221, 0.25) 190px, rgba(0, 0, 0, 0) 190px, rgba(0, 0, 0, 0) 200px, rgba(121, 121, 229, 0.25) 200px, rgba(79, 79, 221, 0.25) 230px, rgba(0, 0, 0, 0) 230px, rgba(0, 0, 0, 0) 240px, rgba(121, 121, 229, 0.25) 240px, rgba(79, 79, 221, 0.25) 270px, rgba(0, 0, 0, 0) 270px, rgba(0, 0, 0, 0) 280px, rgba(121, 121, 229, 0.25) 280px, rgba(79, 79, 221, 0.25) 310px, rgba(0, 0, 0, 0) 310px, rgba(0, 0, 0, 0) 320px, rgba(121, 121, 229, 0.25) 320px, rgba(79, 79, 221, 0.25) 350px, rgba(0, 0, 0, 0) 350px, rgba(0, 0, 0, 0) 360px, rgba(121, 121, 229, 0.25) 360px, rgba(79, 79, 221, 0.25) 390px, rgba(0, 0, 0, 0) 390px, rgba(0, 0, 0, 0) 400px, rgba(121, 121, 229, 0.25) 400px, rgba(79, 79, 221, 0.25) 430px, rgba(0, 0, 0, 0) 430px, rgba(0, 0, 0, 0) 440px, rgba(121, 121, 229, 0.25) 440px, rgba(79, 79, 221, 0.25) 470px, rgba(0, 0, 0, 0) 470px, rgba(0, 0, 0, 0) 480px, rgba(121, 121, 229, 0.25) 480px, rgba(79, 79, 221, 0.25) 510px, rgba(0, 0, 0, 0) 510px, rgba(0, 0, 0, 0) 520px, rgba(121, 121, 229, 0.25) 520px, rgba(79, 79, 221, 0.25) 550px, rgba(0, 0, 0, 0) 550px, rgba(0, 0, 0, 0) 560px, rgba(121, 121, 229, 0.25) 560px, rgba(79, 79, 221, 0.25) 590px, rgba(0, 0, 0, 0) 590px, rgba(0, 0, 0, 0) 600px, rgba(121, 121, 229, 0.25) 600px, rgba(79, 79, 221, 0.25) 630px, rgba(0, 0, 0, 0) 630px, rgba(0, 0, 0, 0) 640px, rgba(121, 121, 229, 0.25) 640px, rgba(79, 79, 221, 0.25) 670px, rgba(0, 0, 0, 0) 670px, rgba(0, 0, 0, 0) 680px, rgba(121, 121, 229, 0.25) 680px, rgba(79, 79, 221, 0.25) 710px, rgba(0, 0, 0, 0) 710px, rgba(0, 0, 0, 0) 720px, rgba(121, 121, 229, 0.25) 720px, rgba(79, 79, 221, 0.25) 750px, rgba(0, 0, 0, 0) 750px, rgba(0, 0, 0, 0) 760px, rgba(121, 121, 229, 0.25) 760px, rgba(79, 79, 221, 0.25) 790px, rgba(0, 0, 0, 0) 790px, rgba(0, 0, 0, 0) 800px, rgba(121, 121, 229, 0.25) 800px, rgba(79, 79, 221, 0.25) 830px, rgba(0, 0, 0, 0) 830px, rgba(0, 0, 0, 0) 840px, rgba(121, 121, 229, 0.25) 840px, rgba(79, 79, 221, 0.25) 870px, rgba(0, 0, 0, 0) 870px, rgba(0, 0, 0, 0) 880px, rgba(121, 121, 229, 0.25) 880px, rgba(79, 79, 221, 0.25) 910px, rgba(0, 0, 0, 0) 910px, rgba(0, 0, 0, 0) 920px, rgba(121, 121, 229, 0.25) 920px, rgba(79, 79, 221, 0.25) 950px, rgba(0, 0, 0, 0) 950px, rgba(0, 0, 0, 0) 960px);
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0px, rgba(121, 121, 229, 0.25) 0px, rgba(79, 79, 221, 0.25) 30px, rgba(0, 0, 0, 0) 30px, rgba(0, 0, 0, 0) 40px, rgba(121, 121, 229, 0.25) 40px, rgba(79, 79, 221, 0.25) 70px, rgba(0, 0, 0, 0) 70px, rgba(0, 0, 0, 0) 80px, rgba(121, 121, 229, 0.25) 80px, rgba(79, 79, 221, 0.25) 110px, rgba(0, 0, 0, 0) 110px, rgba(0, 0, 0, 0) 120px, rgba(121, 121, 229, 0.25) 120px, rgba(79, 79, 221, 0.25) 150px, rgba(0, 0, 0, 0) 150px, rgba(0, 0, 0, 0) 160px, rgba(121, 121, 229, 0.25) 160px, rgba(79, 79, 221, 0.25) 190px, rgba(0, 0, 0, 0) 190px, rgba(0, 0, 0, 0) 200px, rgba(121, 121, 229, 0.25) 200px, rgba(79, 79, 221, 0.25) 230px, rgba(0, 0, 0, 0) 230px, rgba(0, 0, 0, 0) 240px, rgba(121, 121, 229, 0.25) 240px, rgba(79, 79, 221, 0.25) 270px, rgba(0, 0, 0, 0) 270px, rgba(0, 0, 0, 0) 280px, rgba(121, 121, 229, 0.25) 280px, rgba(79, 79, 221, 0.25) 310px, rgba(0, 0, 0, 0) 310px, rgba(0, 0, 0, 0) 320px, rgba(121, 121, 229, 0.25) 320px, rgba(79, 79, 221, 0.25) 350px, rgba(0, 0, 0, 0) 350px, rgba(0, 0, 0, 0) 360px, rgba(121, 121, 229, 0.25) 360px, rgba(79, 79, 221, 0.25) 390px, rgba(0, 0, 0, 0) 390px, rgba(0, 0, 0, 0) 400px, rgba(121, 121, 229, 0.25) 400px, rgba(79, 79, 221, 0.25) 430px, rgba(0, 0, 0, 0) 430px, rgba(0, 0, 0, 0) 440px, rgba(121, 121, 229, 0.25) 440px, rgba(79, 79, 221, 0.25) 470px, rgba(0, 0, 0, 0) 470px, rgba(0, 0, 0, 0) 480px, rgba(121, 121, 229, 0.25) 480px, rgba(79, 79, 221, 0.25) 510px, rgba(0, 0, 0, 0) 510px, rgba(0, 0, 0, 0) 520px, rgba(121, 121, 229, 0.25) 520px, rgba(79, 79, 221, 0.25) 550px, rgba(0, 0, 0, 0) 550px, rgba(0, 0, 0, 0) 560px, rgba(121, 121, 229, 0.25) 560px, rgba(79, 79, 221, 0.25) 590px, rgba(0, 0, 0, 0) 590px, rgba(0, 0, 0, 0) 600px, rgba(121, 121, 229, 0.25) 600px, rgba(79, 79, 221, 0.25) 630px, rgba(0, 0, 0, 0) 630px, rgba(0, 0, 0, 0) 640px, rgba(121, 121, 229, 0.25) 640px, rgba(79, 79, 221, 0.25) 670px, rgba(0, 0, 0, 0) 670px, rgba(0, 0, 0, 0) 680px, rgba(121, 121, 229, 0.25) 680px, rgba(79, 79, 221, 0.25) 710px, rgba(0, 0, 0, 0) 710px, rgba(0, 0, 0, 0) 720px, rgba(121, 121, 229, 0.25) 720px, rgba(79, 79, 221, 0.25) 750px, rgba(0, 0, 0, 0) 750px, rgba(0, 0, 0, 0) 760px, rgba(121, 121, 229, 0.25) 760px, rgba(79, 79, 221, 0.25) 790px, rgba(0, 0, 0, 0) 790px, rgba(0, 0, 0, 0) 800px, rgba(121, 121, 229, 0.25) 800px, rgba(79, 79, 221, 0.25) 830px, rgba(0, 0, 0, 0) 830px, rgba(0, 0, 0, 0) 840px, rgba(121, 121, 229, 0.25) 840px, rgba(79, 79, 221, 0.25) 870px, rgba(0, 0, 0, 0) 870px, rgba(0, 0, 0, 0) 880px, rgba(121, 121, 229, 0.25) 880px, rgba(79, 79, 221, 0.25) 910px, rgba(0, 0, 0, 0) 910px, rgba(0, 0, 0, 0) 920px, rgba(121, 121, 229, 0.25) 920px, rgba(79, 79, 221, 0.25) 950px, rgba(0, 0, 0, 0) 950px, rgba(0, 0, 0, 0) 960px);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0) 5%), linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(121, 121, 229, 0.25) 0px, rgba(79, 79, 221, 0.25) 30px, rgba(0, 0, 0, 0) 30px, rgba(0, 0, 0, 0) 40px, rgba(121, 121, 229, 0.25) 40px, rgba(79, 79, 221, 0.25) 70px, rgba(0, 0, 0, 0) 70px, rgba(0, 0, 0, 0) 80px, rgba(121, 121, 229, 0.25) 80px, rgba(79, 79, 221, 0.25) 110px, rgba(0, 0, 0, 0) 110px, rgba(0, 0, 0, 0) 120px, rgba(121, 121, 229, 0.25) 120px, rgba(79, 79, 221, 0.25) 150px, rgba(0, 0, 0, 0) 150px, rgba(0, 0, 0, 0) 160px, rgba(121, 121, 229, 0.25) 160px, rgba(79, 79, 221, 0.25) 190px, rgba(0, 0, 0, 0) 190px, rgba(0, 0, 0, 0) 200px, rgba(121, 121, 229, 0.25) 200px, rgba(79, 79, 221, 0.25) 230px, rgba(0, 0, 0, 0) 230px, rgba(0, 0, 0, 0) 240px, rgba(121, 121, 229, 0.25) 240px, rgba(79, 79, 221, 0.25) 270px, rgba(0, 0, 0, 0) 270px, rgba(0, 0, 0, 0) 280px, rgba(121, 121, 229, 0.25) 280px, rgba(79, 79, 221, 0.25) 310px, rgba(0, 0, 0, 0) 310px, rgba(0, 0, 0, 0) 320px, rgba(121, 121, 229, 0.25) 320px, rgba(79, 79, 221, 0.25) 350px, rgba(0, 0, 0, 0) 350px, rgba(0, 0, 0, 0) 360px, rgba(121, 121, 229, 0.25) 360px, rgba(79, 79, 221, 0.25) 390px, rgba(0, 0, 0, 0) 390px, rgba(0, 0, 0, 0) 400px, rgba(121, 121, 229, 0.25) 400px, rgba(79, 79, 221, 0.25) 430px, rgba(0, 0, 0, 0) 430px, rgba(0, 0, 0, 0) 440px, rgba(121, 121, 229, 0.25) 440px, rgba(79, 79, 221, 0.25) 470px, rgba(0, 0, 0, 0) 470px, rgba(0, 0, 0, 0) 480px, rgba(121, 121, 229, 0.25) 480px, rgba(79, 79, 221, 0.25) 510px, rgba(0, 0, 0, 0) 510px, rgba(0, 0, 0, 0) 520px, rgba(121, 121, 229, 0.25) 520px, rgba(79, 79, 221, 0.25) 550px, rgba(0, 0, 0, 0) 550px, rgba(0, 0, 0, 0) 560px, rgba(121, 121, 229, 0.25) 560px, rgba(79, 79, 221, 0.25) 590px, rgba(0, 0, 0, 0) 590px, rgba(0, 0, 0, 0) 600px, rgba(121, 121, 229, 0.25) 600px, rgba(79, 79, 221, 0.25) 630px, rgba(0, 0, 0, 0) 630px, rgba(0, 0, 0, 0) 640px, rgba(121, 121, 229, 0.25) 640px, rgba(79, 79, 221, 0.25) 670px, rgba(0, 0, 0, 0) 670px, rgba(0, 0, 0, 0) 680px, rgba(121, 121, 229, 0.25) 680px, rgba(79, 79, 221, 0.25) 710px, rgba(0, 0, 0, 0) 710px, rgba(0, 0, 0, 0) 720px, rgba(121, 121, 229, 0.25) 720px, rgba(79, 79, 221, 0.25) 750px, rgba(0, 0, 0, 0) 750px, rgba(0, 0, 0, 0) 760px, rgba(121, 121, 229, 0.25) 760px, rgba(79, 79, 221, 0.25) 790px, rgba(0, 0, 0, 0) 790px, rgba(0, 0, 0, 0) 800px, rgba(121, 121, 229, 0.25) 800px, rgba(79, 79, 221, 0.25) 830px, rgba(0, 0, 0, 0) 830px, rgba(0, 0, 0, 0) 840px, rgba(121, 121, 229, 0.25) 840px, rgba(79, 79, 221, 0.25) 870px, rgba(0, 0, 0, 0) 870px, rgba(0, 0, 0, 0) 880px, rgba(121, 121, 229, 0.25) 880px, rgba(79, 79, 221, 0.25) 910px, rgba(0, 0, 0, 0) 910px, rgba(0, 0, 0, 0) 920px, rgba(121, 121, 229, 0.25) 920px, rgba(79, 79, 221, 0.25) 950px, rgba(0, 0, 0, 0) 950px, rgba(0, 0, 0, 0) 960px);
+  -moz-background-size: 100% 1.5em, auto;
+  -o-background-size: 100% 1.5em, auto;
+  -webkit-background-size: 100% 1.5em, auto;
+  background-size: 100% 1.5em, auto;
+  background-position: left top;
+}
+
+/* css3 */
+/* line 46, ../sass/screen.scss */
+.simple {
+  -moz-border-radius: 4px / 6px;
+  -webkit-border-radius: 4px 6px;
+  border-radius: 4px / 6px;
+}
+
+/* line 49, ../sass/screen.scss */
+.compound {
+  -moz-border-radius: 2px 5px / 3px 6px;
+  -webkit-border-radius: 2px 3px;
+  border-radius: 2px 5px / 3px 6px;
+}
+
+/* line 52, ../sass/screen.scss */
+.crazy {
+  -moz-border-radius: 1px 3px 5px 7px / 2px 4px 6px 8px;
+  -webkit-border-radius: 1px 2px;
+  border-radius: 1px 3px 5px 7px / 2px 4px 6px 8px;
+}
+
+/* line 56, ../sass/screen.scss */
+.test1 {
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* line 60, ../sass/screen.scss */
+.test2 {
+  -moz-border-radius-bottomleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* line 64, ../sass/screen.scss */
+.test3 {
+  -moz-box-shadow: 1px 2px 3px 3px gray, 1px 2px 3px 3px gray;
+  -webkit-box-shadow: 1px 2px 3px 3px gray, 1px 2px 3px 3px gray;
+  box-shadow: 1px 2px 3px 3px gray, 1px 2px 3px 3px gray;
+}
+
+/* line 68, ../sass/screen.scss */
+.test5 {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 72, ../sass/screen.scss */
+.test6 {
+  width: 750px;
+  -moz-columns: 200px 3;
+  -webkit-columns: 200px 3;
+  columns: 200px 3;
+  column-gap: 50px;
+}
+
+/* line 81, ../sass/screen.scss */
+.test7 {
+  column-span: all;
+}
+
+/* line 85, ../sass/screen.scss */
+.test8 {
+  column-break-before: avoid;
+  -webkit-column-break-before: avoid;
+}
+
+/* line 90, ../sass/screen.scss */
+.logo {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxMDAgMTAwOyBmaWxsOiMxQTlGRkY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiA+CjxwYXRoIGQ9Ik04NS43LDIuMWM2LjcsMCwxMi4yLDUuNSwxMi4yLDEyLjJ2ODMuNkgxNC4zYy02LjcsMC0xMi4yLTUuNS0xMi4yLTEyLjJWMi4xSDg1LjcgTTg1LjcsMEgwdjg1LjdDMCw5My42LDYuNCwxMDAsMTQuMywxMDAKCUgxMDBWMTQuM0MxMDAsNi40LDkzLjYsMCw4NS43LDB6Ii8+CjxwYXRoIGQ9Ik00Ni44LDMyLjljMCwwLTAuNS0wLjEtMS4zLTAuMmMtMC44LTAuMS0yLTAuNC0zLjUtMC42Yy0xLjUtMC4yLTMuMS0wLjQtNS0wLjZjLTEuNS0wLjEtMy4xLTAuMi00LjctMC4yCgljMC0xLjEtMC4xLTIuMi0wLjItMy4zYzAtMC44LTAuMS0xLjUtMC4yLTIuMmMtMC4xLTAuNy0wLjEtMS40LTAuMi0yYy0wLjItMS4yLTAuNC0yLjItMC41LTIuOWMwLTAuMSwwLTAuMiwwLTAuMmMwLDAsMC0wLjEsMC0wLjEKCWMwLDAsMCwwLDAsMGwwLTAuMWMwLTAuMSwwLjEsMC0wLjEtMC40Yy0wLjEsMCwwLjEsMC0wLjMtMC4yYy0wLjItMC4xLTAuNSwwLTAuNiwwLjFjLTAuMSwwLjEtMC4xLDAuMi0wLjEsMC4ybDAsMC4xbDAsMC4xbDAsMC4xCgljMCwwLjEsMCwwLjItMC4xLDAuM2MtMC4yLDAuNy0wLjQsMS44LTAuNywzYy0wLjEsMC42LTAuMiwxLjMtMC4zLDJjLTAuMSwwLjctMC4yLDEuNC0wLjIsMi4yYy0wLjEsMS4xLTAuMSwyLjItMC4yLDMuNAoJYy0wLjEsMC0wLjIsMC0wLjMsMGMtMSwwLjEtMS45LDAuMS0yLjgsMC4yYy0xLjgsMC4yLTMuNSwwLjUtNSwwLjdjLTEuNSwwLjMtMi42LDAuNi0zLjUsMC44Yy0wLjgsMC4zLTEuMywwLjUtMS4zLDAuNQoJYy0wLjEsMC4xLTAuMywwLjItMC4zLDAuNGMtMC4xLDAuMywwLjEsMC42LDAuNCwwLjZjMCwwLDAuNSwwLjEsMS40LDAuMmMwLjQsMCwxLDAuMSwxLjUsMC4xYzAuNiwwLDEuMywwLjEsMiwwLjEKCWMwLjcsMCwxLjUsMC4xLDIuMywwLjFjMC44LDAsMS43LDAuMSwyLjYsMC4xYzAuOSwwLDEuOSwwLjEsMi45LDAuMWMwLDIuMywwLjIsNC41LDAuMyw2LjJjMC4xLDEuMiwwLjIsMi4yLDAuMywzCgljMCwwLjQsMC4xLDAuNiwwLjIsMC44YzAuMSwwLjIsMC4xLDAuMywwLjEsMC4zYzAuMSwwLjMsMC4zLDAuNiwwLjYsMC43YzAuNiwwLjMsMS4zLDAuMSwxLjYtMC41bDAuMi0wLjRjMCwwLDAtMC4xLDAuMS0wLjMKCWMwLTAuMiwwLjEtMC41LDAuMS0wLjhjMC4xLTAuNywwLjEtMS43LDAuMi0zYzAuMS0xLjcsMC4yLTMuOCwwLjMtNi4xYzEuNSwwLDMsMCw0LjQsMGMxLjgsMCwzLjUtMC4xLDQuOS0wLjEKCWMxLjQsMCwyLjctMC4xLDMuNS0wLjJjMC44LDAsMS4zLTAuMSwxLjMtMC4xYzAuNiwwLDEuMS0wLjQsMS4yLTFDNDcuOSwzMy42LDQ3LjQsMzMsNDYuOCwzMi45eiBNMzAuMSwyMC41CglDMzAuMSwyMC42LDMwLjEsMjAuNiwzMC4xLDIwLjVjMCwwLjEsMC4xLDAuMSwwLjEsMC4yYzAsMCwwLDAsMCwwQzMwLDIwLjUsMzAuMSwyMC41LDMwLjEsMjAuNXoiLz4KPHBhdGggZD0iTTM5LjEsNjguN2MtMC44LTAuOC0xLjctMS44LTIuOC0yLjhjLTAuOS0wLjgtMS44LTEuNy0yLjgtMi42YzAuNi0wLjUsMS4xLTAuOSwxLjctMS4zYzAuNi0wLjQsMS4xLTAuOSwxLjctMS4zCgljMC41LTAuNCwxLTAuOCwxLjUtMS4xYzAuNS0wLjQsMC45LTAuNywxLjMtMWMwLjQtMC4zLDAuNy0wLjcsMC45LTAuOWMwLjUtMC42LDAuOC0wLjksMC44LTAuOWMwLjEtMC4xLDAuMS0wLjIsMC4xLTAuMgoJYzAtMC4yLTAuMi0wLjMtMC4zLTAuMmMwLDAtMC40LDAuMS0xLjEsMC4yYy0wLjQsMC4xLTAuOCwwLjEtMS4zLDAuM2MtMC40LDAuMi0wLjksMC40LTEuNSwwLjdjLTAuNSwwLjMtMS4xLDAuNi0xLjcsMQoJYy0wLjYsMC4zLTEuMiwwLjgtMS45LDEuMmMtMC42LDAuNC0xLjMsMC44LTIsMS4zYy0wLjEsMC4xLTAuMywwLjItMC40LDAuM2MtMC42LTAuNS0xLjMtMS0xLjktMS41Yy0xLjEtMS0yLjMtMS42LTMuMi0yLjMKCWMtMS0wLjYtMS44LTEuMS0yLjQtMS40Yy0wLjMtMC4xLTAuNS0wLjMtMC44LTAuMmMtMC4xLDAtMC4yLDAtMC4zLDAuMWMtMC4xLDAuMS0wLjIsMC4xLTAuMiwwLjFjLTAuMiwwLjItMC40LDAuNC0wLjYsMC43CgljMCwwLTAuMSwwLjEtMC4xLDAuMmMwLDAuMSwwLDAuMiwwLDAuM2MwLDAuMiwwLjIsMC40LDAuNCwwLjdjMC40LDAuNSwxLjEsMS4yLDIsMS45YzAuNCwwLjQsMC45LDAuOCwxLjQsMS4yCgljMC41LDAuNCwxLDAuOSwxLjUsMS40YzAuNCwwLjMsMC44LDAuNywxLjEsMWMtMC44LDAuNy0xLjYsMS4zLTIuMiwyYy0wLjUsMC41LTEuMSwxLTEuNiwxLjZjLTAuNSwwLjUtMC45LDEtMS4zLDEuNQoJYy0wLjgsMC45LTEuNCwxLjgtMS44LDIuNGMtMC40LDAuNi0wLjcsMC45LTAuNywwLjljLTAuNCwwLjYtMC4zLDEuMywwLjIsMS44YzAuNiwwLjUsMS40LDAuNSwxLjktMC4xbDAuMS0wLjFjMCwwLDAuMy0wLjMsMC43LTAuOAoJYzAuMi0wLjMsMC41LTAuNiwwLjgtMC45YzAuMy0wLjQsMC43LTAuOCwxLjEtMS4yYzAuOC0wLjksMS43LTEuOCwyLjgtMi45YzAuNy0wLjcsMS41LTEuNCwyLjQtMi4yYzEsMSwxLjksMiwyLjgsMi45CgljMSwxLDEuOCwyLDIuNiwyLjhjMS41LDEuNywyLjYsMi44LDIuNiwyLjhsMCwwYzAuOCwwLjgsMi4xLDAuOSwyLjksMC4xYzAuOS0wLjgsMC45LTIuMSwwLjEtM0M0MS43LDcxLjUsNDAuNyw3MC4zLDM5LjEsNjguN3oiLz4KPHBhdGggZD0iTTU3LjUsMzQuNmMwLDAsMC40LDAuMiwxLDAuNGMwLjcsMC4yLDEuNiwwLjQsMi44LDAuNmMxLjEsMC4yLDIuNSwwLjQsMy45LDAuNWMxLjQsMC4xLDIuOSwwLjMsNC41LDAuMwoJYzMsMC4xLDYuMS0wLjIsOC40LTAuNGMxLjEtMC4xLDIuMS0wLjMsMi44LTAuNGMwLjctMC4xLDEtMC4xLDEtMC4xYzAuNS0wLjEsMS0wLjUsMS4xLTEuMWMwLjEtMC43LTAuNC0xLjMtMS4xLTEuNAoJYzAsMC0wLjQtMC4xLTEtMC4xYy0wLjctMC4xLTEuNi0wLjMtMi44LTAuNGMtMi4zLTAuMi01LjMtMC42LTguNC0wLjVjLTEuNSwwLTMsMC4xLTQuNSwwLjJjLTEuNCwwLjEtMi44LDAuMy0zLjksMC41CgljLTEuMSwwLjItMi4xLDAuNC0yLjgsMC41Yy0wLjcsMC4yLTEsMC40LTEsMC40Yy0wLjEsMC4xLTAuMiwwLjEtMC4zLDAuM0M1Ny4xLDM0LjIsNTcuMiwzNC41LDU3LjUsMzQuNnoiLz4KPHBhdGggZD0iTTU3LjMsNjEuNGMwLDAsMC40LDAsMS4xLDAuMWMwLjcsMC4xLDEuNywwLjIsMi44LDAuM2MwLjYsMCwxLjIsMCwxLjksMC4xYzAuNywwLjEsMS40LDAuMSwyLjEsMC4yCgljMS41LDAuMSwzLjEsMC4xLDQuNywwLjFjMS42LDAsMy4yLTAuMSw0LjctMC4yYzEuNS0wLjEsMi45LTAuMyw0LjEtMC40YzEuMi0wLjIsMi4yLTAuMywyLjktMC41YzAuNy0wLjIsMS4xLTAuMywxLjEtMC4zCgljMC4xLTAuMSwwLjItMC4yLDAuMy0wLjNjMC4xLTAuMywwLTAuNi0wLjMtMC43YzAsMC0wLjQtMC4yLTEuMS0wLjRjLTAuNy0wLjItMS43LTAuNC0yLjktMC42Yy0xLjItMC4yLTIuNi0wLjQtNC4xLTAuNgoJYy0xLjUtMC4xLTMuMS0wLjMtNC43LTAuM2MtMy4yLDAtNi40LDAuMi04LjksMC41Yy0xLjIsMC4yLTIuMiwwLjQtMi45LDAuNWMtMC43LDAuMS0xLjEsMC4yLTEuMSwwLjJjLTAuNSwwLjEtMSwwLjUtMSwxLjEKCWMtMC4xLDAuNywwLjQsMS4zLDEuMSwxLjNMNTcuMyw2MS40eiIvPgo8cGF0aCBkPSJNODMuNyw3MS4yYzAsMC0wLjQtMC4yLTEuMS0wLjNjLTAuNy0wLjItMS43LTAuNS0yLjktMC43Yy0wLjYtMC4xLTEuMy0wLjItMS45LTAuM2MtMC43LTAuMS0xLjQtMC4yLTIuMi0wLjMKCWMtMS41LTAuMi0zLjEtMC4zLTQuNy0wLjRjLTEuNi0wLjEtMy4zLTAuMS00LjgsMGMtMS41LDAtMywwLjItNC4yLDAuM2MtMS4yLDAuMS0yLjMsMC4yLTMsMC4zYy0wLjcsMC4xLTEuMSwwLjMtMS4xLDAuMwoJYy0wLjQsMC4xLTAuNywwLjQtMC44LDAuOWMtMC4zLDAuNywwLjEsMS42LDAuOSwxLjhsMC4yLDAuMWMwLDAsMC40LDAuMSwxLjEsMC4yYzAuNywwLjEsMS43LDAuMiwyLjksMC4zYzEuMiwwLjEsMi42LDAuMiw0LjEsMC4zCgljMC43LDAsMS41LDAuMSwyLjMsMC4xYzAuOCwwLDEuNiwwLDIuNCwwYzEuNiwwLDMuMi0wLjEsNC44LTAuMmMwLjgsMCwxLjUtMC4xLDIuMi0wLjJjMC43LTAuMSwxLjQtMC4xLDItMC4yCgljMS4yLTAuMiwyLjItMC40LDMtMC42YzAuNy0wLjIsMS4xLTAuMywxLjEtMC4zbDAsMGMwLjEsMCwwLjItMC4xLDAuMy0wLjNDODQsNzEuNiw4My45LDcxLjMsODMuNyw3MS4yeiIvPgo8L3N2Zz4K');
+}
+
+/* line 95, ../sass/screen.scss */
+.logo2 {
+  background-image: url('../images/WebDemoIcon-Math.svg');
+}
+
+/* line 101, ../sass/screen.scss */
+ul {
+  list-style-type: none;
+}
+/* line 6, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_inline-list.scss */
+ul, ul li {
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+/* line 30, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_inline-list.scss */
+ul li:after {
+  content: "!";
+}
+/* line 32, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_inline-list.scss */
+ul li:last-child:after {
+  content: "";
+}
+/* line 36, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/typography/lists/_inline-list.scss */
+ul li.last:after {
+  content: "";
+}
+
+/* line 106, ../sass/screen.scss */
+.test11 {
+  text: address, article, aside, blockquote, center, dir, div, dd, details, dl, dt, fieldset, figcaption, figure, form, footer, frameset, h1, h2, h3, h4, h5, h6, hr, header, hgroup, isindex, main, menu, nav, noframes, noscript, ol, p, pre, section, summary, ul;
+}
+
+@font-face {
+  font-family: "FontAwesome";
+  src: url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'), url('../fonts/fontawesome-webfont.svg') format('svg'), url('../fonts/fontawesome-webfont.ttf') format('truetype'), url('../fonts/fontawesome-webfont.woff') format('woff'), url('../fonts/FontAwesome.otf') format('opentype');
+}
+/* line 15, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/_print.scss */
+.print-only {
+  display: none;
+}
+
+/* line 119, ../sass/screen.scss */
+p.baz, div.baz, span.baz {
+  color: red;
+}
+
+/* line 123, ../sass/screen.scss */
+.goods-price {
+  border: 2px solid black;
+}
+/* line 6, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price thead th {
+  border-bottom: 2px solid black;
+}
+/* line 9, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price tfoot th, .goods-price tfoot td {
+  border-top: 2px solid black;
+}
+/* line 12, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price th:first-child, .goods-price th.first {
+  border-right: 2px solid black;
+}
+/* line 16, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price th, .goods-price td {
+  border-right: 1px solid #233551;
+  border-bottom: 1px solid #233551;
+  border-left-width: 0;
+  border-top-width: 0;
+}
+/* line 22, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price th:last-child, .goods-price td:last-child {
+  border-right-width: 0;
+}
+/* line 28, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price th.last, .goods-price td.last {
+  border-right-width: 0;
+}
+/* line 33, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price tbody tr:last-child th, .goods-price tbody tr:last-child td, .goods-price tfoot tr:last-child th, .goods-price tfoot tr:last-child td {
+  border-bottom-width: 0;
+}
+/* line 37, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_borders.scss */
+.goods-price tbody tr.last th, .goods-price tbody tr.last td, .goods-price tfoot tr.last th, .goods-price tfoot tr.last td {
+  border-bottom-width: 0;
+}
+/* line 2, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_scaffolding.scss */
+.goods-price th {
+  text-align: center;
+  font-weight: bold;
+}
+/* line 5, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_scaffolding.scss */
+.goods-price td,
+.goods-price th {
+  padding: 2px;
+}
+/* line 8, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_scaffolding.scss */
+.goods-price td.numeric,
+.goods-price th.numeric {
+  text-align: right;
+}
+/* line 2, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price th {
+  background-color: white;
+}
+/* line 4, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price th.even, .goods-price th:nth-child(2n) {
+  background-color: #dddddd;
+}
+/* line 8, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price tr.odd td, .goods-price tr:nth-child(2n+1) td {
+  background-color: #98c67a;
+}
+/* line 10, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price tr.odd td.even, .goods-price tr.odd td:nth-child(2n), .goods-price tr:nth-child(2n+1) td.even, .goods-price tr:nth-child(2n+1) td:nth-child(2n) {
+  background-color: #76a458;
+}
+/* line 14, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price tr.even td {
+  background-color: #7a98c6;
+}
+/* line 16, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price tr.even td.even, .goods-price tr.even td:nth-child(2n) {
+  background-color: #5876a4;
+}
+/* line 19, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price tfoot th, .goods-price tfoot td {
+  background-color: white;
+}
+/* line 21, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/tables/_alternating-rows-and-columns.scss */
+.goods-price tfoot th.even, .goods-price tfoot th:nth-child(2n), .goods-price tfoot td.even, .goods-price tfoot td:nth-child(2n) {
+  background-color: #dddddd;
+}
+
+/* line 132, ../sass/screen.scss */
+.clearfix {
+  *zoom: 1;
+}
+/* line 22, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_clearfix.scss */
+.clearfix:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* line 138, ../sass/screen.scss */
+.float {
+  float: right;
+  display: inline;
+}
+
+/* line 146, ../sass/screen.scss */
+.min-height-width {
+  min-height: 50px;
+  height: auto;
+  _height: 50px;
+  min-width: 500px;
+  width: auto;
+  _width: 500px;
+}
+
+/* line 151, ../sass/screen.scss */
+.tag-cloud-container {
+  font-size: 24px;
+  line-height: 28.8px;
+}
+/* line 5, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_tag-cloud.scss */
+.tag-cloud-container .xxs, .tag-cloud-container .xs, .tag-cloud-container .s, .tag-cloud-container .l, .tag-cloud-container .xl, .tag-cloud-container .xxl {
+  line-height: 28.8px;
+}
+/* line 7, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_tag-cloud.scss */
+.tag-cloud-container .xxs {
+  font-size: 12px;
+}
+/* line 9, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_tag-cloud.scss */
+.tag-cloud-container .xs {
+  font-size: 16px;
+}
+/* line 11, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_tag-cloud.scss */
+.tag-cloud-container .s {
+  font-size: 18px;
+}
+/* line 13, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_tag-cloud.scss */
+.tag-cloud-container .l {
+  font-size: 32px;
+}
+/* line 15, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_tag-cloud.scss */
+.tag-cloud-container .xl {
+  font-size: 36px;
+}
+/* line 17, D:/me-install/Ruby25-x64/lib/ruby/gems/2.5.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/general/_tag-cloud.scss */
+.tag-cloud-container .xxl {
+  font-size: 48px;
+}
+
+/*
+//极力推荐：compass自动合图
+@import "sprites_icon/*.png";
+@include all-sprites_icon-sprites ;
+
+
+@import "compass/utilities/tables";
+table {
+    $table-color: #666;
+    @include table-scaffolding;
+    @include inner-table-borders(1px, darken($table-color, 40%));
+    @include outer-table-borders(2px);
+    @include alternating-rows-and-columns($table-color,
+    adjust-hue($table-color, -120deg), #222222); 
+}
+*/
+/*
+@import "compass/typography";
+a {
+	@include hover-link();
+	@include link-colors(#00c, #0cc, #c0c, #ccc, #cc0);
+}
+
+.list-horizental {
+	@include inline-list();
+}
+
+.list-inline-nlock {
+	@include inline-block-list(7px);
+}
+
+.text-hide {
+	@include hide-text();
+	//@include squish-text();
+}
+
+$base-font-size: 16px;
+$base-line-height: 24px; //16*1.5=24
+@include establish-baseline();
+
+body {
+	@include debug-vertical-alignment();
+}
+ 
+h1 {
+  font-size: 3em; 	//默认字体大小16px  3*16 = 48px
+  line-height: 1.5em;  	//72px 相对于font-size的行高72/48=1.5
+}
+
+h1 {
+	@include adjust-font-size-to(48px);
+	
+	@include leader(2); //margin-top 默认基线（line-height）高，传值：基线高度倍数如5，则margin-top=5*基线高
+	@include trailer(2);  //margin-bottom 
+}
+*/

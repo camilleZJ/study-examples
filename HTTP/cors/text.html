@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ducoment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<script>
+//   var xhr = new XMLHttpRequest()
+//   xhr.open('GET','http://127.0.0.1:8887/')
+//   xhr.withCredentials = true; //支持跨域发送cookies
+//   xhr.send()
+fetch('http://127.0.0.1:8887/', {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Test-Core': '123'
+    },
+    credentials: "include"  //携带cookie
+})
+</script>
+<!--<script src="http://127.0.0.1:8887"></script> script、link、img上的src和ref地址不涉及同源限制，就不会出现跨域问题 -->
+</body>
+</html>

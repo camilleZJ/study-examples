@@ -1,0 +1,89 @@
+/*------@if------*/
+.tt {
+  display: none;
+}
+
+nav a {
+  color: red;
+}
+header nav a {
+  color: green;
+}
+
+.box {
+  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.block {
+  margin-top: 5px;
+}
+.block span {
+  display: block;
+  margin-top: 5px;
+}
+
+.header {
+  color: orange;
+  margin-top: 5px;
+}
+.header span {
+  display: block;
+  margin-top: 5px;
+}
+
+.mt, .block, .block span, .header, .header span {
+  margin-top: 5px;
+}
+
+.block span {
+  display: block;
+}
+
+.header {
+  color: orange;
+}
+.header span {
+  display: block;
+}
+
+.block, .block span, .header, .header span {
+  margin-top: 5px;
+}
+
+.block span {
+  display: block;
+}
+
+.header {
+  color: orange;
+}
+.header span {
+  display: block;
+}
+
+.box {
+  width: 160px;
+}
+
+.icon-twitter {
+  background-postion: 0 -20px;
+}
+
+.icon-facebook {
+  background-postion: 0 -40px;
+}
+
+.icon-github {
+  background-postion: 0 -60px;
+}
+
+.icon-weibo {
+  background-postion: 0 -80px;
+}
+
+.box:before {
+  content: " Hello Sass! ";
+}
+
+/*# sourceMappingURL=main.css.map */

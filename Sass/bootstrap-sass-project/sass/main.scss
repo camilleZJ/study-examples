@@ -1,0 +1,592 @@
+@import "bootstrap-compass";
+@import "bootstrap-variables"; 
+@import 'bootstrap-custom';
+
+/*** FONTS ***/
+@font-face {
+  font-family: "Gotham";
+  src: url("../fonts/gotham/gotham-bold.eot");
+  src: url("../fonts/gotham/gotham-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham/gotham-bold.woff") format("woff"), url("../fonts/gotham/gotham-bold.ttf") format("truetype"), url("../fonts/gotham/gotham-bold.svg#Icons") format("svg");
+  font-weight: 700;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("../fonts/gotham/gotham-medium.eot");
+  src: url("../fonts/gotham/gotham-medium.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham/gotham-medium.woff") format("woff"), url("../fonts/gotham/gotham-medium.ttf") format("truetype"), url("../fonts/gotham/gotham-medium.svg#Icons") format("svg");
+  font-weight: 500;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("../fonts/gotham/gotham-book.eot");
+  src: url("../fonts/gotham/gotham-book.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham/gotham-book.woff") format("woff"), url("../fonts/gotham/gotham-book.ttf") format("truetype"), url("../fonts/gotham/gotham-book.svg#Icons") format("svg");
+  font-weight: 400;
+  font-style: normal; 
+} 
+
+
+/* reset css */
+* {
+  @include box-sizing(border-box);
+}
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}
+
+html {  
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
+  
+  @media (max-width: 640px) {
+    font-size: 57%; 
+  }
+  @media (min-width: 641px) {
+    font-size: 59%;  
+  }
+  @media (min-width: 1025px) {
+    font-size: 62.5%;
+  }
+}
+
+body {
+  font-family: "Gotham", Helvetica, Arial, PingFangSC-Regular, "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 160%;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #F7F7F7;
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.4px;
+  margin: 0;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+}
+
+a {
+  cursor: pointer;
+  color: #00A862;
+  text-decoration: none;
+  
+  &:hover {
+    color: #00A862;
+  }
+}
+
+small {
+  font-size: $font-size-h6;
+  font-size: ($font-size-h6 / 10px) * 1rem; 
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+  font-family: $headings-font-family;
+  font-weight: bold;
+  line-height: 120%;
+  color: $headings-color;
+}
+
+h1 {
+  font-size: $font-size-h1;
+  font-size: ($font-size-h1 / 10px) * 1rem; 
+}
+
+h2 {
+  font-size: $font-size-h2;
+  font-size: ($font-size-h2 / 10px) * 1rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: $font-size-h3;
+  font-size: ($font-size-h3 / 10px) * 1rem; 
+}
+
+h1, h2, h3, h4, h5, h6,
+p, 
+pre  {
+  margin: 0 0 $line-height-computed;
+}
+
+ul,
+ol {
+  margin: 0 0 $line-height-computed $line-height-computed;
+  padding: 0;
+}
+
+ul li,
+ol li {
+  margin: 0 0 ($line-height-computed / 4);
+  padding: 0;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin-bottom: 0; 
+}
+
+ul ul li,
+ul ol li,
+ol ul li,
+ol ol li {
+  margin: ($line-height-computed / 4) 0 0; 
+}
+
+blockquote {
+  padding-left: $line-height-computed;
+  margin: 0 $line-height-computed $line-height-computed;
+  color: #666;
+  border-left: 6px solid $blockquote-border-color;
+  
+  & > *:last-child {
+    margin-bottom: 0; 
+  }
+}
+
+code,
+.code {
+  display: inline-block;
+  font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+  font-size: $font-size-base;
+  font-size: ($font-size-base / 10px) * 1rem;
+  line-height: 140%;  
+  padding: 0 46px;
+  background-color: $code-bg;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: $border-radius-base;
+}
+
+pre code,
+pre .code {
+  display: block;
+  padding: 6px 12px;
+  white-space: pre-wrap; 
+}
+
+
+/** index */
+.icon {
+    background: none;
+    border: 0;
+    outline: none;
+}
+
+#nav {
+    background: #fff;
+    position: relative;
+    overflow: visible;
+    z-index: 1006;
+    @include box-shadow(0 0 4px rgba(0, 0, 0, 0.12));
+    
+    .container {
+        overflow: hidden;
+        
+        .header {
+            height: 48px;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+            display: block;
+            padding: 24px;
+            position: relative;
+            
+            @media (max-width: 640px) {
+                display: none;
+            }
+            @media (max-width: 1024px) and (min-width: 641px) {
+                padding: 16px;
+            }
+        }
+        
+        .primary {
+            display: inline-block;
+            
+            ul {
+                display: inline-block;
+                white-space: nowrap;
+                
+                li {
+                    float: left;
+                    white-space: nowrap;
+                }
+                
+                a {
+                    color: inherit;
+                    display: block;
+                    font-weight: 700;
+                    font-size: 11px;
+                    font-size: 1.1rem;
+                    letter-spacing: 1px;
+                    padding: 5px 10px 5px;
+                    text-transform: uppercase;
+                    
+                    body.lang-zh & {
+                        font-size: 16px;
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+        }
+    }
+    
+    .header .icon {
+        float: right;
+        padding: 6px 0;
+    }
+    
+    .logo {
+        float: left;
+        width: 36px;
+        margin-right: 12px;
+        
+        & img {
+            width: 100%;
+        }
+    }
+    
+    ul {
+        margin: 0;
+        list-style: none;
+        
+        li {
+            display: block;
+            margin: 0;
+        }
+    }
+    
+    .display-1 {
+        display: block;
+        margin-bottom: 24px;
+        line-height: 140%;
+    }
+    
+    .overlay > .container {
+        display: table;
+        height: 100%;
+        width: 100%;
+    }
+    
+    @media (min-width: 1025px) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 30%;
+        height: 100%;
+        
+        & > .container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            &.middle {
+                vertical-align: middle;
+            }
+            
+            .primary {
+                max-width: calc(100% - 72px);
+                overflow: hidden;
+            }  
+            
+            .body {
+               display: table; 
+               width: 100%;
+               height: calc(100% - 96px);
+               
+               .container {
+                    display: table-cell;
+                    padding: 0 24px 0 84px;
+               }
+            }
+        }
+        
+        & > .container > * {
+            display: table-row;
+        }
+        
+        .overlay {
+            width: 30%;
+            
+            & > .container .header {
+                padding: 24px;
+            }   
+        }
+    }
+}
+
+.nav:before, .nav:after {
+  content: " ";
+  display: table;
+}
+
+.nav:after {
+  clear: both;
+}
+
+.display-1 {
+    font-size: 26px;
+    font-size: 2.6rem;
+    font-weight: 700;
+}
+
+.button {
+    display: inline-block;
+    font-weight: 500;
+    background-image: none;
+    border: 1px solid #00A862;
+    border-radius: 48px;
+    color: #00A862;
+    padding: 6px 18px;
+    transition-duration: 0.1s;
+    transition-property: background, border-color, color;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.button.small {
+    padding: 2px 12px;
+}
+
+.sign-in {
+    margin-right: 24px;
+    padding: 3px 0;
+    
+    @media (max-width: 1024px) and (min-width: 641px) {
+        #nav .secondary .account &, #nav .secondary .account .register {
+            margin-bottom: 12px;
+        }
+    }  
+}
+
+@media (max-width: 640px) {
+    #nav .container .secondary {
+        padding: 16px 16px 0 16px;
+    }  
+    
+    .mobile-hidden {
+        display: none !important;
+    }
+}
+
+
+footer .sign-in img {
+    margin-right: 4px;
+    margin-top: -3px;
+    vertical-align: middle;
+}
+
+.overlay {
+    background: #fff;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1005;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;     
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .header .close {
+        background: url(../images/icons/icon-close.svg) no-repeat center center;
+        color: transparent;
+        width: 48px;
+        height: 48px;
+        opacity: 0.8;
+        margin: -12px;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+        -webkit-transition: all 0.1s linear;
+        -moz-transition: all 0.1s linear;
+        transition: all 0.1s linear;
+        cursor: pointer;
+    }
+    
+    .body {
+        clear: both;
+        margin: 0 auto;
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+        transform-origin: center center;
+        -webkit-transform-origin: center center;
+        -webkit-transition: all 0.1s linear;
+        -moz-transition: all 0.1s linear;
+        transition: all 0.1s linear;
+    }
+    
+    &.active .body {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    
+    #nav & > .container {
+        .body {
+            height: 100%;
+        }
+        & > * {
+            display: table-row;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .header {
+            display: block;
+            height: auto;
+            padding: 16px;
+            
+            @media (min-width: 1025px) {
+                padding: 24px;
+            }
+        }
+    }
+}
+
+//#nav .overlay > .container .header .icon {
+//  right: 16px;
+//  top: 16px;
+//  
+//  @media (min-width: 1025px) {
+//    right: 24px;
+//    top: 24px;
+//  } 
+//}
+
+#nav-overlay .footer {
+    color: rgba(0, 0, 0, 0.12);
+    display: inline-block !important;
+    font-size: 14px;
+    font-size: 1.4rem;
+    line-height: 160%;
+    margin-top: 12px;
+    width: 100%;
+    
+    .container {
+        position: relative;
+        padding-right: 60px;
+        
+        @media (min-width: 641px) {
+            margin: 0 24px 24px 84px;
+        }
+    }
+    
+    a{
+        color: rgba(0, 0, 0, 0.38);
+    }
+}
+
+#nav .overlay .body .container ul {
+    font-weight: 700;
+    font-size: 18px;
+    font-size: 1.8rem;
+    line-height: 120%;
+    width: 100%;
+    
+    a {   
+        color: inherit;
+        display: block;
+        padding: 8px 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        
+        &:hover, &:active, &:focus {
+            text-decoration: none;
+        }
+    }
+}
+
+
+.legal {
+    font-size: 9px;
+    font-size: 0.9rem;
+    line-height: 160%;
+}
+
+#content {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 24px;
+    padding-top: 24px;
+    
+    @media (min-width: 1025px) {
+        width: 70%;
+        left: auto;
+        margin-left: 30%;
+    }
+}
+
+.tag_ad {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0px 6px;
+    color: #fff;
+    background-color: #000;
+    font-size: 1.2rem;
+    line-height: 180%;
+    opacity: 0.6;
+    border-radius: 2px;
+    z-index: 200;
+}
+
+.hero {
+    margin-top: -24px;
+}
+
+
+#nav .container .secondary {
+    clear: both;
+    min-height: 62px;
+    
+    @media (max-width: 1024px) and (min-width: 641px) {
+        padding: 0 16px 0 16px;
+    }
+}
+
+
+
+/** bootstrap */
+.sr-only {
+    display: none;
+}
+
+
+
+
+
+

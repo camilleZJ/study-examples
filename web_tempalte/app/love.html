@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>爱心日蚀</title>
+<meta name="description" content="爱心日蚀">
+<meta name="keywords" content="爱心日蚀">
+<style>
+	body{
+		margin:0;
+		padding:0;
+	}
+	html{
+		height:100%;
+		--timing:6s; /*统一定义动画时间 */
+		--lovecolor: skyblue;
+	}
+	body{
+		position: relative;
+		height: inherit; /*继承父级html高度 */
+		background: var(--lovecolor);
+		animation: atmosphere var(--timing) linear infinite; /*infinite 循环运动 无线执行 若只想执行有限次数就写数字就可以 */
+	}
+	#wrap{
+		position: absolute;
+		left:0;right:0;bottom:0;top:0;margin: auto;  /*水平垂直居中方法1*/
+		/*top: 50%;left: 50%;margin-left: -100px;margin-top: -100px;*/ /*水平垂直居中方法2*/
+		width:200px; 
+		height:200px;
+		/*background: #222;*/
+	}
+	#wrap .love{
+		position: relative;		
+		width:200px;
+		height: 180px;
+	}
+	#wrap .love::after,#wrap .love::before{
+		content: '';  /* 激活伪元素after before */
+		position: absolute;
+		width:100px;
+		height: 150px;
+		background: #ffd319;
+		border-radius: 50px 50px 0 0; /*四个参数：左上 右上  右下 左下 顺时针4个角*/
+	}
+	#wrap .love::after{ 
+		left: 32px;
+		transform: rotate(-45deg);/*逆时针旋转45度  */
+	}
+	#wrap .love::before{ 
+		left: 68px;
+		transform: rotate(45deg);  /*顺时针旋转45度 */
+	}
+	
+	#wrap .love:last-of-type{ 
+		position: absolute;
+		top:0;
+		right: -200px;
+		animation: move var(--timing) linear infinite; /*infinite 循环运动，无限执行 */
+	}
+	#wrap .love:last-of-type:after, #wrap .love:last-of-type:before{ 
+		background: skyblue;
+		/*animation: atmosphere 2s linear infinite;*/ /*infinite 循环运动 */
+		animation: atmosphere var(--timing) linear infinite;  /*调用自定义的统一变量： var(--变量名)*/
+	}
+	
+	@keyframes move{ /*自定义动画序列*/
+		0%{
+			right: -200px;
+		}
+		100%{
+			right: 200px;
+		}	
+	}
+	
+	@keyframes atmosphere{
+		0%{
+			background: var(--lovecolor);
+		}
+		50%{
+			background: black;
+		}	
+		100%{
+			background: var(--lovecolor);
+		}	
+	}
+</style>
+</head>
+<body>
+    <!-- 
+    	居中：
+    		display:flex; 弹性盒模型
+    		justify-content:center;  内部元素横向排列方式 居中
+    		align-items: center;  内部元素纵向排列方式 居中
+    	水平垂直居中方法3： body{display:grid;} #wrap{margin: auto;}  grid网格兼容性不是太好
+    	
+    	以下也是生成爱心的方法，但是如下方法每个爱心都需要两个div，多个的话就会有很多无意义的标签
+    	#wrap .love div:first-of-type{ /*div:first-of-type 第一个div */
+		position: absolute;
+		left: 32px;
+		width:100px;
+		height: 150px;
+		background: red;
+		border-radius: 50px 50px 0 0; /*四个参数：左上 右上  右下 左下 顺时针4个角*/
+		transform: rotate(-45deg);/*逆时针旋转45度  */
+		}
+		#wrap .love div:last-of-type{ /*div:last-of-type 最后一个div */
+			position: absolute;
+			left: 68px;
+			width:100px;
+			height: 150px;
+			background: red;
+			border-radius: 50px 50px 0 0; /*四个参数：左上 右上  右下 左下 顺时针4个角*/
+			transform: rotate(45deg);  /*顺时针旋转45度 */
+		}
+		 <div id="wrap">
+	    	<div class="love">
+	    		<div></div>
+	    		<div></div>
+	    	</div>
+	    </div>
+     -->
+    <div id="wrap">
+    	<div class="love"></div>
+    	<div class="love"></div>
+    </div>
+</body>
+</html>

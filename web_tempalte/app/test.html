@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<style>
+	body{
+		margin:0;
+	}
+	#banner{
+		position:ralative;
+		width: 1120px;
+		height: 400px;
+		/*background:#00ccff;*/
+		margin:50px auto;
+		overflow:hidden;
+	}
+	#banner .item{
+		position: absolute;
+		top:0;
+	}
+	#banner h3{
+		position: absolute;
+		top:0;
+		width:16px;
+		height:400px;
+		background:rgba(0, 0, 0, .4);
+		font-size:16px;
+		margin:0;
+		font-weight:100; /*字体粗细 100-800 */
+		padding:0 12px;
+		color:#fff;
+		border-left: 1px solid #fff;
+	}
+	#banner .item img{
+		width: 956px;
+		height: 400px;
+	}
+</style>
+</head>
+<body>
+   <div id="banner"> 
+   		<div class="item">
+   			<h3>爱新鲜</h3>
+   			<img src="images/1.jpg" alt="爱新鲜">
+   		</div>
+   		<div class="item">
+   			<h3>一衣多穿</h3>
+   			<img src="images/2.jpg" alt="一衣多穿">
+   		</div>
+   		<div class="item">
+   			<h3>达人心经</h3>
+   			<img src="images/3.jpg" alt="达人心经">
+   		</div>
+   		<div class="item">
+   			<h3>大咖卖场</h3>
+   			<img src="images/4.jpg" alt="大咖卖场">
+   		</div>
+   		<div class="item">
+   			<h3>测评擂台</h3>
+   			<img src="images/5.jpg" alt="测评擂台">
+   		</div>
+   </div> 
+   
+   
+   <div class="u-level" id="home-u-level" data-id-u-level="56" data-id-u-levelname="钻石会员"></div>
+<input type="text" name="member_card_name"  maxlength="6" id="member_card_name" lay-verify="required" autocomplete="off" value="" class="layui-input">
+
+
+   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+   <script>
+   
+   $(document).on("input", "#member_card_name", function(){
+	  var letter_len = $(this).val().length,
+	  	  word_len = $(this).val().replace(/[^u4E00-u9FA5]/g, "").length,
+	  	  len = 0;
+	 if(d == "")
+	 {
+		 len = 2*letter_len;
+	 }
+	 else 
+	 {
+		 len = (letter_len-word_len)*2 + word_len;
+	 }
+	  console.log(t+'-'+d+'-'+len);
+	  if(len > 6)
+	  {
+	  	 
+	  }
+   }).on("blur", "#member_card_name", function(){
+	   var letter_len = $(this).val().length,
+  	  	   word_len = $(this).val().replace(/[^u4E00-u9FA5]/g, "").length,
+  	       len = 0;
+	   if(d == "")
+	   {
+		   len = 2*letter_len;
+	   }
+	   else 
+	   {
+		   len = (letter_len-word_len)*2 + word_len;
+	   }
+	   console.log(t+'--'+d+'--'+len);
+   });
+   
+   
+   
+   	var arr = [];
+   	$(".item").each(function(i){
+   		$(this).css("left", i*40+"px");
+   		arr[i] = i*40;
+   	});
+   	$(".item h3").click(function(){
+   		var index= $(this).parent().index(); //获取元素下标
+   		$(".item").each(function(i){
+   	   		if(i <= index)
+   	   		{
+   	   			$(this).animate({left:arr[i]+"px"},500);
+   	   		}
+   	   		else
+   	   		{
+   	   			$(this).animate({left:arr[i]+915+"px"},500);
+   	   		}
+   	   	});
+   	});
+   	
+   	
+/* 	var current_level_name = document.getElementById('home-u-level').getAttribute("data-id-u-levelname");
+   	var current_level = get_level(current_level_name);
+   	if(current_level == -1)
+  	{
+  		console.log('等级不存在！');
+  	}
+   	else
+   	{
+   		console.log('等级存在:' + current_level);
+   	}
+
+   	function get_level(level_name)
+   	{
+   		var levels = ["注册会员", "铜牌会员", "银牌会员", "金牌会员", "钻石会员"];
+   		
+   		return levels.indexOf(level_name);
+   	} 
+*/  	
+   	
+   	var levels = ["注册会员", "铜牌会员", "银牌会员", "金牌会员", "钻石会员"];
+	var current_level_name = document.getElementById('home-u-level').getAttribute("data-id-u-levelname");
+	var current_level = levels.indexOf(current_level_name);
+	console.log(current_level);
+   </script>
+</body>
+</html>

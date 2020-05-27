@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>QQ-侧边悬浮栏</title>
+<meta name="description" content="QQ-侧边悬浮栏 客服侧边悬浮栏">
+<meta name="keywords" content="QQ-侧边悬浮栏 客服侧边悬浮栏">
+<style>
+	body,div,p{margin:0; padding:0;}
+	#slide_qq{
+		position: fixed; /*固定不动  防止随着页面垂直滚动条的滑动而滚动*/
+		right: 0;
+		top: 200px;
+		width: 158px;
+		height: 200px;
+	}
+	#slide_qq .show-qq{
+		position: absolute; /* 改变位置，但是不影响其他盒子 */
+		width: 100%;		
+	}
+	#slide_qq .hide-qq{
+		position: absolute;	
+		right: -33px;
+	}
+	 .show-qq .show-ewm{
+		text-align: center; /*文字居中，适用行内img*/
+		padding-top: 10px; /*img行内元素无外边距*/
+ 		background: url("../images/qq-slide/bg.jpg"); 
+	}
+	.show-qq .show-ewm p{
+		width: 140px; 
+ 		margin: auto; /*外边距左右自动居中*/ 
+		border-bottom: 1px solid #fff;
+		font-size: 12px;
+		line-height: 30px;
+	}
+	.show-qq .show-ewm p a{
+		color: #fff;
+		text-decoration: none; /* a标签去掉下划线 */
+	}
+</style>
+</head>
+<body>
+	<!-- 
+		id:命名使用下划线：_; class命名使用中划线：-; 
+		id跟body之间父子级关系  其他的层级关系通过class
+	-->
+	<div id="slide_qq">
+		<div class="show-qq">
+			<img style="display:block;" src="../images/qq-slide/top.png" alt="qq悬浮栏top背景"> <!-- img行内元素有向下4px的bug，设置display：block转换为块级解决 -->
+			<div class="show-ewm">
+				<img src="../images/qq-slide/ewm.jpg" width="100" height="100" alt="二维码">
+				<p>
+					<a href="#">
+						<img src="../images/qq-slide/qq.jpg" alt="报名qq" style="vertical-align:middle;"> <!-- 文字和图片垂直居中：img标签添加align="absmiddle"或设置样式垂直居中：vertical-align:middle; -->
+						报名：123421983
+					</a>
+				</p>
+			</div>
+			<img class="show-exit" src="../images/qq-slide/bot.png" alt="qq悬浮栏bottom背景">
+		</div>
+		<div class="hide-qq">
+			<img src="../images/qq-slide/small.png" alt="qq悬浮栏隐藏图">
+		</div>
+	</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+$(document).on("click", ".show-exit",function(){
+	$(".show-qq").animate({
+		"left": "158px"
+		},500,function(){
+		$(".hide-qq").animate({
+			"right": 0
+		},500)
+	});
+}).on("click", ".hide-qq img",function(){
+	$(".hide-qq").animate({
+		"right": "-33px"
+		},500,function(){
+		$(".show-qq").animate({
+			"left": 0
+		},500)
+	});
+})
+</script>
+</body>
+</html>

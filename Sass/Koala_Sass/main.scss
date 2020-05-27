@@ -1,0 +1,200 @@
+/*------@if------*/
+@mixin blockOrHidden($boolean:true) {
+	@if $boolean {
+		@debug "$boolean is #{$boolean}";
+		display: block;
+	}
+	@else {
+		@debug "$boolean is #{$boolean}";
+		display: none;
+	}
+}
+
+.tt{
+	@include blockOrHidden(false);
+}
+
+@debug 54px + 86px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+nav {
+  a {
+    color: red;
+
+    header & {
+      color:green;
+    }
+  }  
+}
+
+
+@mixin box-shadow($shadows...){
+  @if length($shadows) >= 1 {
+    -webkit-box-shadow: $shadows;
+    box-shadow: $shadows;
+  } @else {
+    $shadows: 0 0 2px rgba(#000,.25);
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+  }
+}
+.box {
+  @include box-shadow(0 0 1px rgba(#000,.5));
+}
+
+
+
+//SCSS中混合宏使用
+@mixin mt($var){
+  margin-top: $var;  
+}
+
+.block {
+  @include mt(5px);
+
+  span {
+    display:block;
+    @include mt(5px);
+  }
+}
+
+.header {
+  color: orange;
+  @include mt(5px);
+
+  span{
+    display:block;
+    @include mt(5px);
+  }
+}
+
+
+
+//SCSS 继承的运用
+.mt{
+  margin-top: 5px;  
+}
+
+.block {
+  @extend .mt;
+
+  span {
+    display:block;
+    @extend .mt;
+  }
+}
+
+.header {
+  color: orange;
+  @extend .mt;
+
+  span{
+    display:block;
+    @extend .mt;
+  }
+}
+
+
+
+//SCSS中占位符的使用
+%mt{
+  margin-top: 5px;  
+}
+
+.block {
+  @extend %mt;
+
+  span {
+    display:block;
+    @extend %mt;
+  }
+}
+
+.header {
+  color: orange;
+  @extend %mt;
+
+  span{
+    display:block;
+    @extend %mt;
+  }
+}
+
+
+
+.box {
+  width: 20px * 8;
+}
+$list: twitter,facebook,github,weibo;
+
+@for $i from 1 through length($list){
+  .icon-#{nth($list,$i)}{
+    background-postion: 0 -20px * $i;
+  }
+}
+
+
+$content: "Hello" + " " + "Sass!";
+.box:before {
+  content: " #{$content} ";
+}

@@ -1,0 +1,105 @@
+@import "compass/utilities/sprites/base";
+
+// General Sprite Defaults
+// You can override them before you import this file.
+$honors-sprite-dimensions : false !default;
+$honors-use-percentages   : false !default;
+$honors-position          : 0% !default;
+$honors-spacing           : 0 !default;
+$honors-repeat            : no-repeat !default;
+$honors-prefix            : '' !default;
+$honors-clean-up          : true !default;
+$honors-layout            : vertical !default;
+$honors-inline            : false !default;
+$honors-sort-by           : 'none' !default;
+$honors-class-separator   : $default-sprite-separator !default;
+$honors-sprite-base-class : ".honors#{$honors-class-separator}sprite" !default;
+
+  
+ // These variables control the generated sprite output
+ // You can override them selectively before you import this file.
+ 
+   $honors-huang-position: $honors-position !default;
+   $honors-huang-spacing:  $honors-spacing !default;
+   $honors-huang-repeat:   $honors-repeat !default;
+ 
+   $honors-lang-position: $honors-position !default;
+   $honors-lang-spacing:  $honors-spacing !default;
+   $honors-lang-repeat:   $honors-repeat !default;
+ 
+   $honors-tiao-position: $honors-position !default;
+   $honors-tiao-spacing:  $honors-spacing !default;
+   $honors-tiao-repeat:   $honors-repeat !default;
+ 
+
+ $honors-sprites: sprite-map("honors/*.png",
+ 
+   $honors-huang-position: $honors-huang-position, 
+   $honors-huang-spacing:  $honors-huang-spacing, 
+   $honors-huang-repeat:   $honors-huang-repeat,
+ 
+   $honors-lang-position: $honors-lang-position, 
+   $honors-lang-spacing:  $honors-lang-spacing, 
+   $honors-lang-repeat:   $honors-lang-repeat,
+ 
+   $honors-tiao-position: $honors-tiao-position, 
+   $honors-tiao-spacing:  $honors-tiao-spacing, 
+   $honors-tiao-repeat:   $honors-tiao-repeat,
+ 
+ $layout   : $honors-layout,
+ $cleanup  : $honors-clean-up,
+ $spacing  : $honors-spacing,
+ $position : $honors-position,
+ $sort-by  : $honors-sort-by
+ );
+
+
+// All sprites should extend this class
+// The honors-sprite mixin will do so for you.
+@if $honors-inline {
+  #{$honors-sprite-base-class} {
+    background-image: inline-sprite($honors-sprites);
+  } 
+} @else {
+  #{$honors-sprite-base-class} {
+    background-image: sprite-url($honors-sprites);
+    background-repeat: no-repeat;
+  }
+}
+//sass functions to return the dimensions of a sprite image as units
+
+  @function honors-sprite-width($name) {
+    @return sprite-width($honors-sprites, $name);
+  }
+
+  @function honors-sprite-height($name) {
+    @return sprite-height($honors-sprites, $name);
+  }
+
+
+// Use this to set the dimensions of an element
+// based on the size of the original image.
+@mixin honors-sprite-dimensions($name) {
+  @include sprite-dimensions($honors-sprites, $name)
+}
+
+// Move the background position to display the sprite.
+@mixin honors-sprite-position($name, $offset-x: 0, $offset-y: 0, $use-percentages: $honors-use-percentages) {
+  @include sprite-background-position($honors-sprites, $name, $offset-x, $offset-y, $use-percentages)
+}
+
+// Extends the sprite base class and set the background position for the desired sprite.
+// It will also apply the image dimensions if $dimensions is true.
+@mixin honors-sprite($name, $dimensions: $honors-sprite-dimensions, $offset-x: 0, $offset-y: 0, $use-percentages: $honors-use-percentages, $separator: $honors-class-separator) {
+  @extend #{$honors-sprite-base-class};
+  @include sprite($honors-sprites, $name, $dimensions, $offset-x, $offset-y, $use-percentages, $separator: $separator);
+}
+
+@mixin honors-sprites($sprite-names, $dimensions: $honors-sprite-dimensions, $prefix: sprite-map-name($honors-sprites), $offset-x: 0, $offset-y: 0, $use-percentages: $honors-use-percentages, $separator: $honors-class-separator) {
+  @include sprites($honors-sprites, $sprite-names, $honors-sprite-base-class, $dimensions, $prefix, $offset-x, $offset-y, $use-percentages, $separator: $separator)
+}
+
+// Generates a class for each sprited image.
+@mixin all-honors-sprites($dimensions: $honors-sprite-dimensions, $prefix: sprite-map-name($honors-sprites), $offset-x: 0, $offset-y: 0, $use-percentages: $honors-use-percentages, $separator: $honors-class-separator) {
+  @include honors-sprites(huang lang tiao, $dimensions, $prefix, $offset-x, $offset-y, $use-percentages, $separator: $separator);
+}

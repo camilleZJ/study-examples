@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ducoment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <form action="/form" id="form"  method="POST" enctype="multipart/form-data"> 
+        <input type="text" name="user" />
+        <input type="password" name="password" />
+        <input type="file" name="file" />
+        <input type="submit" name="Submit" />
+    </form>
+<script>
+// var form = document.getElementById('form')
+// from.addEventListener('submit', function(e) {
+//     e.preventDefault();  //阻止跳转
+//     var fromData = new FormData(form);
+//     fetch('/form', {
+//         method: 'POST',
+//         body: fromData  //根据fordata自动设置Content-type，无需手动设置
+//     })
+// })
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+//定制bootstrap：根据自己的项目的实际需要，对模块进行取舍，不需要的模块注释掉，对默认的变量进行修改，这样得到的 boostrap 就是一个定制的规则样式
+
+// Core variables and mixins
+@import "bootstrap/variables";          //变量模块
+@import "bootstrap/mixins";             //方法，函数模块
+
+// Reset and dependencies
+//@import "bootstrap/normalize";          //重置样式模块  
+//@import "bootstrap/print";              //打印样式模块
+//@import "bootstrap/glyphicons";         //图标模块
+
+// Core CSS
+@import "bootstrap/scaffolding";        //常用标签初始化设置、img图片相关类（bootstrap官网->全局css->图片）、sr-only相关隐藏类
+//@import "bootstrap/type";               //排版模块：一些标签的初始化设置以及文本相关样，列表、情景文本颜色、情境背景色--对应bootstrap官网->全局css->排版、辅助类，bootstrap官网->组件->页头
+//@import "bootstrap/code";               //代码模块：简单特殊标签初始化--对应bootstrap官网->全局css->代码
+//@import "bootstrap/grid";               //栅格模块:container、container-fluid以及不同屏幕大小适配、行、列,.row 内包含的列（column）大于12个，包含多余列（column）的元素将作为一个整体单元被另起一行排列,注意若12以内换行（不应该换行时），可能是列的padding值影响的，设置box-sizing：border-box即可（scaffolding模块设置了）
+//@import "bootstrap/tables";             //表格模块--对应bootstrap官网->全局css->表格
+//@import "bootstrap/forms";              //表单模块--对应bootstrap官网->全局css->表单
+//@import "bootstrap/buttons";            //按键模块--对应bootstrap官网->全局css->按钮
+
+// Components--需要引入js否则无动态效果
+//@import "bootstrap/component-animations";       //组件动画模块：包含fade in collapse相关类
+//@import "bootstrap/dropdowns";                  //下拉菜单模块：下拉dropdown/上拉dropup菜单相关，包括三角符号、左右对齐、分割线、列表标题、列表展开、列表项失焦/选中等
+//@import "bootstrap/button-groups";              //按键组模块：水平/垂直排列按钮组、按钮工具栏、按钮组尺寸：-lg/-sm/-xs、按钮等大自适应、
+//@import "bootstrap/input-groups";               //输入组模块 注意一定要设置box-sizing：border-box，可以开启scaffolding模块，否则样式会有问题
+//@import "bootstrap/navs";                       //导航模块  须进行初始化设置：开启scaffolding
+//@import "bootstrap/navbar";                     //导航条模块  注：用到了forms中mixin的form-inline  所以必须引入
+//@import "bootstrap/breadcrumbs";                //路径导航模块
+//@import "bootstrap/pagination";                 //分页模块
+//@import "bootstrap/pager";                      //页数模块 （翻页，分页的一种）
+//@import "bootstrap/labels";                     //标签模块 标签块无内容不显示
+//@import "bootstrap/badges";                     //微章模块  无内容不显示
+//@import "bootstrap/jumbotron";                  //巨幕模块
+//@import "bootstrap/thumbnails";                 //缩略图模块  全局css中scaffolding模块也存在图片的处理
+//@import "bootstrap/alerts";                     //警告模块  和情景文本很相似  主要区别是多了border和padding
+//@import "bootstrap/progress-bars";              //进度条模块
+//@import "bootstrap/media";                      //媒体模块   注:.media-right 应当放在 .media-body 的后面 与文本可居中、居上、居下对齐  默认居上
+//@import "bootstrap/list-group";                 //列表组模块
+//@import "bootstrap/panels";                     //面板模块
+//@import "bootstrap/responsive-embed";           //具有响应式内容的嵌入模块
+//@import "bootstrap/wells";                      //Well模块
+//@import "bootstrap/close";                      //关闭按钮模块:close类，关闭按钮样式X
+
+// Components w/ JavaScript
+//@import "bootstrap/modals";                     //模态框模块
+//@import "bootstrap/tooltip";                    //提示信息模块
+//@import "bootstrap/popovers";                   //弹出框模块
+@import "bootstrap/carousel";                   //carousel模块
+
+// Utility classes
+//@import "bootstrap/utilities";                  //工具模块：左、右浮动、清除浮动、文本显示/隐藏、附加导航affix插件
+//@import "bootstrap/responsive-utilities";       //自适应工具模块：响应式工具，针对不同设备展示或隐藏页面内容、打印机显示或隐藏内容--对应bootstrap官网->全局css->响应式工具

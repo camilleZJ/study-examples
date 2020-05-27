@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../js/layui/css/layui.css"  media="all">
+    
+    
+    
+   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<form class="layui-form layui-form-pane" action="room/jiaruroom/">
+	<div class="layui-form-item">
+        <label class="layui-form-label">我的名片</label>
+        <div class="layui-input-block">
+            <input type="text" name="member_card_name" oninput="checkLength(this)" maxlength="6" id="member_card_name" lay-verify="required|checkCharNum"    autocomplete="off" value="aa" class="layui-input" placeholder="最多6个字符">
+        </div>
+    </div>
+    
+     <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<table>
+	<tr data-id="1">
+		<td><input type="text" name="member_card_name" oninput="checkLength(this)" maxlength="6" id="member_card_name" lay-verify="required|checkCharNum"    autocomplete="off" value="aa" class="layui-input" placeholder="最多6个字符"></td>
+		<td>
+			<a href="javascript:void(0)" class="btn btn-danger btn-xs btn-chat" onclick="copy_data('member_card_name')">
+			    <span class="glyphicon glyphicon-copy"></span> 复制
+			</a>
+		</td>
+	</tr>
+	<tr data-id="1">
+		<td><input type="text" name="member_card_name" oninput="checkLength(this)" maxlength="6" id="member_card_name1" lay-verify="required|checkCharNum"    autocomplete="off" value="bbb1" class="layui-input" placeholder="最多6个字符"></td>
+		<td>
+			<a href="javascript:void(0)" class="btn btn-danger btn-xs btn-chat" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
+			    <span class="glyphicon glyphicon-copy"></span> 复制
+			</a>
+		</td>
+		<button class="copyData-btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
+		    Copy to clipboard
+		</button>
+		
+		<textarea id="bar">Mussum ipsum cacilds...</textarea>
+		<!-- Trigger -->
+		<button class="copyData-btn" data-clipboard-action="cut" data-clipboard-target="#bar">
+		    Cut to clipboard
+		</button>
+	</tr>
+</table>
+
+
+<button class="copyData-btn2" data-copy="11">复制</button>
+<button class="copyData-btn2" data-copy="22">复制</button>
+
+
+<a href="navigationBar.html?uid=1234" class="btn btn-danger btn-xs">
+    <span class="glyphicon glyphicon-copy"></span> 跳转
+</a>
+
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script type="text/javascript" src="../js/layui/lay/dest/layui.all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
+<script type="text/javascript" src="../js/jquery_zclip/jquery.zclip.js"></script>
+<script>
+new Clipboard('.copyData-btn');
+var form;
+layui.use('form', function(){
+ 	form = layui.form();
+});
+form.verify({
+	checkCharNum: function(value, item){ //value：表单的值、item：表单的DOM对象
+		  var letter_len = value.length,
+	  	  	  word_len = value.replace(/[^u4E00-u9FA5]/g, "").length,
+	  	  	  len = 0;
+		  if(word_len == "")
+		  {
+		 	 len = 2*letter_len;
+		  }
+		  else 
+		  {
+			 len = (letter_len-word_len)*2 + word_len;
+		  }
+		  if(len > 6)
+		  {
+		  	return '只允许输入6个字符';
+		  }
+	  }
+});  
+function checkLength(obj){
+	  var letter_len = obj.value.length,
+	  	  word_len = obj.value.replace(/[^u4E00-u9FA5]/g, "").length,
+	  	  len = 0;
+	  if(word_len == "")
+	  {
+		 len = 2*letter_len;
+	  }
+	  else 
+	  {
+		 len = (letter_len-word_len)*2 + word_len;
+	  }
+	  if(len > 6)
+	  {
+		  layer.msg('只允许输入6个字符',{icon: 5});
+	  }
+ }
+ 
+function copy_data(elemtID){
+	var succeed = copyToClipboard(document.getElementById(elemtID));
+	if(succeed)
+	{
+		layer.msg('文本复制成功！', {icon: 1});
+	}
+	else
+	{
+		layer.msg('文本复制失败！', {icon: 5});
+	}
+}
+
+function copyToClipboard(elem) {
+	  // create hidden text element, if it doesn't already exist
+  var targetId = "_hiddenCopyText_";
+  var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+  var origSelectionStart, origSelectionEnd;
+  if (isInput) {
+      // can just use the original source element for the selection and copy
+      target = elem;
+      origSelectionStart = elem.selectionStart;
+      origSelectionEnd = elem.selectionEnd;
+  } else {
+      // must use a temporary form element for the selection and copy
+      target = document.getElementById(targetId);
+      if (!target) {
+          var target = document.createElement("textarea");
+          target.style.position = "absolute";
+          target.style.left = "-9999px";
+          target.style.top = "0";
+          target.id = targetId;
+          document.body.appendChild(target);
+      }
+      target.textContent = elem.textContent;
+  }
+  // select the content
+  var currentFocus = document.activeElement;
+  target.focus();
+  target.setSelectionRange(0, target.value.length);
+  
+  // copy the selection
+  var succeed;
+  try {
+  	  succeed = document.execCommand("copy");
+  } catch(e) {
+      succeed = false;
+  }
+  // restore original focus
+  if (currentFocus && typeof currentFocus.focus === "function") {
+      currentFocus.focus();
+  }
+  
+  if (isInput) {
+      // restore prior selection
+      elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+  } else {
+      // clear temporary content
+      target.textContent = "";
+  }
+  return succeed;
+}
+
+
+$(".copyData-btn2").zclip({
+	path: '../js/jquery_zclip/ZeroClipboard.swf',
+	copy: function(){
+        return $(this).data('copy');
+    }
+});
+</script>
+</body>
+</html>

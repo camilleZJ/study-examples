@@ -1,0 +1,28 @@
+{
+  "name": "jquery-bootstrap-in-action",
+  "authors": [
+    "Vina <707114574@qq.com>"
+  ],
+  "description": "test",
+  "main": "",
+  "keywords": [
+    "jquery",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.2.1"
+  },
+  "devDependencies": {
+    "angular": "^1.7.6"
+  }
+}

@@ -1,0 +1,31 @@
+@import "compass/utilities/sprites";
+
+@import "retina-sprites";
+
+$honors-sprite-dimensions: true;  //是否显示图片的with和height，默认false-不显示
+
+$disable-magic-sprite-selectors: true; //是否根据图片名生成相应的伪类样式  默认false-开启
+
+$honors-layout: horizontal;  //默认生成的雪碧图都是竖向拼接vertical  横向拼接：horizontal   斜对角线：diagon  最节省空间拼接：smart
+
+@import "honors/*.png";
+
+@include all-honors-sprites;  
+
+.main-logo {
+    @include honors-sprite("lang");  //单个使用
+}
+
+
+
+
+$sprites: sprite-map("retina-version/sprites/*.png");
+$sprites2x: sprite-map("retina-version/sprites-retina/*.png");
+
+.ico-file {
+  @include retina-sprite(file);
+}
+
+.ico-calendar {
+  @include retina-sprite(calendar, true);
+}

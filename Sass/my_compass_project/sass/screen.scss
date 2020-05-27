@@ -1,0 +1,240 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+ 
+ 
+/*以下重置样式=@import "compass/reset";*/
+//@import "compass/reset/utilities";
+//@include global-reset;  
+
+//@import "compass/reset";
+//@import "normalize";   //用normalize替换掉reset模块   
+
+//修改支持的浏览器：$supported-browsers: [支持的浏览器列表]
+//$browser-minimum-versions: (支持的浏览器最低版本的map)
+$browser-minimum-versions: ("ie": "6");    
+
+@import "icons";          
+
+
+/*layout*/
+@import "compass/layout";  
+.stretch-full {
+	@include stretch(20px, 30px, false, 30px);    
+}
+
+.stretch-x {
+	@include stretch-x(30px);    
+}  
+
+.stretch-y {
+	@include stretch-y(30px, 1px);
+}
+
+@include sticky-footer(30px);
+
+$grid-background-column-color: rgba(100, 100, 225, 0.25); 
+#bg { 
+	@include grid-background();
+}
+
+
+@import "compass";
+
+/* css3 */
+.simple { 
+	@include border-radius(4px, 6px);  
+}
+.compound { 
+	@include border-radius(2px 5px, 3px 6px); 
+}
+.crazy { 
+	@include border-radius(1px 3px 5px 7px, 2px 4px 6px 8px);
+}
+
+.test1{
+	@include border-corner-radius(top, right, 10px);
+}
+
+.test2{
+	@include border-bottom-radius(4px);
+}
+
+.test3{
+	@include box-shadow(1px 2px 3px 3px gray, 1px 2px 3px 3px gray);
+}
+
+.test5 {
+	@include box-sizing();
+}
+
+.test6{
+	width: 750px;
+	@include columns(200px 3);
+	//column-fill: auto;
+	//column-count: 4;
+	column-gap:50px;
+	//column-rule:4px outset #ff0000;
+}
+
+.test7 {
+	column-span: all;
+}
+
+.test8{
+	column-break-before: avoid;
+	-webkit-column-break-before: avoid;
+}
+
+.logo {
+	//background-image: url('data:image/png;base64,..[图片的base64编码]..'); //base64格式，但是data URI比直接使用图片会多消耗大约50%的CPU资源，适当场景使用
+	background-image: inline-image('WebDemoIcon-Math.svg');  //inline-image自动生成base64图片引用
+}
+
+.logo2 { 
+	//background-image: url('../images/WebDemoIcon-Math.svg?7923874932');   //cache buster：正常图片会有缓存  每更换一次就要改一下版本号，麻烦且易出错
+	background-image: image-url('WebDemoIcon-Math.svg'); 
+	//image-url()说明：括号内内容是相对于配置文件中的images_dir，生成的css：/[images_dir]/WebDemoIcon-Math.svg?1532332533,[images_dir]前的地址是配置文件中的http_path值，目前看生成的css：http_path = "/" ,若是项目的各个资源不在同一域名下，则compass提供了不止http_path一个配置参数，其他细分地址如：http_images_path、http_javascripts_path等具体看compass官方文档中help下的Configuration Properties介绍，生成的css中的图片地址是绝对路径想要使用相对路径，则修改配置文件中的relative_assets = true
+}
+
+ul{
+	//@include delimited-list;  //默认逗号分隔
+	@include delimited-list( "!" )
+}
+
+.test11 {
+	text: elements-of-type('block');
+}
+
+//@debug compass-env();
+//@debug font-files("fontawesome-webfont.eot", "fontawesome-webfont.svg", "fontawesome-webfont.ttf", "fontawesome-webfont.woff", "FontAwesome.otf");
+@include font-face("FontAwesome", font-files("fontawesome-webfont.eot", "fontawesome-webfont.svg", "fontawesome-webfont.ttf", "fontawesome-webfont.woff", "FontAwesome.otf"));
+//@debug brightness(#000);
+//@debug omitted-usage("ie", "6"); //查看ie6的使用率
+
+@import "compass/utilities/print";
+@include print-utilities(screen);  //默认print
+
+#{append-selector("p, div, span", ".baz")} {
+	color: red;
+}
+
+.goods-price {
+    $table-color: #7a98c6;
+    @include outer-table-borders();
+    @include inner-table-borders(1px, darken($table-color, 40%));
+    
+    @include table-scaffolding();
+    @include alternating-rows-and-columns($table-color, adjust-hue($table-color, -120deg), #222);
+}
+
+.clearfix {
+    //@include clearfix();  //overflow：hidden  zoom是用来兼容ie6
+    //@include pie-clearfix();   //低版本浏览器不支持display: table;
+    @include legacy-pie-clearfix(); //最常见的清除浮动的方法
+}
+
+.float {
+    //@include float-left();
+    //@include float-right();
+    @include float(right); //不传值默认left 
+    //@include reset-float();  //回复默认float: none and display: block
+    //ie5/6说明：ie5/6下设置float并且还设置了相应的margin-[float的方向]则浏览器显示时实际上设置的margin-值是设置的2倍  解决这个问题就是设置float的同时加上display: inline;这句其实并不会影响布局因为浏览器默认设置的float元素都是block，即使设置了inline但并不会改变默认的block  因此compass根据设置支持的浏览器及版本会自动判断是否生成display：inline；
+}
+
+.min-height-width {
+    @include min-height(50px);
+    @include min-width(500px);
+}
+
+.tag-cloud-container {
+    @include tag-cloud(24px);
+}
+
+
+
+
+/*
+//极力推荐：compass自动合图
+@import "sprites_icon/*.png";
+@include all-sprites_icon-sprites ;
+
+
+@import "compass/utilities/tables";
+table {
+    $table-color: #666;
+    @include table-scaffolding;
+    @include inner-table-borders(1px, darken($table-color, 40%));
+    @include outer-table-borders(2px);
+    @include alternating-rows-and-columns($table-color,
+    adjust-hue($table-color, -120deg), #222222); 
+}
+*/
+//@include keyframes(run);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+@import "compass/typography";
+a {
+	@include hover-link();
+	@include link-colors(#00c, #0cc, #c0c, #ccc, #cc0);
+}
+
+.list-horizental {
+	@include inline-list();
+}
+
+.list-inline-nlock {
+	@include inline-block-list(7px);
+}
+
+.text-hide {
+	@include hide-text();
+	//@include squish-text();
+}
+
+$base-font-size: 16px;
+$base-line-height: 24px; //16*1.5=24
+@include establish-baseline();
+
+body {
+	@include debug-vertical-alignment();
+}
+ 
+h1 {
+  font-size: 3em; 	//默认字体大小16px  3*16 = 48px
+  line-height: 1.5em;  	//72px 相对于font-size的行高72/48=1.5
+}
+
+h1 {
+	@include adjust-font-size-to(48px);
+	
+	@include leader(2); //margin-top 默认基线（line-height）高，传值：基线高度倍数如5，则margin-top=5*基线高
+	@include trailer(2);  //margin-bottom 
+}
+*/

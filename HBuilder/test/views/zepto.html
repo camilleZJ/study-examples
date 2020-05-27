@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"><!-- 告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面。 IE=edge,chrome=1-->
+<meta name="viewport" content="width=device-width,maximum-scale=1.0,minimum-scale=1.0,initial-scale=1.0,user-scalable=no">
+<title>半屏聊天</title>
+<!-- <meta content="telephone=no,email=no,address=no" name="format-detection"> -->
+<meta name="keywords" content="chat">
+<meta name="description" content="半屏聊天">
+<script>(self.window!==top.window)&&(top.window.location.href=self.window.location.href),!function(a){function b(){var a=e.getBoundingClientRect().width,b=a/10;e.style.fontSize=b+"px";try{"function"==typeof eval("init")&&init()}catch(e){}}var c,d=a.document,e=d.documentElement;a.addEventListener("resize",function(){clearTimeout(c),c=setTimeout(b,300)},!1),b()}(window);</script>
+<style type="text/css">
+/*--reset--*/
+*{margin: 0;padding: 0;border: 0;-webkit-appearance: none;-webkit-tap-highlight-color:transparent;}
+html, body{height: 100%;font-size:14px;font-family:"Microsoft YaHei UI","Microsoft YaHei",DengXian,SimSun,"Segoe UI",Tahoma,Helvetica,sans-serif;overflow-x:hidden;overflow-y: auto;}
+a{text-decoration:none}
+ul{list-style: none;}
+input{outline: none;}
+
+
+/*-- --*/
+.container{width: 100%;height: 100%;overflow-x:hidden;}
+.user-bg{position: relative;width: 100%;height: 8.7rem;background: url(http://img.ipark.cn/ishowapp/2018/0314/1521014628-Fjzvdi1fJEjryn1K3C0lYlxblJLL-0348-w470h520.jpg) no-repeat center;background-size: cover;}
+.img-con{position: absolute;height: 2.1rem;bottom: .5rem;left: 50%;margin-left:-4.65rem;}
+.img-con:after{content: '';display: block;clear: both;}
+
+
+.item{width: 2.1rem;height: 100%;margin-right: .3rem;border-radius: 6px;float: left;}
+.item:nth-child(1){background: url(http://userface.ispeak.cn/default/1000L.png) no-repeat;background-size: cover;}
+.item:nth-child(2){background: url(http://img.ipark.cn/ishowapp/2018/0314/1521014649-FlRmBNddy6bmRxxMjtL2MACsVTjn-0409-w414ha.jpg) no-repeat;background-size: cover;}
+.item:nth-child(3){background: url(http://img.ipark.cn/ishowapp/2018/0314/1521014658-FuYDkl3gqsPb_TX-S1-oa6_Wel67-0418-w414ha.jpg) no-repeat;background-size: cover;}
+.item:nth-child(4){margin: 0;background: url(http://img.ipark.cn/ishowapp/2018/0314/1521014670-FnaHk7hbUQZ9WC8DpCfsfRlsRDMD-0430-w414ha.jpg) no-repeat;background-size: cover;}
+
+.user-info-con, .user-activity{width: 100%;box-sizing: border-box;}  
+.user-info-con{padding: 20px 15px 0;}
+.user-activity{padding: 10px 15px;}
+.address-con, .sex-con{display: inline-block;}
+.sex-con{display: inline-block;width: 36px;height: 15px;background: url("https://h5.ispeak.cn/static/template/img/f.png")  no-repeat center;background-size: cover;}
+.age{font-size: 12px;color: #fff;float: right;margin-right: 3px;height: 100%;line-height: 15px;}
+.address-con{font-size: 13px;color: #999;}
+.address-icon{display: inline-block;width: 12px;height: 15px;background: url("https://h5.ispeak.cn/static/template/img/loc.png")  no-repeat center;background-size: cover;margin: 0 5px 0 9px;}
+.address{display: inline-block;height: 15px;line-height: 15px;vertical-align: top;}
+.user-activity>span:nth-child(2){display: inline-block;padding-right: 15px;}
+
+.dynamics-con{width: 100%;background:}
+.pub-title-con{}
+#user-data-con, #dynamic-con, #photo-con, #album-con{}
+/*资料*/
+
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="user-bg">
+			<ul class="img-con">
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+				<li class="item"></li>
+			</ul>
+		</div>
+		<div class="infro-con">
+			<div class="user-info-con">
+				<div class="sex-con">
+					<span class="age">12</span>
+				</div>
+				<div class="address-con">
+					<div class="address-icon"></div>
+					<span class="address">江苏·南京市</span>
+				</div>
+			</div>
+			<div class="user-activity">
+				<span>魅力值</span>
+				<span>40</span>
+				<span>关注</span>
+				<span>0</span>
+			</div>
+		</div>
+		<div class="dynamics-con">
+			<div class="pub-title-con">
+				<label class="pub-click active" for="user-data-con">资料</label>
+				<label class="pub-click" for="dynamic-con">动态</label>
+				<label class="pub-click" for="photo-con">相册</label>
+				<label class="pub-click" for="album-con">专辑</label>
+			</div>	
+			<div id="user-data-con">
+				<div class="personal-info">
+					<p>个人信息</p>
+					<p>
+						<span>ID</span><span id="user-showid">5346532</span>
+						<a href="javascript:;" class="copy-showid" data-clipboard-target="#user-showid">(点击复制)</a>
+					</p>
+					<p>
+						<span>星座</span><span>金牛座</span>
+					</p>
+					<p>
+						<span>签名</span><span class="signature">知我心者谓我心忧！</span>
+					</p>
+					<p>
+						<span>家乡</span><span>北京 东城</span>
+					</p>
+				</div>
+				<div class="rich-users">
+					<div class="user-info-l rich-users-title">TA的豪客</div>
+					<div class="user-info-r rich-users-rank">
+						<img class="rich-rank-img" alt="portrait" src="http://userface.ispeak.cn/face/0152/67/10/152671033M.png">
+						<img class="rich-rank-img" alt="portrait" src="http://userface.ispeak.cn/face/0100/00/03/100000337M.png">
+						<img class="rich-rank-img" alt="portrait" src="http://qnpan.ispeak.cn/face/116319421.png?t=5ae2b74e&sign=6fa613141b4e1794922c3cb75a3bb287&v=1">
+						<div class="more_r"></div>
+					</div>
+				</div>
+				<div class="little-shop">
+					<p>TA的小卖部</p>
+					<ul class="shop-list-con">
+						
+						<li>
+							<div class="user-info-l">
+								<img class="buyer-img" alt="portrait" src="http://userface.ispeak.cn/default/1000M.png">
+								<span class="order-info">
+									<span>Q版画像</span>
+									<span>接单1次</span>
+								</span>
+							</div>
+							<div class="user-info-r">
+								<span class="order-num">2</span>香水/次
+							</div>
+						</li>
+						
+						<li>
+							<div class="user-info-l">
+								<img class="buyer-img" alt="portrait" src="http://userface.ispeak.cn/default/1000M.png">
+								<span class="order-info">
+									<span>Q版画像</span>
+									<span>接单1次</span>
+								</span>
+							</div>
+							<div class="user-info-r">
+								<span class="order-num">2</span>香水/次
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			<div id="dynamic-con">
+				
+			</div>
+			<div id="photo-con">
+				
+			</div>
+			<div id="album-con">
+				
+			</div>
+		</div>
+	</div>
+	
+<script type="text/javascript" src="https://www.imooc.com/static/lib/jquery/1.9.1/jquery.js"></script>
+<script>
+	//$(function(){});
+	$(document).ready(function(){
+		
+	});
+	
+</script>
+</body>
+</html>

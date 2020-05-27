@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>CSS动画 弹出的导航栏</title>
+<meta name="description" content="弹弹弹，弹出我的导航栏 ">
+<meta name="keywords" content="导航栏 ">
+<style>
+body,div,ul{
+	margin:0;
+	padding:0;
+}
+ul{
+	list-style:none;
+}
+html,body{
+	height: 100%;  /*html、body高度是根据内容自适应的，并不是默认下就是100%*/
+}
+body{
+	background: linear-gradient(#f17c67 50%, #376956 50%); /*背景元素多种过渡/渐变*/
+	
+	/*position: absolute;right: 0;left: 0;bottom: 0;top: 0;margin: auto;*/
+	/* css3水平垂直居中：弹性盒模型 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.menu{
+	min-width: 90px; /*到达最小宽度不在缩小*/
+	height: 90px;
+	border-radius: 10px;
+	background: #fff;	
+
+	display: flex; /*正常页面展示形式：从上到下 从左到右，而弹性盒模型是沿着主轴方向排列（默认横向）（弹性盒模型按照水平轴和垂直轴）*/
+}
+.menu-content{
+	width: 0px;
+	height: 90px;
+	overflow: hidden;
+	transition: width 1s cubic-bezier(.28, -0.55, .04, 1.41); /*贝塞尔曲线http://cubic-bezier.com/#.17,.67,.83,.67*/
+}
+.menu-btn{
+	width: 90px;
+	height: 90px;
+	border-radius: 10px;
+}
+.menu-list{
+	display: flex;
+}
+.list-text{
+	width: 70px;
+	height: 90px;
+	font-size: 14px;
+	color: #6c7784;
+	font-weight: bold;
+	cursor: pointer;
+	
+	/* 文字水平垂直居中 */
+	text-align: center;
+	line-height: 90px;
+	
+	transition:opacity .7s cubic-bezier(.28, -0.55, .04, 1.41); 
+	opacity: 0;
+}
+.list-text:hover{
+	color: #00bdea;
+}
+.menu-button1{
+	position: absolute;
+	opacity: 0;
+}
+.clone{
+	width: 100%;
+	height: 100%;
+	display: block; /*lable行内元素无宽高   转换为块级元素 */
+}
+.line{
+	width: 30px;
+	height: 5px;
+	background: #096dd3;
+	margin: 0 auto;
+}
+.line1{
+	margin-top: 37px;
+	transition:transform .7s cubic-bezier(.28, -0.55, .04, 1.41); 
+}
+.line2{
+	margin-top: 6px;
+	transition:transform .7s cubic-bezier(.28, -0.55, .04, 1.41); 
+}
+.menu-button1:checked~.menu-content{ /*~代表兄弟元素*/
+	width: 320px;
+}
+.menu-button1:checked~.menu-content .menu-list .list-text{ 
+	opacity: 1;
+}
+.menu-button1:checked~.menu-btn .clone .line1{
+	transform: rotate(-225deg) translateY(-7px);
+}
+.menu-button1:checked~.menu-btn .clone .line2{
+	transform: rotate(225deg) translateY(7px);
+}
+</style>
+</head>
+<body>
+    <div class="menu">
+    	<input type="checkbox" class="menu-button1" id="goal-input">
+    	<div class="menu-content">
+    		<ul class="menu-list">
+	    		<li class="list-text">主页</li>
+	    		<li class="list-text">企业详情</li>
+	    		<li class="list-text">关于</li>
+	    		<li class="list-text">联系方式</li>
+	    	</ul>
+    	</div>
+		<div class="menu-btn">
+			<label for="goal-input" class="clone">
+				<div class="line line1"></div>
+				<div class="line line2"></div>
+			</label>
+		</div>
+    </div>
+<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>    
+<script>
+console.log($.url().param('uid'));
+
+var uid = getQueryString('uid');
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+</script>    
+</body>
+</html>

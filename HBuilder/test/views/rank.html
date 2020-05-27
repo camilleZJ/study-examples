@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<title>活动插件</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<style>
+			#wrap{width: 730px;height: 492px;padding: 15px 15px 0;background: url('../img/title.png') no-repeat center top;}
+			.header{color: #fff;height: 105px;padding-top: 10px}
+			.header-left, .header-right{width: 200px;}
+			.header-left{float: left;}
+			.header-right{float: right;}
+			.return, .activity-intro{cursor: pointer;}
+			.activity-intro{margin-left: 5px;color: #7DBFFE;}
+			.fresh-time{display: inline-block;width: 34px;height: 34px;background: url(../img/round.png) no-repeat;font-size: 16px;text-align: center;padding-top: 5px;}
+			.time{padding: 4px;text-align: center;background: url('../img/date.png') no-repeat center;}
+			.time-menu{float: right;font-size: 14px;background: url(../img/menu.png) no-repeat;width: 100px;height: 24px;position: relative;}
+			.menu-box{padding: 2px 0 0 6px;}
+			.menu{display: inline-block;float: right;width: 20px;height: 24px;}
+			.menu-list{width: 100px;position: absolute;right: 0;top: 23px;display: none;}
+			.menu-list li{width: 100%;height: 34px;background: #575757;text-align: center;line-height: 34px;}
+			.menu-list li:hover{background: #a3a3a3;}
+			.menu-list a{color: #fff !important;}
+			
+			.header-center{width: 235px;text-align: center;padding-top: 13px;margin: 0 auto;}
+			.title{font-size: 20px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+			.total{text-align: left;margin-top: 14px;padding-left: 48px;}
+			
+			.top{width: 500px;margin: 0 auto;height: 200px;}
+			.top-item{width: 33%;float: left;height: 100%;}
+			.top-two, .top-one, .top-three{position: relative;}
+			.portrait, .rank-box, .name, .anchor-rank{position: absolute;}
+			.portrait{behavior: url(http://test.roommanage.ispeak.cn/static/misc/PIE.htc);border-radius: 50%;}
+			.top-item span {text-align: center;width: 90px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-left: 4px;}
+			.top-two .rank-box{left: 20px;top: 35px;}
+			.top-one .rank-box{left: 35px;top: 0px;}
+			.top-three .rank-box{left: 35px;top: 43px;}
+			.top-two .portrait{top: 54px;left: 42px;}
+			.top-one .portrait{left: 56px;top: 28px;}
+			.top-three .portrait{left: 56px;top: 55px;}
+			.top-two .name{left: 35px;top: 135px;}
+			.top-one .name{left: 50px;top: 108px;}
+			.top-three .name{left: 50px;top: 135px;}
+			.top-two .anchor-rank{left: 35px;top: 155px;}
+			.top-one .anchor-rank{left: 50px;top: 128px;}
+			.top-three .anchor-rank{left: 50px;top: 155px;}
+			
+			.rank{width: 100%;height: 172px;}
+			.rank-btn, .rank-lists{float:left;}
+			.rank-lists{width: 596px;height: 100%;margin: 0 36px;position: relative;overflow: hidden;}
+			.lists-box{position: absolute;width: 100%;height: 100%;}
+			.lists-box li{float: left;width: 33.3%;height: 50%;position: relative;}
+			.lists-box .portrait{left: 24px;top: 0;}
+			.lists-box .rank-box{left: 24px;top: 0;}
+			.lists-box .name, .lists-box .total{display: block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+			.lists-box .name{width: 90px;height: 18px;left: 88px;top: 20px;}
+			.lists-box .rank-total{position: absolute;width: 80px;text-align: center;left: 76px;top: 42px;}
+			.lists-box .anchor-rank{width: 18px;text-align: center;left: 154px;top: 42px;}
+			.btn-left, .btn-right{display: block;width: 16px;height: 50px;margin-top: 68px;}
+			.btn-left{background: url(../img/left.png) no-repeat;}
+			.btn-right{background: url(../img/right.png) no-repeat;}
+			.rank-btn .btn-left:hover, .rank-btn .btn-right:hover{background-position: 50%;}
+			.rank-btn .btn-left:active, .rank-btn .btn-right:active{background-position: 100%;}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="header">
+				<div class="header-left">
+					<img src="../img/return.png" class="return" onclick="javascript:history.go(-1);" style="display: none;"/>
+					<span class="fresh-time" style="">4</span>
+					<span class="activity-intro">活动说明</span>
+				</div>	
+				<div class="header-right">
+					<div class="time" style="display: none;">2017-12-18 17时00分<br />至<br />2017-12-19 00时00分</div>
+					<div class="time-menu">
+						<div class="menu-box">
+							<span>06</span>
+							<span>:</span>
+							<span>03</span>
+							<span>:</span>
+							<span>24</span>
+							<span class="menu"></span>
+						</div>
+						<ul class="menu-list">
+							<li><a href="add.html">编辑活动</a></li>
+							<li><a href="history.html">历史记录</a></li>
+							<li><a href="">编辑活动</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="header-center">
+					<p class="title">asdasa</p>
+					<p class="total">总分 : 0</p>
+				</div>
+			</div>
+			<div class="top">
+				<div class="top-item">
+					<div class="top-two">
+						<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="77" />
+						<img class="rank-box" src="../img/rank2.png" />
+						<span class="name">xiangxiang</span>
+						<span class="anchor-rank">2</span>
+					</div>
+				</div>
+				<div class="top-item">
+					<div class="top-one">
+						<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="77" />
+						<img class="rank-box" src="../img/rank1.png" />
+						<span class="name">mengmeng</span>
+						<span class="anchor-rank">1</span>
+					</div>
+				</div>
+				<div class="top-item">
+					<div class="top-three">
+						<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="77" />
+						<img class="rank-box" src="../img/rank3.png" />
+						<span class="name">mengmeng</span>
+						<span class="anchor-rank">3</span>
+					</div>
+				</div>
+			</div>
+			<div class="rank">
+				<div class="rank-btn">
+					<span class="btn-left"></span>
+				</div>
+				<div class="rank-lists">
+					<ul class="lists-box">
+						<li>
+							<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="60"/>
+							<img class="rank-box" src="../img/rank4.png" />
+							<span class="name">paofu</span>
+							<span class="rank-total">0</span>
+							<span class="anchor-rank">4</span>
+						</li>
+				
+						<li>
+							<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="60"/>
+							<img class="rank-box" src="../img/rank4.png" />
+							<span class="name">paofu</span>
+							<span class="rank-total">0</span>
+							<span class="anchor-rank">5</span>
+						</li>
+						<li>
+							<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="60"/>
+							<img class="rank-box" src="../img/rank4.png" />
+							<span class="name">paofu</span>
+							<span class="rank-total">0</span>
+							<span class="anchor-rank">5</span>
+						</li>
+						<li>
+							<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="60"/>
+							<img class="rank-box" src="../img/rank4.png" />
+							<span class="name">paofu</span>
+							<span class="rank-total">0</span>
+							<span class="anchor-rank">5</span>
+						</li>
+						<li>
+							<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="60"/>
+							<img class="rank-box" src="../img/rank4.png" />
+							<span class="name">paofu</span>
+							<span class="rank-total">0</span>
+							<span class="anchor-rank">5</span>
+						</li>
+						<li>
+							<img class="portrait" src="http://userface.ispeak.cn/default/1000M.png" width="60"/>
+							<img class="rank-box" src="../img/rank4.png" />
+							<span class="name">paofu</span>
+							<span class="rank-total">0</span>
+							<span class="anchor-rank">5</span>
+						</li>
+					</ul>
+				</div>
+				<div class="rank-btn">
+					<span class="btn-right"></span>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+		<script>
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,10 @@
+// Import Bootstrap Compass integration
+@import "bootstrap-compass";
+
+// Import custom Bootstrap variables
+@import "bootstrap-variables";
+
+// Import Bootstrap for Sass
+//@import "bootstrap";  //引入全部的bootstrap的模块，制定化bootstrap，往往只引入需要的 bootstrap模块进行源码修改
+@import 'bootstrap-custom'; //制定化bootstrap:拷贝_bootstrap.scss到自己的项目并改名为_bootstrap-custom.scss，并@import "bootstrap";改为@import 'bootstrap-custom';然后修改 _bootstrap-custom.scss 可以根据自己的需要取舍相应的 bootstrap模块
+

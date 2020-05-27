@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>svg test</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+      }
+
+      section {
+        width: 100%;
+        height: 100%;
+        background-color: cornsilk;
+        margin: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <!-- <embed
+        src="./svg_shape/shape.svg"
+        width="500"
+        height="500"
+        type="image/svg+xml"
+        pluginspage="http://www.adobe.com/svg/viewer/install/"
+      /> -->
+
+      <object
+        data="./svg_shape/filter.svg"
+        type="image/svg+xml"
+        width="500"
+        height="500"
+        codebase="http://www.adobe.com/svg/viewer/install/"
+      ></object>
+
+      <!-- <iframe src="./svg_shape/shape.svg" width="500" height="500"></iframe>  -->
+    </section>
+  </body>
+</html>

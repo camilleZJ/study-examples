@@ -1,0 +1,603 @@
+<?php
+	header("content-type:text/html;charset=utf-8");
+	/*
+	绑定数据接口
+	http://58.215.165.157:8874/share_bind_stat?bdate=2017-7-10&edate=2017-7-11&sid=33256524&json=1
+	*/
+	/*
+	日志文件
+	http://58.215.165.153:8068/static/logs/
+	*/
+
+
+	$sid = @isset($_GET['sid'])?$_GET['sid']:'';
+	$starttime = isset($_GET['bdate'])?$_GET['bdate']:date("Y-m-d");
+	$endttime = isset($_GET['edate'])?$_GET['edate']:date("Y-m-d");
+	$remenshuju = 0;
+
+	//对时间做判断
+	$stime = strtotime($starttime);
+	$etime = strtotime($endttime);
+	$checktime = ($etime - $stime)/(24*3600);
+
+	if ($etime > strtotime('today'))
+	{
+		echo "结束时间不正确";
+		exit;
+	}
+	if ($checktime > 1)
+	{
+		echo "输入时间太长了，不能超过1天哦！";
+		exit;
+	}
+
+	$res = @file_get_contents('http://58.215.165.157:8874/share_bind_stat?bdate='.$starttime.'&edate='.$endttime.'&sid='.$sid.'&json=1');
+	if($res)
+	{
+		$reslut = json_decode($res,true);
+		// var_dump($reslut);
+		$count = count($reslut);
+		$invalid126 = 0;
+		$invalidis = 0;
+		$remenshuju = 0;
+		$isshuju  = 0;
+		$totledata = 0;
+		$success126 = 0;
+		$successis = 0;
+		$totleinvalid = 0;
+		$h5partnerid126 = 0;
+		$h5partneridis = 0;
+		$losestatus = 0;
+		$losestatusis = 0;
+		$overtime = 0 ;
+		$overtime126 = 0;
+		$overtimeis = 0;
+
+		$reglater = 0;
+		$reglateris = 0;
+		$platform126 = 0;
+		$platformis = 0;
+
+		$abnormityUaArray = array();
+		$versionnum =0;
+
+		foreach ($reslut as $keys =>$value)
+		{
+			if($reslut[$keys]['refer'] == 'h5.iphone' || $reslut[$keys]['refer'] == 'h5.android' || $reslut[$keys]['refer'] == 'mp.qq' || $reslut[$keys]['refer'] == 'www.ishow' || $reslut[$keys]['refer'] == 'ispeak.cn' || $reslut[$keys]['refer'] == 'pc_client' || $reslut[$keys]['refer'] == 'mp.weixin' || $reslut[$keys]['status'] =='255')
+			{
+				//记录无效数据
+				$totleinvalid += 1;
+				unset($reslut[$keys]);
+				continue;
+			}
+
+			if ('126' == $reslut[$keys]['reg_partnerid'])
+			{
+				$remenshuju += 1;
+				if(empty($reslut[$keys]['status']))
+				{
+					//统计热门无效数据
+					$invalid126 += 1;
+				}else
+				{
+					//统计热门成功数据
+					$success126 +=1;
+				}
+
+			}else
+			{
+
+				//过滤无效版本号
+				// 判断版本号
+				/*
+				3.2.3.07032		安卓
+				3.2.3.07041		安卓
+				3.2.8			ios
+				*/
+				$version = str_replace('.', '', strtolower($reslut[$keys]['version2']));
+				if (('32307032' !== $version) && ('32307041' !== $version) && ('328' !== $version))
+				{
+					$totleinvalid += 1;
+					unset($reslut[$keys]);
+					continue;
+				}
+				// 统计is过滤后的数据
+				$isshuju += 1;
+				//统计热门无效数据
+				if(empty($reslut[$keys]['status']))
+				{
+					$invalidis += 1;
+				}else
+				{
+					//统计IS成功数据
+					$successis +=1;
+				}
+			}
+			//统计一共有多少条数据
+			$totledata +=1;
+		}
+
+		$count1 = count($reslut);
+		//绑定失败数据
+		$totlefaile = $invalidis + $invalid126;
+		// 绑定成功数据
+		$totlesuccess = $success126 + $successis;
+
+
+		//下一步工作
+		//过滤无效的  注册时间   ua 不一致
+		foreach ($reslut as $keys =>$value)
+		{
+			// 先注册后打开的数据--释放
+
+			if ('126' == $reslut[$keys]['reg_partnerid'])
+			{
+				//热门数据
+				$h5partnerid126 += 1;
+
+				//热门失败的数据
+				if(empty($reslut[$keys]['status']))
+				{
+					$losestatus += 1;
+
+					if (strtotime($reslut[$keys]['h5time']) >= strtotime($reslut[$keys]['regtime']))
+					{
+						// 先注册后打开
+						$reglater += 1;
+						if(!empty($reslut[$keys]['status']))
+						{
+							$overtime126 += 1;
+						}
+					}
+					else
+					{
+						// 正常先打开后注册
+						// 判断设备平台
+						/*
+						banban_android   安卓
+						banban_android	 安卓
+						banban_ios		 ios
+						hotlive_android  安卓
+						hotlive_ios		 ios
+						IOS.HotLive 	 ios
+						m.android 	 	 安卓
+						m.iphone 		 ios    IS
+						mobile	         ios 	IS
+						*/
+						$ua = str_replace(' ', '', strtolower(stripslashes($reslut[$keys]['h5ua'])));
+						if (FALSE !== strpos($ua, 'android'))
+						{
+							// 安卓注册ios打开
+							if ( FALSE == strpos(strtolower($reslut[$keys]['refer']), 'android'))
+							{
+								$platform126 += 1;
+							}else
+							{
+								$abnormityUaArray[] = $reslut[$keys];
+							}
+						}else
+						{
+							// ios注册安卓打开
+							if ( FALSE !== strpos(strtolower($reslut[$keys]['refer']), 'android'))
+							{
+								$platform126 += 1;
+							}else
+							{
+								$abnormityUaArray[] = $reslut[$keys];
+							}
+						}
+					}
+				}
+				if (strtotime($reslut[$keys]['h5time']) > strtotime($reslut[$keys]['regtime']))
+				{
+					if(!empty($reslut[$keys]['status']))
+					{
+						$overtime += 1;
+					}
+					unset($reslut[$keys]);
+				}
+			}else
+			{
+				// IS统计
+				$h5partneridis += 1;
+
+				// IS失败
+				if(empty($reslut[$keys]['status']))
+				{
+					$losestatusis += 1;
+
+					if (strtotime($reslut[$keys]['h5time']) >= strtotime($reslut[$keys]['regtime']))
+					{
+						// 先注册后打开
+						$reglateris += 1;
+						if(!empty($reslut[$keys]['status']))
+						{
+							$overtimeis += 1;
+						}
+					}
+					else
+					{
+						// 判断注册设备平台
+						/*
+						m.android 	 	 安卓
+						m.iphone 		 ios    IS
+						mobile	         ios 	IS
+						*/
+						/*
+						判断打开设备类型h5_client
+						1 	pc
+						2 	ios
+						16  安卓
+						*/
+						$h5_clientis = $reslut[$keys]['h5_client'];
+						// ios注册安卓打开
+						if ( (FALSE !== strpos(strtolower($reslut[$keys]['refer']), 'm.iphone'))  || (FALSE !== strpos(strtolower($reslut[$keys]['refer']), 'mobile')))
+						{
+							if ('2' == $h5_clientis)
+							{
+								$abnormityUaArray[] = $reslut[$keys];
+							}else
+							{
+								$platformis += 1;
+							}
+						}
+
+						// 安卓注册ios打开
+						if ( FALSE !== strpos(strtolower($reslut[$keys]['refer']), 'm.android'))
+						{
+							if ('16' == $h5_clientis)
+							{
+								$abnormityUaArray[] = $reslut[$keys];
+							}else
+							{
+								$platformis += 1;
+							}
+						}
+					}
+				}
+				if (strtotime($reslut[$keys]['h5time']) > strtotime($reslut[$keys]['regtime']))
+				{
+					if(!empty($reslut[$keys]['status']))
+					{
+						$overtime += 1;
+					}
+					unset($reslut[$keys]);
+				}
+			}
+
+		}
+		$countua = count($abnormityUaArray);
+		// 注册时间正常数据
+		$countend = count($reslut);
+		// 总数据-注册正常的-先注册后打开的 -先注册后打开的却绑定上的
+		$overtimes = $count1 - $countend - $overtime;
+
+
+
+		// 与日志文件匹配
+		$returnTxt = null; // 初始化返回
+	    $i = 1; // 行数
+	    $length = 4096;//默认1024一行的大小
+	    $res_array = array();
+	    $uaequally = 0;
+	    $uaequallyis = 0;
+	    // echo $starttime;exit;
+	    // 需要处理日志文件名
+	    /*log-2017-07-11.log
+	    2017-7-11*/
+
+	    //打开文件
+	    $handle = @fopen('./log-'.$starttime.'.log', "r");
+
+	    //读取全部的内容
+	    // $res = fread($handle,filesize("./test.log"));
+	    //读取每一行
+	    if ($handle)
+	    {
+	        while (!feof($handle))
+	        {
+	            $buffer = fgets($handle, $length);
+	            //处理行
+	            if ((FALSE !== strpos($buffer, '{')) && (FALSE !== strpos($buffer, 'ip')) && (FALSE !== strpos($buffer, 'uid')))
+	            {
+	                $buffer2 = substr($buffer,strpos($buffer,'{'));
+	                $buffer1 = json_decode($buffer2,TRUE);
+	                if (array_key_exists('ip', $buffer1) && array_key_exists('uid', $buffer1)) {
+	                	$res_array[] = $buffer1;
+	                }else{
+	                	unset($buffer1);
+	                }
+	            }else
+	            {
+	                unset($buffer);
+	            }
+	            $i++;
+	        }
+	        fclose($handle);
+	    }else
+	    {
+	    	echo '日志文件还没下载';
+	    }
+
+
+	    $uadifferent = 0 ;
+	    $uadifferentis = 0 ;
+	    $ipdifferent = 0 ;
+	    $ipdifferentis = 0 ;
+	    $uidh5reg = 0 ;
+	    $uidh5regis = 0 ;
+	    $uadifferencearray = array();
+	    $jisuanshujuis = 0 ;
+	    $uidmeiyou = 0;
+
+	    // 循环没有匹配上的ua与日志文件ua匹配
+	    foreach ($abnormityUaArray as $uakey => $uavalue)
+	    {
+	    	/*if (empty($abnormityUaArray[$uakey]['ip']) || empty($abnormityUaArray[$uakey]['min(reg.uid)'])) {
+	    		continue;
+	    	}*/
+	    	foreach ($res_array as $logkey => $logvalue)
+	    	{
+	    		/*if ( empty($res_array[$logkey]['ip']) || empty($res_array[$logkey]['uid']) ) {
+	    				continue;
+	    			}*/
+		    	if ('126' == $abnormityUaArray[$uakey]['reg_partnerid'])
+		    	{
+		    		if ($abnormityUaArray[$uakey]['min(reg.uid)'] == $res_array[$logkey]['uid'])
+	    			// if ('172853394' == $res_array[$logkey]['uid'])
+		    		{
+		    			$uidh5reg+=1;
+
+		    			if ( ($abnormityUaArray[$uakey]['h5ip'] == $res_array[$logkey]['ip']))
+		    			{
+		    				/*var_dump($res_array[$logkey]['uid']);
+		    				echo '<br>';
+		    				var_dump($res_array[$logkey]['ip']);*/
+		    				// ip不一致
+		    				//判断ua
+
+		    				$uah5 = str_replace(' ', '', strtolower(stripslashes($abnormityUaArray[$uakey]['h5ua'])));
+		    				$ua_arr1h5 = explode('(', $uah5);
+							$str1h5 = isset($ua_arr1h5[1]) ? $ua_arr1h5[1] : '';
+							$ua_arr2h5 = explode(')', $str1h5);
+							$ua_strh5 = isset($ua_arr2h5[0]) ? $ua_arr2h5[0] : '';
+
+		    				$regua = str_replace(' ', '', strtolower(stripslashes($res_array[$logkey]['ua'])));
+		    				$ua_arr1reg = explode('(', $regua);
+							$str1reg = isset($ua_arr1reg[1]) ? $ua_arr1reg[1] : '';
+							$ua_arr2reg = explode(')', $str1reg);
+							$ua_strreg = isset($ua_arr2reg[0]) ? $ua_arr2reg[0] : '';
+							$uadifferencearray[] = array_merge($abnormityUaArray[$uakey],$res_array[$logkey]);
+
+		    				if ($ua_strh5 == $ua_strreg)
+		    				{
+		    					// ua 一致
+		    					// 判断ua是否合法
+		    					// build信息   品牌  版本
+		    					$uaequally +=1;
+		    				}
+		    				else
+		    				{
+		    					// ua不一致
+		    					$uadifferent +=1;
+		    				}
+		    			}
+		    			else
+		    			{
+		    				// ip不一致
+		    				$ipdifferent +=1;
+		    			}
+		    		}
+    			}else
+    			{
+    				if ($abnormityUaArray[$uakey]['min(reg.uid)'] == $res_array[$logkey]['uid'])
+		    		{
+		    			$uidh5regis += 1;
+
+		    			if ( ($abnormityUaArray[$uakey]['h5ip'] == $res_array[$logkey]['ip']))
+		    			{
+		    				/*var_dump($res_array[$logkey]['uid']);
+		    				echo '<br>';
+		    				var_dump($res_array[$logkey]['ip']);*/
+		    				// ip不一致
+		    				// 判断ua
+		    				$uah5is = str_replace(' ', '', strtolower(stripslashes($abnormityUaArray[$uakey]['h5ua'])));
+		    				$ua_arr1h5is = explode('(', $uah5is);
+							$str1h5is = isset($ua_arr1h5is[1]) ? $ua_arr1h5is[1] : '';
+							$ua_arr2h5is = explode(')', $str1h5is);
+							$ua_strh5is = isset($ua_arr2h5is[0]) ? $ua_arr2h5is[0] : '';
+
+		    				$reguais = str_replace(' ', '', strtolower(stripslashes($res_array[$logkey]['ua'])));
+		    				$ua_arr1regis = explode('(', $reguais);
+							$str1regis = isset($ua_arr1regis[1]) ? $ua_arr1regis[1] : '';
+							$ua_arr2regis = explode(')', $str1regis);
+							$ua_strregis = isset($ua_arr2regis[0]) ? $ua_arr2regis[0] : '';
+							$uadifferencearray[] = array_merge($abnormityUaArray[$uakey],$res_array[$logkey]);
+
+		    				if ($ua_strh5is == $ua_strregis)
+		    				{
+		    					// ua 一致
+		    					// 判断ua是否合法
+		    					// build信息   品牌  版本
+		    					$uaequallyis +=1;
+		    				}
+		    				else
+		    				{
+		    					// ua不一致
+		    					$uadifferentis +=1;
+		    				}
+		    			}
+		    			else
+		    			{
+		    				// ip不一致
+		    				$ipdifferentis +=1;
+		    			}
+		    		}
+    			}
+    		//判断uid是否在日志中
+			if (TRUE == in_array($abnormityUaArray[$uakey]['min(reg.uid)'],$res_array[$logkey]))
+			{
+				// 日志文件有uid的数量
+				$uidmeiyou +=1;
+			}
+
+	    	}
+	    }
+
+	    //在日志文件中找不到uid
+		$logloseuid = $countua-$uidmeiyou;
+		//在注册日志中没有uid  先算在is里面
+	    $uadifferentis = $uadifferentis + $logloseuid;
+
+	    //成功率   成功/（总-无效）
+	    //总成功条数
+	    $successtotle = $successis+$success126;
+
+
+	    //无效占比
+	    $failerate = ceil((100*$totlefaile)/$totledata);
+
+		/*echo '一共'.$totledata.'条数据，其中'.$totlesuccess.'条绑定成功 '.$totlefaile.'条绑定失败';
+		echo $totleinvalid.'无效数据';
+		echo '<hr>';
+		echo $overtimes.'条先注册后打开邀请链接';
+		echo '<hr>';
+		echo '热门统计开始--------------------------------------------------------';
+		echo '<br>';
+		echo $h5partnerid126.'热门总数据';
+		echo '<hr>';
+		echo $losestatus.'条无效数据';
+		echo '<hr>';
+		echo $reglater.'条先注册后打开';
+		// echo '<hr>';
+		// echo $overtime126.'条先注册后打开绑定成功';
+		echo '<hr>';
+		echo $platform126.'条注册设备系统与打开分享的设备系统不一致';
+		// echo '<hr>';
+		// echo $versionnum.'版本太旧不支持';
+		echo '<hr>';
+		echo $countua.'需要匹配ua';
+		echo '<hr>';
+		echo $uadifferent.'ua不一致';
+		echo '<hr>';
+		echo $uaequally.'ua一致';
+		echo '<hr>';
+		echo $ipdifferent.'ip不一致';
+		echo '<hr>';
+		echo '热门统计结束--------------------------------------------------------';
+
+		echo 'IS统计开始--------------------------------------------------------';
+		echo '<br>';
+		echo $h5partneridis.'IS总数据';
+		echo '<hr>';
+		echo $losestatusis.'条无效数据';
+		echo '<hr>';
+		echo $reglateris.'条先注册后打开';
+		// echo '<hr>';
+		// echo $overtime126.'条先注册后打开绑定成功';
+		echo '<hr>';
+		echo $platformis.'条注册设备系统与打开分享的设备系统不一致';
+		echo '<hr>';
+		echo $countua.'需要匹配ua';
+		echo '<hr>';
+		echo $uadifferentis.'ua不一致';
+		echo '<hr>';
+		echo $uaequallyis.'ua一致';
+		echo '<hr>';
+		echo $ipdifferentis.'ip不一致';
+		echo '<hr>';
+		echo 'IS统计结束--------------------------------------------------------';*/
+		// echo $uidh5reg.'uid统计';
+
+		// var_dump($abnormityUaArray);
+		// var_dump($uadifferencearray);
+
+	}
+	else
+	{
+		echo '服务器在维护...';
+		exit;
+	}
+
+
+?>
+
+<!-- 成功条数
+	暂时不加成功率
+ -->
+
+<!-- 表格展示 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>注册绑定情况分析</title>
+	<style type="text/css">
+	table.gridtable {font-family:verdana,arial,sans-serif;font-size:11px;color:#333333;border-width:1px;border-color:#666666;border-collapse:collapse;text-align:center;margin:50px auto;}
+	table.gridtable th {border-width:1px;padding:8px;border-style:solid;border-color:#666666;background-color:#dedede;}
+	table.gridtable td {border-width:1px;padding:8px;border-style:solid;border-color:#666666;}
+	table.totle td {background-color:#9BC3E7;}
+	</style>
+</head>
+<body>
+	<table class="gridtable">
+		<tr>
+			<th colspan="8"><?php echo $starttime;?> &nbsp;&nbsp;注册绑定情况分析</th>
+		</tr>
+		<tr >
+			<td rowspan="2">APP</td>
+			<td rowspan="2">总条数</td>
+			<td colspan="5">无效条数</td>
+			<td rowspan="2">成功条数</td>
+			<!-- <td rowspan="2">深度链接补救</td> -->
+
+		</tr>
+		<tr>
+			<td>
+			先注册后打开H5
+			</td>
+			<td>注册设备系统与打开H5设备系统不一致</td>
+			<td>ua不一致</td>
+			<td>其他</td>
+			<td>无效总计</td>
+		</tr>
+		<tr>
+			<td>热门总计</td>
+			<td><?php echo $h5partnerid126;?></td>
+			<td><?php echo $reglater;?></td>
+			<td><?php echo $platform126;?></td>
+			<td><?php echo $uadifferent;?></td>
+			<td><?php echo $uaequally;?></td>
+			<td><?php echo $losestatus;?></td>
+			<td><?php echo $success126;?></td> <!-- 成功率 -->
+			<!-- <td><?php echo '';?></td>  --><!-- 深度链接补救 -->
+		</tr>
+		<tr>
+			<td>IS总计</td>
+			<td><?php echo $h5partneridis;?></td>
+			<td><?php echo $reglateris;?></td>
+			<td><?php echo $platformis;?></td>
+			<td><?php echo $uadifferentis;?></td>
+			<td><?php echo $uaequallyis;?></td> <!-- 正常需要完善ua -->
+			<td><?php echo $losestatusis;?></td> <!-- 无效总数 -->
+			<td><?php echo $successis;?></td> <!-- 成功率 -->
+			<!-- <td><?php echo '';?></td>  --><!-- 深度链接补救 -->
+		</tr>
+		<tr class ="totle">
+			<td>总计</td>
+			<td><?php echo $totledata;?></td>
+			<td colspan="5"><?php echo $totlefaile;?></td>
+			<td><?php echo $successtotle;?></td>
+			<!-- <td><?php echo '';?></td> -->
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td colspan="5">无效占比<?php echo $failerate.'%';?></td>
+			<td></td>
+			<!-- <td>深度链接补救提升</td> -->
+		</tr>
+	</table>
+</body>
+</html>

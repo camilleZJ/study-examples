@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ducoment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+   <div>This is content, and is:<span id="data"></span></div>
+   <button id="button">click me</button>
+</body>
+<script>
+    var index = 0
+  function doRequest () {
+    var data = document.getElementById('data')
+    data.innerText = ''
+    fetch('/data', {
+      headers: {
+        'X-Test-Cache': index++
+      }
+    }).then(function (resp) {
+      return resp.text()
+    }).then(function (text) {
+      data.innerText = text
+    })
+  }
+  document.getElementById('button').addEventListener('click', doRequest)
+</script>
+</html>

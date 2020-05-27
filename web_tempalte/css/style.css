@@ -1,0 +1,350 @@
+@CHARSET "UTF-8";
+
+/*reset css*/
+body,div,ol,ul,dl,h1,h2,h3,h4,p {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: "Helvetica Neue", Helvetica Arial, sans-serif;
+	font-size: 14px;
+	background: #fff;
+}
+ol,dl,ul {
+	list-style: none;
+}
+a,button {
+	cursor: pointer;
+}
+a {
+	text-decoration: none;
+	color: #3b3b3b;
+	display: block;  /*非必需*/
+}
+img {
+	border: none;
+	vertical-align: middle;  /*img向下有4pxbug*/
+	display: block;/*非必需*/
+}
+.clearfloat {
+	zoom: 1;
+}
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visiblility: hidden;
+	height: 0;
+}
+/*ios 手机*/
+input,textarea {
+	-webkit-appearance: none;
+}
+
+/*common css*/
+.public-header {
+	height: 110px;
+}
+.public-container {
+	position: relative;
+	margin: 0 auto;
+	width: 1100px;
+}
+.public-header .header-logo {
+	float:left;
+	margin-top: 40px;
+}
+.public-header .header-logo a {
+	width: 181px;
+	height: 54px;
+	background: url("../images/header-logo.png") no-repeat;
+}
+.public-header .header-nav {
+	float:right;
+}
+.public-header .header-nav .item{
+	float:left;
+	margin-left: 50px;
+	margin-top: 44px;
+}
+.public-footer {
+	height: 317px;
+	margin-top: 100px;
+	background: #3b3b3b;
+}
+.public-footer .footer-col {
+	float: left;
+	font-size: 16px;
+	color: #fff;
+	width: 230px;
+	padding-top: 100px;
+	margin-right: 60px;
+	line-height: 1.8;
+}
+.public-footer .footer-col a {
+	color: #fff;
+}
+.public-footer .last-col {
+	margin-right: 0;
+}
+.footer-col .footer-logo {
+	width: 182px;
+	height: 55px;
+	margin-top: -10px;
+	margin-bottom: 12px;
+	background: url(../images/footer-logo.png) no-repeat;
+}
+
+/*index css*/
+.index-banner {
+	position: relative;
+	width: 100%;
+	height: 571px;
+	text-align: center;
+	/*overflow: hidden;background: url("../images/banner-bg.png") no-repeat;*/
+	background: #2d2c2c;
+}
+
+.index-banner .index-banner-bg{
+	position: absolute;
+	left: 50%;
+	margin-left: -750px;
+}
+
+.index-banner .index-banner-text {
+	position: absolute;
+	top: 211px;
+	left:50%;
+	margin-left: -388px; 
+}
+
+.index-banner-text .text-logo {
+	width: 776px;
+	height: 117px;
+	margin-bottom: 18px;
+	background: url("../images/banner-logo.png") no-repeat;
+}
+
+.index-banner-text .text-info {
+	font-size: 16px;
+	color: #fff;
+}
+.text-info .line {
+	display: inline-block;
+	width: 40px;
+	border: 1px solid #fff;
+	vertical-align: middle;
+	margin-top:10;
+}
+.text-info .line-l {
+	margin-right: 27px;
+}
+.text-info .line-r {
+	margin-left: 27px;
+}
+
+.index-menu{
+	position: relative;
+	border-top: 4px solid #f34949;
+}
+
+.index-menu .menu-tips {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	margin-left: -78px;
+	width: 156px;
+	height: 75px;
+	text-align: center;
+	background: #f34949;
+	font-size: 20px;
+	color: #fff;
+	line-height: 65px; /*除去10px的倒三角，height：75-10=65排除倒三角居中line-height：65px*/
+}
+
+.index-menu .menu-tips:after {
+	position:absolute;
+	content: '';
+	left: 0;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border-left: 78px solid transparent;
+	border-right: 78px solid transparent;
+	border-bottom: 10px solid #fff;
+}
+
+.index-menu .menu-list {
+	margin-top: 156px;
+	color: #555;
+	font-size: 16px;
+	overflow: hidden; /*隐藏超出60px标签的负元素多出的60px*/
+}
+
+.index-menu .menu-list ul{
+	width: 1160px; /*下面menu-item：520+60+520+60即最右边超出了容器60px,包裹的容器只有1100px,若超出标签的父元素不多60px会换行显示*/
+}
+
+.index-menu .menu-item{
+	float: left;
+	width: 520px;
+	margin-right: 60px;  
+	margin-bottom: 56px;
+}
+
+.index-menu .menu-item .title, .index-menu .menu-item .line {
+	float: left;
+}
+
+.index-menu .menu-item .price {
+	float: right;
+}
+
+.index-menu .menu-item .title{
+	width: 230px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.index-menu .menu-item .comment {
+	padding-top: 10px;
+	color: #b7b7b7;
+	font-size: 12px;
+}
+
+.index-menu .menu-item .line{
+	width: 192px;
+	border: 1px solid #e3e1e1;
+	margin-top: 10px;
+}
+
+.index-menu .load-more-btn {
+	margin: 0 auto;
+	width: 114px;
+	height: 32px;
+	line-height: 32px;
+	padding-left: 12px;
+	margin-top: 35px;
+	color: #b7b7b7;
+	border: 1px solid #d7d5d5;
+}
+
+.index-menu .load-more-btn .load-more-line{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.index-menu .load-more-btn .icon{
+	display: inline-block;
+	width: 11px;
+	height: 7px;
+	background: url("../images/load-more-icon.png") no-repeat;
+}
+
+.index-panel {
+	margin-top: 200px;
+}
+
+.index-panel-header h3 {
+	font-size:20px;
+	color: #3b3b3b;
+	
+	float: left;
+	margin-right: 48px;
+}
+
+.index-panel-header .line {
+	float: left;
+	width: 200px;
+	margin-top: 12px;
+	border: 1px solid #e5e3e3;
+}
+
+.index-panel-header .btn-group {
+	font-size: 0;
+	float: right;
+}
+
+.index-panel-header .btn {
+	display: inline-block;
+	margin-left: 11px;
+	width: 9px;
+	height: 9px;
+	/*background: #dedede;
+	border-radius: 50%;*/
+	background: url("../images/btn.png") no-repeat;
+}
+
+.index-panel-header .active {
+	/*background: #9b9b9b;*/
+	background: url("../images/btn-active.png") no-repeat;
+}
+
+.index-panel-body {
+	margin-top: 75px;
+}
+
+.index-food-list{
+	overflow: hidden;
+}
+
+.index-food-list ul{
+	width: 1160px;
+}
+
+.index-food-list .food-item{
+	float: left;
+	width: 230px;
+	margin-right: 60px;
+}
+
+.index-food-list .food-item .banner{
+	margin-bottom: 30px;
+	height: 202px;
+}
+
+.index-food-list .food-item .name{
+	color: #555;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.index-food-list .food-item .price{
+	float:right;
+}
+
+.index-food-list .food-item .star-bar{
+	font-size: 0;
+}
+
+.food-item .star-bar .star{
+	display: inline-block;
+	width: 12px;
+	height: 13px;
+	margin-right: 5px;
+	background: url("../images/star-yellow.png") no-repeat;
+}
+
+.food-item .star-bar .nostar{
+	background: url("../images/star-gray.png") no-repeat;
+}
+
+.index-pics{
+	height: 382px;
+	overflow: hidden;
+}
+
+.index-pics .pic-col{
+	float:left;
+}
+
+.index-pics .pic-col-m{
+	width: 353px;
+}
+.index-pics .pic-col-s{
+	width: 287px;
+}
+.index-pics .pic-col-l,{
+	width: 460px;
+}

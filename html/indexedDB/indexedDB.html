@@ -1,0 +1,451 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>indexedDB example</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+
+      .main {
+        height: 100%;
+        background-color: antiquewhite;
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="main">
+      <form
+        id="indexedDB-form"
+        name="indexedDB-form"
+        action=""
+        method="post"
+        enctype="multipart/form-data"
+        novalidate
+        autocomplete="on"
+      >
+        <fieldset>
+          <legend>请填写学生信息</legend>
+          <p>
+            <lable for="stuName">姓名</lable>
+            <input
+              type="text"
+              name="stuName"
+              id="stuName"
+              placeholder="学生姓名"
+            />
+          </p>
+          <p>
+            <lable for="height">学号</lable>
+            <input
+              type="number"
+              name="stuNo"
+              id="stuNo"
+              placeholder="学号"
+              maxlength="310"
+              pattern="\d{6, 10}"
+            />
+          </p>
+          <p>
+            <lable for="height">身高</lable>
+            <input
+              type="number"
+              name="height"
+              id="height"
+              placeholder="学生身高"
+              maxlength="3"
+              min="100"
+              max="200"
+              pattern="\d{3}"
+            />
+            cm
+          </p>
+          <p>
+            <lable for="score">平均分</lable>
+            0
+            <input
+              type="range"
+              name="score"
+              id="score"
+              placeholder="平均分"
+              min="0"
+              max="120"
+              maxlength="3"
+              value="60"
+            />
+            120
+          </p>
+          <p>
+            <input type="button" value="添加" id="submitBtn" />
+            <input type="reset" value="重置" />
+          </p>
+        </fieldset>
+      </form>
+      <textarea
+        form="indexedDB-form"
+        name="desc"
+        placeholder="学生备注"
+        rows="3"
+      ></textarea>
+      <p>
+        <button type="button" id="count">count</button>
+        <button type="button" id="get">get 7</button>
+        <button type="button" id="getIndex">get by index</button>
+        <button type="button" id="getAll">get all</button>
+        <button type="button" id="delete">delete 1</button>
+        <button type="button" id="put">put 4</button>
+        <button type="button" id="deleteObjectStore">delete objectStore</button>
+        <button type="button" id="deleteDatabase">delete database</button>
+      </p>
+    </article>
+
+    <script>
+      window.onload = function () {
+        if (window.indexedDB) {
+          var databaseName = "student",
+            dbVersion = 5,
+            tableName = "students_info",
+            db;
+          var dbRes = window.indexedDB.open(databaseName, dbVersion);
+          console.log(dbRes);
+
+          dbRes.onerror = function (event) {
+            alert("database open failure");
+            console.log("open failure", event);
+          };
+
+          dbRes.onsuccess = function (event) {
+            db = event.target.result;
+            useDatabase("open success", db);
+            console.log("open success", event.target.result, dbRes.resulte);
+          };
+
+          dbRes.onupgradeneeded = function (event) {
+            console.log("upgrade", event, event.target.result, dbRes.resulte);
+
+            db = event.target.result;
+
+            useDatabase("upgrade", db);
+            console.log("tables:", db.objectStoreNames);
+
+            if (db.objectStoreNames.contains(tableName)) {
+              return false;
+            }
+
+            var objectStore = db.createObjectStore(tableName, {
+              keyPath: "id",
+              autoIncrement: true,
+            });
+            objectStore.createIndex("stuNo", "stuNo", { unique: true });
+            objectStore.createIndex("name", "name", { unique: false });
+            console.log("tables:", db.objectStoreNames);
+
+            // db.deleteObjectStore(tableName).onsuccess = function (event) {
+            //   console.log("delete objectStore success:", event.target);
+            // };
+          };
+
+          function useDatabase(type, db) {
+            // 当由其他页签请求了版本变更时，确认添加了一个会被通知的事件处理程序。
+            // 这里允许其他页签来更新数据库，如果不这样做，版本升级将不会发生知道用户关闭了这些页签。
+            console.log("onversionchange start:", type);
+            //版本升级是success中进入此处，打开过的页签会提示下面的alert，并且close数据库需重行打开此页签或刷新才能使用数据库
+            //否则报错提示数据库closing
+            db.onversionchange = function (event) {
+              console.log("onversionchange going:", type);
+              db.close();
+              alert(
+                "A new version of this page is ready. Please reload or close this tab!"
+              );
+            };
+
+            // 处理数据库
+          }
+
+          var submitBtn = document.getElementById("submitBtn");
+          submitBtn.addEventListener("click", function () {
+            var stuName = document.getElementById("stuName").value,
+              stuNo = +document.getElementById("stuNo").value,
+              score = +document.getElementById("score").value,
+              height = +document.getElementById("height").value;
+
+            if (stuName === "") {
+              alert("stuName error");
+              return false;
+            }
+            var stuNoLen = ("" + stuNo).length;
+            if (isNaN(stuNo) || stuNoLen > 10 || stuNoLen < 6) {
+              alert("stuNo error");
+              return false;
+            }
+            if (isNaN(score) || score < 0 || score > 120) {
+              alert("score error");
+              return false;
+            }
+            if (isNaN(height) || height < 100 || height > 200) {
+              alert("height error");
+              return false;
+            }
+
+            function getObjectStore(mode = "readonly") {
+              return db.transaction([tableName], mode).objectStore(tableName);
+            }
+
+            function add() {
+              var addRes = getObjectStore("readwrite").add({
+                stuNo,
+                stuName,
+                score,
+                height,
+              });
+
+              addRes.onerror = function (event) {
+                console.log("add error");
+              };
+
+              addRes.onsuccess = function (event) {
+                console.log("add success");
+              };
+            }
+            add();
+
+            document.getElementById("indexedDB-form").submit();
+          });
+
+          //   function getObjectStore(mode = "readonly") {
+          //     return db.transaction([tableName], mode).objectStore(tableName); //注意上面indexedDB操作都是异步的，此处为同步函数，会报错db还没获取到，不会有transaction
+          //   }
+
+          var countBtn = document.getElementById("count");
+          var getBtn = document.getElementById("get");
+          var getIndexBtn = document.getElementById("getIndex");
+          var deleteBtn = document.getElementById("delete");
+          var putBtn = document.getElementById("put");
+          var getAllBtn = document.getElementById("getAll");
+          var deleteObjectStoreBtn = document.getElementById(
+            "deleteObjectStore"
+          );
+          var deleteDatabaseBtn = document.getElementById("deleteDatabase");
+
+          countBtn.addEventListener("click", function count() {
+            var objectStore = db
+                .transaction([tableName], "readonly")
+                .objectStore(tableName),
+              countRes = objectStore.count();
+
+            countRes.onsuccess = function (event) {
+              if (countRes.result) {
+                //event.target.result
+                console.log("count: ", countRes.result);
+              }
+            };
+
+            countRes.onerror = function (event) {
+              console.log("count error", event);
+            };
+          });
+          getBtn.addEventListener("click", function get() {
+            function getObjectStore(mode = "readonly") {
+              var objectStore = db
+                .transaction([tableName], mode)
+                .objectStore(tableName);
+              return objectStore;
+            }
+
+            var objectStore = getObjectStore(),
+              getRes = objectStore.get(7);
+            getRes.onsuccess = function (event) {
+              if (getRes.result) {
+                // getRes.result.stuNo
+                // getRes.result.stuName
+                console.log("get7: ", getRes.result, event.target.result);
+              } else {
+                console.log("get7 res:", event);
+              }
+            };
+
+            getRes.onerror = function (event) {
+              console.log("get7 error", event);
+            };
+          });
+
+          getIndexBtn.addEventListener("click", function getIndexData() {
+            function getObjectStore(mode = "readonly") {
+              var objectStore = db
+                .transaction([tableName], mode)
+                .objectStore(tableName);
+              return objectStore;
+            }
+
+            var objectStore = getObjectStore(),
+              getRes = objectStore.index("stuNo").get(12345675);
+
+            getRes.onsuccess = function (event) {
+              if (getRes.result) {
+                // getRes.result.stuNo
+                // getRes.result.stuName
+                console.log("getIndex: ", getRes.result, event.target.result);
+              } else {
+                console.log("getIndex res:", event);
+              }
+            };
+
+            getRes.onerror = function (event) {
+              console.log("getIndex error", event);
+            };
+          });
+
+          deleteBtn.addEventListener("click", function deleteData() {
+            function getObjectStore(mode = "readwrite") {
+              //注意：删除模式是readwrite，readonly会报错
+              var objectStore = db
+                .transaction([tableName], mode)
+                .objectStore(tableName);
+              return objectStore;
+            }
+
+            var objectStore = getObjectStore(),
+              deleteRes = objectStore.delete(1);
+
+            deleteRes.onsuccess = function (event) {
+              //event.target.result为undefined;无返回值
+              console.log("delete success");
+            };
+
+            deleteRes.onerror = function (event) {
+              console.log("delete error:", event);
+            };
+          });
+
+          putBtn.addEventListener("click", function put() {
+            function getObjectStore(mode = "readonly") {
+              var objectStore = db
+                .transaction([tableName], mode)
+                .objectStore(tableName);
+              return objectStore;
+            }
+
+            var objectStore = getObjectStore("readwrite"),
+              putRes = objectStore.put({
+                stuNo: 12345679,
+                stuName: "王宇",
+                score: 77,
+                height: 160,
+                id: 4,
+              }); //根据主键修改，主键为4的记录存在修改，不存在插入一条数据-add
+
+            putRes.onsuccess = function (event) {
+              // putRes.result, event.target.result 返回id值：4
+              console.log("put success");
+            };
+
+            putRes.onerror = function (event) {
+              console.log("put error", event);
+            };
+
+            var getRes = objectStore.get(4);
+            getRes.onsuccess = function (event) {
+              if (event.target.result) {
+                var data = event.target.result;
+                data.score = 27;
+
+                var requestUpdate = objectStore.put(data);
+                requestUpdate.onsuccess = function (event) {
+                  console.log("put success");
+                };
+
+                requestUpdate.onerror = function (event) {
+                  console.log("put error", event);
+                };
+              }
+            };
+          });
+
+          getAllBtn.addEventListener("click", function getAll() {
+            function getObjectStore(mode = "readonly") {
+              var objectStore = db
+                .transaction([tableName], mode)
+                .objectStore(tableName);
+              return objectStore;
+            }
+
+            var objectStore = getObjectStore();
+
+            objectStore.openCursor().onsuccess = function (event) {
+              var cursor = event.target.result;
+              if (cursor) {
+                //cursor.key:是id值  cursor.value:是Object，一条记录
+                console.log("Id: " + cursor.key);
+                console.log("stuNo: " + cursor.value.stuNo);
+                console.log("stuName: " + cursor.value.stuName);
+                console.log("height: " + cursor.value.height);
+                console.log("score: " + cursor.value.score);
+
+                cursor.continue();
+              } else {
+                console.log("没有更多数据了！"); //当你已经到达数据的末尾时（或者没有匹配 openCursor() 请求的条目）仍然会得到一个成功回调，但是 result 属性是 undefined
+              }
+            };
+
+            objectStore.openKeyCursor().onsuccess = function (event) {
+              var cursor = event.target.result;
+              if (cursor) {
+                console.log("Id: " + cursor.key); //无cursor.value
+                cursor.continue();
+              } else {
+                console.log("没有更多数据了！");
+              }
+            };
+
+            objectStore.getAll().onsuccess = function (event) {
+              var dataArr = event.target.result;
+              dataArr.forEach((item) => {
+                console.log("Id: " + item.id);
+                console.log("stuNo: " + item.stuNo);
+                console.log("stuName: " + item.stuName);
+                console.log("height: " + item.height);
+                console.log("score: " + item.score);
+              });
+            };
+          });
+
+          deleteObjectStoreBtn.addEventListener("click", function get() {
+            function getObjectStore(mode = "readwrite") {
+              var objectStore = db
+                .transaction([tableName], mode)
+                .objectStore(tableName);
+              return objectStore;
+            }
+
+            var objectStore = getObjectStore();
+
+            objectStore.clear().onsuccess = function (event) {
+              // event.target.result为undefined无返回值
+              console.log("clear objectStore");
+            };
+          });
+
+          deleteDatabaseBtn.addEventListener("click", function get() {
+            var deleteRes = window.indexedDB.deleteDatabase(databaseName); //会触发versionchange事件
+
+            deleteRes.onsuccess = function (event) {
+              // event.target.result为undefined无返回值
+              console.log("delete database success:", event.target);
+            };
+
+            deleteRes.onerror = function (event) {
+              console.log("delete database error:", event);
+            };
+          });
+        } else {
+          alert("your browser don't support indexedDB!");
+        }
+      };
+    </script>
+  </body>
+</html>
