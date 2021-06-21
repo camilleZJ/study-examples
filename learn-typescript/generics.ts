@@ -54,7 +54,7 @@ const arr1 = echoWithLength([1, 2, 3]);
 // queue.push("str");
 // console.log(queue.pop().toFixed());
 // console.log(queue.pop().toFixed());
-//问题：toFixed是数字类型才有的方法，但是pop出的有string类型的值，若是限定：push(item: number)  pop():number也可以解决
+//问题：toFixed是数字类型才有的方法，把 Number 四舍五入为指定小数位数的数字，参数：保留的小数位数。但是pop出的有string类型的值，若是限定：push(item: number)  pop():number也可以解决
 //泛型解决：
 class Queue1<T> {
   private data = [];
